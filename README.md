@@ -23,5 +23,5 @@
 
 # Lancement du projet 
   Afin de tester le projet, il faut lancer le serveur symfony en exécutant (dans votre projet) la commande : `symfony serve start`
-  Et afin d'avoir le front il faut aussi lancer NPM via cette commande : `npm run dev`
+  Et afin d'avoir le front dynamique il faut aussi lancer NPM via cette commande : `npm run watch`
   
