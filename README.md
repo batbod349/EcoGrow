@@ -12,7 +12,7 @@
 ## Symfony-cli
   Pour installer Symfony exécutez cette commande : `scoop install symfony-cli`
 ## Node.js
-  Pour installer Node.js téléchargez et installez le, ici : https://nodejs.org/dist/v22.11.0/node-v22.11.0-x64.msi
+  Pour installer Node.js 10.8 téléchargez et installez le, ici : https://nodejs.org/dist/v22.11.0/node-v22.11.0-x64.msi
 
 # Récupération du projet
   Une fois toutes les dépendances installées vous pouvez récuperer le projet.
