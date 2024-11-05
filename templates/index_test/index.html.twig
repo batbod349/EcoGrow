@@ -8,5 +8,9 @@
                 'title': "Mon autre title",
                 'titleColor': "text-greenMint",
             } %}
+	{% include 'components/cards/challengeCard.html.twig' with {
+                'number': "1234",
+                'title': "Mon titre",
+            } %}
 	{% include 'components/navigation/bottomNavBar.html.twig' %}
 {% endblock %}
