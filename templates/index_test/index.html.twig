@@ -6,7 +6,13 @@
 	</h1>
 	{% include 'components/test.html.twig' with {
                 'title': "Mon autre title",
+				'desc': 'desc supp',
                 'titleColor': "text-greenMint",
             } %}
+			
+	{% include 'components/buttons/button.html.twig' with {
+		 'placeholder': "Placeholder",
+		 'backgroundColor': "bg-greenMint",} %}
 	{% include 'components/navigation/bottomNavBar.html.twig' %}
 {% endblock %}
+
