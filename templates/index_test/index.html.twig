@@ -1,7 +1,12 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-  <h1 class="text-3xl font-bold underline">
-    Hello world
-    {{response}}
-  </h1>
+	<h1 class="text-3xl font-bold underline">
+		Hello world
+		{{response}}
+	</h1>
+	{% include 'components/test.html.twig' with {
+                'title': "Mon autre title",
+                'titleColor': "text-greenMint",
+            } %}
+	{% include 'components/navigation/bottomNavBar.html.twig' %}
 {% endblock %}
