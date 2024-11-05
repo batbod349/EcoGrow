@@ -22,6 +22,6 @@
 **_À chaque fois qu'une dépendances sera ajouté il faudra refaire ces 2 commandes, donc si votre projet ne fonctionne plus, dans le doute, réexécutez ces 2 commandes_**
 
 # Lancement du projet 
-  Afin de tester le projet, il faut lancer le serveur symfony en exécutant (dans votre projet) la commande : `symfony serve start`
+  Afin de tester le projet, il faut lancer le serveur symfony en exécutant (dans votre projet) la commande : `symfony server:start`
   Et afin d'avoir le front dynamique il faut aussi lancer NPM via cette commande : `npm run watch`
   
