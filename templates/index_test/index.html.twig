@@ -7,6 +7,12 @@
 	{% include 'components/test.html.twig' with {
                 'title': "Mon autre title",
                 'titleColor': "text-greenMint",
+                'image': "../images/logo/logo.png",
             } %}
+	{% include 'components/cards/challengeCard.html.twig' with {
+                'number': "1234",
+                'title': "Mon titre",
+            } %}
+	{% include 'components/cards/tipsCard.html.twig' %}
 	{% include 'components/navigation/bottomNavBar.html.twig' %}
 {% endblock %}
