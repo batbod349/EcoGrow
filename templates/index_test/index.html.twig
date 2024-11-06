@@ -2,7 +2,6 @@
 {% block body %}
 	<h1 class="text-3xl font-bold underline">
 		Hello world
-		{{response}}
 	</h1>
 	{% include 'components/test.html.twig' with {
                 'title': "Mon autre title",
@@ -37,5 +36,7 @@
 
 
 	{% include 'components/navigation/bottomNavBar.html.twig' %}
+
+	{% include 'components/headers/tipsHeader.html.twig' %}
 {% endblock %}
 
