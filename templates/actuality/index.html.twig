@@ -18,7 +18,9 @@
 	</style>
 
 	<div class="example-wrapper">
-		<h1>Actualités</h1>
+		{% include 'components/headers/pageHeader.html.twig' with {
+                'title': 'Actualites',
+            } %}
 
 		<ul>
 			<h3 class="font-inter text-lg pb-10">Derniers articles :</h3>
@@ -32,9 +34,9 @@
                 'subtitle': article.text,
                 'description': article.text,
             } %}
-            {% else %}
-                Aucun article n'a été trouvé.
-            {% endfor %}
+				{% else %}
+					Aucun article n'a été trouvé.
+				{% endfor %}
 			</ul>
 		</div>
 	</div>
