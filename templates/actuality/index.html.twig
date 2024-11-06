@@ -17,15 +17,15 @@
 		}
 	</style>
 
-	<div class="example-wrapper">
+	<div class="flex flex-col items-center example-wrapper space-y-10">
 		{% include 'components/headers/pageHeader.html.twig' with {
                 'title': 'Actualites',
             } %}
 
-		<ul>
-			<h3 class="font-inter text-lg pb-10">Derniers articles :</h3>
+		<h3 class="font-inter text-lg font-bold">Derniers articles :</h3>
 
-			<div class="space-y-5">
+		<ul>
+			<div class="flex flex-wrap justify-center items-center gap-5">
 				{% for article in articles %}
 					{% include 'components/cards/actualite.html.twig' with {
                 'image': article.getImage,
@@ -33,12 +33,12 @@
                 'title': article.name,
                 'subtitle': article.text,
                 'description': article.text,
-            } %}
+            	} %}
 				{% else %}
 					Aucun article n'a été trouvé.
 				{% endfor %}
-			</ul>
-		</div>
+			</div>
+		</ul>
 	</div>
 {% endblock %}
 
