@@ -21,6 +21,9 @@ class Friends
     #[ORM\JoinColumn(nullable: false)]
     private ?user $user2 = null;
 
+    #[ORM\Column]
+    private ?bool $accepted = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -46,6 +49,18 @@ class Friends
     public function setUser2(?user $user2): static
     {
         $this->user2 = $user2;
+
+        return $this;
+    }
+
+    public function isAccepted(): ?bool
+    {
+        return $this->accepted;
+    }
+
+    public function setAccepted(bool $accepted): static
+    {
+        $this->accepted = $accepted;
 
         return $this;
     }
