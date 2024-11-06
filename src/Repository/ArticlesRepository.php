@@ -39,6 +39,15 @@ class ArticlesRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function fetchArticleById(int $id): ?Articles
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
 //    public function findOneBySomeField($value): ?Articles
 //    {
 //        return $this->createQueryBuilder('a')

@@ -15,7 +15,7 @@ class ChallengeController extends AbstractController
         $today = new \datetime();
         $dailyQuests = $QuestRepository->findDailyQuests($today);
         $monthlyQuests = $QuestRepository->findMonthlyQuest($today);
-        return $this->render('challenge/index.html.twig', 
+        return $this->render('challenge/index.html.twig',
         [
             'dailyQuests' => $dailyQuests,
             'monthlyQuests' => $monthlyQuests,
