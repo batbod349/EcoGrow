@@ -29,6 +29,18 @@ input:focus {
 }
 
 * {
-    margin : 0;
-    padding : 0;
+    margin: 0;
+    padding: 0;
+}
+
+input {
+    background-color: var(--white);
+}
+
+.container-page{
+    @apply pt-10 px-4 space-y-10
+}
+
+.section-container{
+    @apply space-y-4
 }
