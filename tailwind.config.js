@@ -13,6 +13,11 @@ module.exports = {
             'greenMint': 'var(--greenMint)',
             'red': 'var(--red)'
         },
+        fontFamily: {
+            'rawles': "'Rawles', sans-serif",
+            'inter': "'Inter', sans-serif",
+            'monsterrat': "'Montserrat', sans-serif"
+        },
         extend: {},
     },
     plugins: [],
