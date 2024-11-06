@@ -17,43 +17,50 @@
 			</div>
 		{% endif %}
 
-		<div>
-			<img src="../images/logo/logo.png" alt="Logo EcoGrow" class="rounded-2xl h-28 lg:h-48 object-fit"/>
+		<div class="space-y-12">
+			<div class="flex justify-center items-center">
+				<img src="../images/logo/logo.png" alt="Logo EcoGrow" class="rounded-2xl h-28 lg:h-48 object-fit"/>
+			</div>
+			<div class="flex flex-col items-center space-y-5 font-monsterrat text-xs">
+				<div class="text-sm">
+					<h1 class="h3 mb-3 font-weight-normal">Connectez-vous</h1>
+				</div>
+				{% include 'components/forms/textFormSimple.html.twig' with {
+						'label' : "Nom d'utilisateur",
+						'placeholder' : "Nom d'utilisateur",
+						'type' : "username",
+						'value' : last_username,
+						'name' : "_username",
+						'id' : "username",
+						'autocomplete' : "username",
+				} %}
+				{% include 'components/forms/textFormSimple.html.twig' with {
+						'label' : "Mot de passe",
+						'placeholder' : "Mot de passe",
+						'type' : "password",
+						'name' : "_password",
+						'id' : "password",
+						'autocomplete' : "current-password",
+				} %}
+			</div>
+			
+			<div class="flex flex-col items-center space-y-2 font-monsterrat text-sm">
+				<a href="{{ path('app_register') }}">Créer un compte</a>
+				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+				{% include 'components/buttons/buttonSubmit.html.twig' with {
+					'placeholder': "Se connecter",} %}
+				{#
+					Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+					See https://symfony.com/doc/current/security/remember_me.html
+			
+					<div class="checkbox mb-3">
+						<input type="checkbox" name="_remember_me" id="_remember_me">
+						<label for="_remember_me">Remember me</label>
+					</div>
+				#}
+			</div>
 		</div>
-
-		<h1 class="h3 mb-3 font-weight-normal font-rawles">Connectez-vous</h1>
-		{% include 'components/forms/textFormSimple.html.twig' with {
-				'label' : "Nom d'utilisateur",
-				'placeholder' : "Nom d'utilisateur",
-				'type' : "username",
-				'value' : last_username,
-				'name' : "_username",
-				'id' : "username",
-				'autocomplete' : "username",
-	} %}
-		{% include 'components/forms/textFormSimple.html.twig' with {
-				'label' : "Mot de passe",
-				'placeholder' : "Mot de passe",
-				'type' : "password",
-				'name' : "_password",
-				'id' : "password",
-				'autocomplete' : "current-password",
-	} %}
-
-		<a href="{{ path('app_register') }}">Créer un compte</a>
-		<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-		{% include 'components/buttons/buttonSubmit.html.twig' with {
-            'placeholder': "Se connecter",} %}
-		{#
-            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-            See https://symfony.com/doc/current/security/remember_me.html
-    
-            <div class="checkbox mb-3">
-                <input type="checkbox" name="_remember_me" id="_remember_me">
-                <label for="_remember_me">Remember me</label>
-            </div>
-        #}
 
 	</form>
 {% endblock %}
