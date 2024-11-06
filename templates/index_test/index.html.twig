@@ -6,13 +6,22 @@
 	</h1>
 	{% include 'components/test.html.twig' with {
                 'title': "Mon autre title",
+				'desc': 'desc supp',
                 'titleColor': "text-greenMint",
                 'image': "../images/logo/logo.png",
             } %}
+
+			
+	{% include 'components/buttons/button.html.twig' with {
+		 'placeholder': "Placeholder",
+		 'backgroundColor': "bg-greenMint",} %}
+
 	{% include 'components/cards/challengeCard.html.twig' with {
                 'number': "1234",
                 'title': "Mon titre",
             } %}
 	{% include 'components/cards/tipsCard.html.twig' %}
+
 	{% include 'components/navigation/bottomNavBar.html.twig' %}
 {% endblock %}
+
