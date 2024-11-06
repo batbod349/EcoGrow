@@ -18,4 +18,13 @@ class ActualityController extends AbstractController
             'articles' => $articles,
         ]);
     }
+
+    #[Route('/actuality/{id}', name: 'app_actuality_detail')]
+    public function detailIndex(int $id, ArticlesRepository $articleRepository): Response
+    {
+        $article = $articleRepository->fetchArticleById($id);
+        return $this->render('actuality/detail.html.twig', [
+            'article' => $article,
+        ]);
+    }
 }

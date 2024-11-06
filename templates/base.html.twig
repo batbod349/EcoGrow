@@ -24,9 +24,11 @@
 			{% endblock %}
 		{% endblock %}
 	</head>
-	<body class="bg-white pb-24 h-full"> {% block body %}{% endblock %}
-		</body>
-		<footer>
-			{% include 'components/navigation/bottomNavBar.html.twig' %}
-		</footer>
-	</html>
+	<header> {% block header %}{% endblock %}
+    </header>
+    <body class="bg-white pb-24 h-full"> {% block body %}{% endblock %}
+    </body>
+    <footer>
+        {% include 'components/navigation/bottomNavBar.html.twig' %}
+    </footer>
+ </html>

@@ -28,7 +28,7 @@ class QuestRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findMonthlyChallenges(\DateTime $date): array
+    public function findMonthlyQuest(\DateTime $date): array
     {
         $startOfMonth = $date->modify('first day of this month')->setTime(0, 0);
         $endOfMonth = $date->modify('last day of this month')->setTime(23, 59, 59);
