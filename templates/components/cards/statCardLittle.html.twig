@@ -1,0 +1,16 @@
+{% set text = text|default('')%}
+{% set backgroundColor = backgroundColor|default('bg-greenMint')%}
+{% set textColor = textColor|default('text-black')%}
+{% set Amis = Amis|default('')%}
+{% set rang = rang|default('')%}
+{% set image_alt = image_alt|default('') %}
+
+<div class=" relative w-28 h-14 bg-greenMint rounded-2xl px-3 py-2  "> 
+    <div class="{{ textColor }} {{backgroundColor}}  text-sm">
+        <p>{{rang}}</p>
+        <p class="font-thin">{{Amis}}</p>  
+    </div>
+    <div class="absolute left-24 bottom-10">
+        <img src="..\images\icons\target.svg" alt="{{ image_alt }}" class="w-5 h-5 "/>
+    </div>
+</div>

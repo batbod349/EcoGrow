@@ -1,30 +1,53 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ActualityController!{% endblock %}
+{% block title %}Hello ActualityController!
+{% endblock %}
 
 {% block body %}
-    <style>
-        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-    </style>
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
 
-    <div class="example-wrapper">
-        <h1>Hello ! ✅</h1>
+	<div class="example-wrapper">
+		<h1>Actualités</h1>
 
-        This friendly message is coming from:
-        <ul>
-            <li>List of articles:</li>
-            {% for article in articles %}
-                <li>
-                    <strong>{{ article.name }}</strong> - {{ article.createDate|date('Y-m-d H:i') }}
-                    {% if article.getImage %}
-                        <img src="data:image/jpeg;base64,{{ article.getImage }}" alt="{{ article.name }}" width="250">
-                    {% endif %}
-                    {{ article.text|slice(0, 100) }}{% if article.text|length > 100 %} ...{% endif %}
-                </li>
+		<ul>
+			<h3 class="font-inter text-lg pb-10">Derniers articles :</h3>
+
+			<div class="space-y-5">
+				{% for article in articles %}
+					{% include 'components/cards/actualite.html.twig' with {
+                'image': article.getImage,
+                'image_alt': article.name,
+                'title': article.name,
+                'subtitle': article.text,
+                'description': article.text,
+            } %}
             {% else %}
-                <li>No articles found.</li>
+                Aucun article n'a été trouvé.
             {% endfor %}
-        </ul>
-    </div>
+			</ul>
+		</div>
+	</div>
 {% endblock %}
+
+{# <strong>{{ article.name }}</strong>
+					                -
+					                {{ article.createDate|date('Y-m-d H:i') }}
+					                {% if article.getImage %}
+					                    <img src="data:image/jpeg;base64,{{ article.getImage }}" alt="{{ article.name }}" width="250">
+					                {% endif %}
+					                {{ article.text|slice(0, 100) }}
+					                {% if article.text|length > 100 %}
+					                    ...
+					                {% endif %}
+					                #}
