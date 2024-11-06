@@ -10,12 +10,6 @@
                 'image': "../images/logo/logo.png",
             } %}
 
-
-	{% include 'components/forms/textForm.html.twig' with {
-				'label' : 'Label de texte',
-				'placeholder' : 'Rechercher',
-	} %}
-
 	{% include 'components/forms/searchForm.html.twig' with {
 				'placeholder' : 'Rechercher',
 	} %}
@@ -45,5 +39,7 @@
 	{% include 'components/navigation/bottomNavBar.html.twig' %}
 
 	{% include 'components/headers/tipsHeader.html.twig' %}
+	
+	{% include 'components/headers/pageHeader.html.twig' %}
 {% endblock %}
 
