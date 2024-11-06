@@ -1,42 +1,50 @@
-<div style="display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
-    <!-- Profil -->
-    <div class="profile">
-        <img src="{{ asset('images/default-profil/pepe-lunettes-doree.jpg') }}" alt="Profil" class="rounded-full" width="50" height="40">
-    </div>
+<div
+	class="z-50 sticky top-0" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 20px;">
+	<!-- Profil -->
+	<div class="profile">
+		<a href="{{ path('app_profil') }}">
+			<img src="{{ asset('images/default-profil/pepe-lunettes-doree.jpg') }}" alt="Profil" class="rounded-full" width="50" height="40">
+		</a>
+	</div>
 
-    <!-- Classement -->
-    <div class="badge" style="display: inline-flex; align-items: center; margin-right: 10px; background-color: #1D3932; padding: 8px 12px; border-radius: 8px; box-shadow: 0px 4px 8px 0px rgba(29, 57, 50, 0.70); color: #fff; gap: 15px;">
-        <span>1er</span>
-        <span class="ms-2">
-            <i class="bi bi-trophy-fill"></i>
-            <img src="{{ asset('images/icons/couronne.png') }}" alt="Billets" width="24" height="24">
+	<div
+		class="space-x-1">
+		<!-- Classement -->
+		<div class="badge" style="display: inline-flex; align-items: center; background-color: #1D3932; padding: 6px 8px; border-radius: 8px; box-shadow: 0px 4px 8px 0px rgba(29, 57, 50, 0.70); color: #fff; gap: 15px;">
+			<span class="text-xs">1er</span>
+			<span class="">
+				<i class="bi bi-trophy-fill"></i>
+				<img src="{{ asset('images/icons/couronne.png') }}" alt="Billets" width="15" height="15">
 
-        </span>
-    </div>
+			</span>
+		</div>
 
-    <!-- Points -->
-    <div class="badge" style="display: inline-flex; align-items: center; margin-right: 10px; background-color: #5C913B; padding: 8px 12px; border-radius: 8px; box-shadow: 0px 4px 8px 0px rgba(29, 57, 50, 0.70); color: #fff; gap: 15px;">
-        <span>340</span>
-        <span class="ms-2">
-            <i class="bi bi-tv-fill"></i>
-            <img src="{{ asset('images/icons/billets.png') }}" alt="Billets" width="24" height="24">
-        </span>
-    </div>
+		<!-- Points -->
+		<div class="badge" style="display: inline-flex; align-items: center; background-color: #5C913B; padding: 6px 8px; border-radius: 8px; box-shadow: 0px 4px 8px 0px rgba(29, 57, 50, 0.70); color: #fff; gap: 15px;">
+			<span class="text-xs">340</span>
+			<span class="">
+				<i class="bi bi-tv-fill"></i>
+				<img src="{{ asset('images/icons/billets.png') }}" alt="Billets" width="15" height="15">
+			</span>
+		</div>
 
-    <!-- Objectif -->
-    <div class="badge" style="display: inline-flex; align-items: center; background-color: #D3E9E2; padding: 8px 12px; border-radius: 8px; box-shadow: 0px 4px 8px 0px rgba(29, 57, 50, 0.70); color: #fff; gap: 15px;">
-        <span>2/3</span>
-        <span class="ms-2">
-            <i class="bi bi-check-circle-fill"></i> 
-            <img src="{{ asset('images/icons/target.png') }}" alt="Billets" width="24" height="24">
-        </span>
-    </div>
+		<!-- Objectif -->
+		<div class="badge" style="display: inline-flex; align-items: center; background-color: #D3E9E2; padding: 6px 8px; border-radius: 8px; box-shadow: 0px 4px 8px 0px rgba(29, 57, 50, 0.70); color: #fff; gap: 15px;">
+			<span class="text-xs">2/3</span>
+			<span class="">
+				<i class="bi bi-check-circle-fill"></i>
+				<img src="{{ asset('images/icons/target.png') }}" alt="Billets" width="15" height="15">
+			</span>
+		</div>
+	</div>
 
 
-    <!-- Notifs -->
-    <div style="display: inline-flex; align-items: center; white-space: nowrap; gap: 15px;">
-    <div class="notif" style="gap: 15px";>
-        <img src="{{ asset('images/icons/cloche.png') }}" alt="Profil" class="rounded-circle" width="40" height="40";>
-    </div>
+	<!-- Notifs -->
+	<div style="display: inline-flex; align-items: center; white-space: nowrap; gap: 15px;">
+		<a href="{{ path('app_notification') }}">
+			<div class="notif" style="gap: 15px" ;>
+				<img src="{{ asset('images/icons/cloche.png') }}" alt="Profil" class="rounded-circle" width="40" height="40" ;>
+			</div>
+		</a>
 
-</div>
+	</div>

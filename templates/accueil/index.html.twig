@@ -1,9 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AccueilController!{% endblock %}
-
+{% block title %}Hello AccueilController!
+{% endblock %}
+{% block header %}
+	{% include 'components/navigation/infoBar.html.twig' %}
+{% endblock %}
 {% block body %}
-
+	<div class="flex flex-col">
+		<div class="container-page">
+			<section class="section-container">
+				<h2 class="font-rawles text-3xl">Aujourd'hui</h2>
+				<div class="space-y-4">
+					{% for dailyQuest in dailyQuests %}
+						{% include 'components/cards/challengeCard.html.twig' with {
+                            'number': dailyQuest.rewards,
+                            'title': dailyQuest.Name,
+                    } %}
+					{% else %}
+						Aucun challenge quotidien n'a été trouvé.
+					{% endfor %}
+				</div>
+			</section>
+			<section class="section-container">
+				<h2 class="font-rawles text-3xl">En bref</h2>
+				<div class="flex flex-wrap space-x-3">
+					{% include 'components/cards/statCardLittle.html.twig' with{
+                    'Amis':"Amis",
+                    'rang':"rang",
+                    'background':"bg-greenMint",} %}
+					{% include 'components/cards/statCardLittle.html.twig' with{
+                    'Amis':"Amis",
+                    'rang':"rang",
+                    'background':"bg-greenMint",} %}
+					{% include 'components/cards/statCardLittle.html.twig' with{
+                    'Amis':"Amis",
+                    'rang':"rang",
+                    'background':"bg-greenMint",} %}
+				</div>
+			</section>
+			<section class="section-container">
+				<h2 class="font-rawles text-3xl">Je veux participer</h2>
+				<div class="space-y-4">
+					{% for monthlyQuest in monthlyQuests %}
+						{% include 'components/cards/challengeCard.html.twig' with {
+                            'number': monthlyQuest.rewards,
+                            'title': monthlyQuest.Name,
+                    } %}
+					{% else %}
+						Aucun challenge mensuel n'a été trouvé.
+					{% endfor %}
+				</div>
+			</section>
+		</div>
+	</div>
 {% endblock %}
 {# <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
