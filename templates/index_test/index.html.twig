@@ -14,13 +14,16 @@
 			
 	{% include 'components/buttons/button.html.twig' with {
 		 'placeholder': "Placeholder",
-		 'backgroundColor': "bg-greenMint",} %}
+		 'backgroundColor': "bg-greenDark",} %}
 
 	{% include 'components/cards/challengeCard.html.twig' with {
                 'number': "1234",
                 'title': "Mon titre",
             } %}
-	{% include 'components/cards/tipsCard.html.twig' %}
+	{% include 'components/cards/statCardLittle.html.twig' with{
+	  	'Amis':"Amis",
+		'rang':"rang",
+		'background':"bg-greenMint",} %}
 
 	{% include 'components/navigation/bottomNavBar.html.twig' %}
 {% endblock %}
