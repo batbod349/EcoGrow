@@ -8,8 +8,8 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class TipsDetailController extends AbstractController
 {
-    #[Route('/tips/detail', name: 'app_tips_detail')]
-    public function index(): Response
+    #[Route('/tips/{id}', name: 'app_tips_detail')]
+    public function index(int $id): Response
     {
         return $this->render('tips_detail/index.html.twig', [
             'controller_name' => 'TipsDetailController',
