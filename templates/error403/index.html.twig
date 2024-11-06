@@ -3,18 +3,15 @@
 {% block title %}Hello Error403Controller!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-    <li> Erreur 403 : Acces refuse ! Ce jardin est prive.</ul>
-
-    <button type="submit" class="btn btn-primary">Retourner à la page d'accueil</button>
+<div class="flex flex-col justify-center items-center h-dvh gap-10 bg-white">
+    <div>
+        <img src="..\images\errors\error403.png" alt="">
+    </div>
+    <h1 class="text-center text-4xl w-3/4 font-rawles">
+        ERREUR 403 : ACCES REFUSE ! CE JARDIN EST PRIVE. RETOUR A L'ACCUEIL
+    </h1>
+    <button class="bg-greenDark text-white py-2 px-4 rounded-2xl font-monsterrat text-sm">
+        RETOURNER À LA PAGE D'ACCUEIL
+    </button>
 </div>
 {% endblock %}
