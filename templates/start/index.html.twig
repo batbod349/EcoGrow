@@ -1,20 +1,61 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Hello StartController!{% endblock %}
-
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <style>
+        .example-wrapper {
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+            font: 18px/1.5 sans-serif;
+        }
+        .example-wrapper code {
+            background: #F5F5F5;
+            padding: 2px 6px;
+        }
+    </style>
 
-<div class="example-wrapper">
+    <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/Users/nathael/dev/EcoGrow/src/Controller/StartController.php</code></li>
-        <li>Your template at <code>/Users/nathael/dev/EcoGrow/templates/start/index.html.twig</code></li>
-    </ul>
-</div>
+    <h1>Idées Éco-responsables</h1>
+
+    <!-- Le bouton qui déclenche l'appel AJAX -->
+    <button id="fetch-ideas-btn" class="btn btn-primary">Obtenir des idées</button>
+
+    <!-- Les 3 zones de texte pour afficher les idées -->
+    <textarea id="idea1" class="form-control" rows="3" placeholder="Idée 1"></textarea><br>
+    <textarea id="idea2" class="form-control" rows="3" placeholder="Idée 2"></textarea><br>
+    <textarea id="idea3" class="form-control" rows="3" placeholder="Idée 3"></textarea>
+
+    {# Inclure le script JavaScript pour l'appel AJAX #}
+    <script>
+        document.getElementById('fetch-ideas-btn').addEventListener('click', function() {
+            const prompt = "Répond en francais uniquement : Donne moi 3 idées de tâches eco-résponsable (en une phrase chaques idées séparé par des ;) à réaliser dans la journée";
+
+            // Effectuer l'appel AJAX vers la route /fetch-ideas-ajax
+            fetch('{{ path('fetch_ideas_ajax') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ prompt: prompt })  // Passer le prompt si nécessaire
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Vérifier si des idées sont retournées
+                    if (data.ideas && data.ideas.length >= 3) {
+                        // Afficher les idées dans les trois zones de texte
+                        document.getElementById('idea1').value = data.ideas[0] || '';
+                        document.getElementById('idea2').value = data.ideas[1] || '';
+                        document.getElementById('idea3').value = data.ideas[2] || '';
+                    } else {
+                        // Si pas assez d'idées, vider les champs ou afficher un message d'erreur
+                        document.getElementById('idea1').value = 'Aucune idée retournée';
+                        document.getElementById('idea2').value = 'Aucune idée retournée';
+                        document.getElementById('idea3').value = 'Aucune idée retournée';
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur lors de l\'appel à l\'API', error);
+                });
+        });
+    </script>
 {% endblock %}
