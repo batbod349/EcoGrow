@@ -5,13 +5,13 @@
 {% block body %}
 <div class="flex flex-col justify-center items-center h-dvh gap-10 bg-white">
     <div>
-        <img src="images\error1.png" alt="">
+        <img src="..\images\errors\error404.png" alt="">
     </div>
     <h1 class="text-center text-4xl w-3/4 font-rawles">
         ERREUR 404 : PAGE ENVOLEE COMME UNE FEUILLE RETOUR A L'ACCUEIL
     </h1>
-    <button class="bg-greenDark text-white py-2 px-4 rounded-2xl font-monsterrat text-sm">
-        RETOURNER A LA PAGE D'ACCUEIL
-    </button>
+    {% include 'components/buttons/button.html.twig' with {
+		 'placeholder': "RETOURNER À LA PAGE D'ACCUEIL",
+		 'backgroundColor': "bg-greenDark",} %}
 </div>
 {% endblock %}
