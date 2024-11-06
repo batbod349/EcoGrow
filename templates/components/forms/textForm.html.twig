@@ -1,0 +1,17 @@
+{% set label = label|default('') %}
+{% set placeholder = placeholder|default('') %}
+
+{# <div class="space-y-3.5">
+    <p class="ml-1 text-black">{{label}}</p>
+    <div class="px-5 py-2 border-2 border-greenDark rounded-2xl w-72 h-11">
+        <input type="text" placeholder="{{placeholder}}" class="w-full outline-none">
+    </div>
+</div> #}
+
+<div class="space-y-2">
+    <p class="ml-1 text-black">{{ form_label(field) }}</p>
+    <div class="px-5 py-3 border-2 border-greenDark rounded-2xl w-72 h-11 flex content-center">
+        {{ form_widget(field, {'attr': {'placeholder': placeholder}}) }}
+        {{ form_errors(field) }}
+    </div>
+</div>

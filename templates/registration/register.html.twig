@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}S'inscrire
+{% endblock %}
+
+{% block body %}
+	{% for flash_error in app.flashes('verify_email_error') %}
+		<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+	{% endfor %}
+
+	<div>
+		<img src="../images/logo/logo.png" alt="Logo EcoGrow" class="rounded-2xl h-28 lg:h-48 object-fit"/>
+	</div>
+	<h1>S'inscrire</h1>
+
+	{% form_theme registrationForm 'components/forms/custom_formErrors.html.twig' %}
+
+	{{ form_errors(registrationForm) }}
+	{{ form_start(registrationForm) }}
+	<div class="space-y-5">
+		{% include 'components/forms/textForm.html.twig' with {
+                    'field': registrationForm.nom,
+                    'placeholder' : "Nom",
+        } %}
+		{% include 'components/forms/textForm.html.twig' with {
+                    'field': registrationForm.prenom,
+                    'placeholder' : "Prénom",
+        } %}
+		{% include 'components/forms/textForm.html.twig' with {
+                    'field': registrationForm.username,
+                    'placeholder' : "Nom d'utilisateur",
+        } %}
+		{% include 'components/forms/textForm.html.twig' with {
+                    'field': registrationForm.email,
+                    'label' : "Email",
+                    'placeholder' : "Email",
+        } %}
+		{% include 'components/forms/textForm.html.twig' with {
+                    'field': registrationForm.plainPassword.first,
+                    'label' : "Mot de passe",
+                    'placeholder' : "Mot de passe",
+        } %}
+		{% include 'components/forms/textForm.html.twig' with {
+                    'field': registrationForm.plainPassword.second,
+                    'placeholder' : "Mot de passe (vérification)",
+        } %}
+		<a href="{{ path('app_login') }}">Se connecter</a>
+		{% include 'components/buttons/buttonSubmit.html.twig' with {
+                'placeholder': "Créer le compte",} %}
+	</div>
+	{{ form_row(registrationForm.agreeTerms) }}
+	{{ form_end(registrationForm) }}
+
+{% endblock %}
+
+{# {{ form_row(registrationForm.nom) }} 
+        {{ form_row(registrationForm.prenom) }}
+        {{ form_row(registrationForm.username) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.plainPassword.first) }}
+        {{ form_row(registrationForm.plainPassword.second) }}
+        {{ form_row(registrationForm.agreeTerms) }} 
+        <button type="submit" class="btn">Register</button>#}

@@ -11,6 +11,12 @@ module.exports = {
             'greenDark': 'var(--greenDark)',
             'greenLight': 'var(--greenLight)',
             'greenMint': 'var(--greenMint)',
+            'red': 'var(--red)'
+        },
+        fontFamily: {
+            'rawles': "'Rawles', sans-serif",
+            'inter': "'Inter', sans-serif",
+            'monsterrat': "'Montserrat', sans-serif"
         },
         extend: {},
     },
