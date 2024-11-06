@@ -11,23 +11,14 @@
 			<section class="section-container">
 				<h2 class="font-rawles text-3xl">Aujourd'hui</h2>
 				<div class="space-y-4">
-            {% for challenge in challenges %}
-					{% include 'components/cards/challengeCard.html.twig' with {
-                'number': "1234",
-                'title': challenge.name,
-                'desc': challenge.Text,
-            } %}
-            {% for article in articles %}
-					{% include 'components/cards/actualite.html.twig' with {
-                'image': article.getImage,
-                'image_alt': article.name,
-                'title': article.name,
-                'subtitle': article.text,
-                'description': article.text,
-            } %}
-				{% else %}
-					Aucun article n'a été trouvé.
-				{% endfor %}
+					{% for dailyQuest in dailyQuests %}
+						{% include 'components/cards/challengeCard.html.twig' with {
+                            'number': dailyQuest.rewards,
+                            'title': dailyQuest.Name,
+                    } %}
+					{% else %}
+						Aucun challenge quotidien n'a été trouvé.
+					{% endfor %}
 				</div>
 			</section>
 			<section class="section-container">
@@ -50,10 +41,14 @@
 			<section class="section-container">
 				<h2 class="font-rawles text-3xl">Je veux participer</h2>
 				<div class="space-y-4">
-					{% include 'components/cards/challengeCard.html.twig' with {
-                'number': "1234",
-                'title': "Mon titre",
-            } %}
+					{% for monthlyQuest in monthlyQuests %}
+						{% include 'components/cards/challengeCard.html.twig' with {
+                            'number': monthlyQuest.rewards,
+                            'title': monthlyQuest.Name,
+                    } %}
+					{% else %}
+						Aucun challenge mensuel n'a été trouvé.
+					{% endfor %}
 				</div>
 			</section>
 		</div>
