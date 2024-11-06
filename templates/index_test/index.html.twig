@@ -8,5 +8,14 @@
                 'title': "Mon autre title",
                 'titleColor': "text-greenMint",
             } %}
+
+	{% include 'components/forms/textForm.html.twig' with {
+				'label' : 'Label de texte',
+				'placeholder' : 'Rechercher',
+	} %}
+
+	{% include 'components/forms/searchForm.html.twig' with {
+				'placeholder' : 'Rechercher',
+	} %}
 	{% include 'components/navigation/bottomNavBar.html.twig' %}
 {% endblock %}
