@@ -11,6 +11,7 @@ module.exports = {
             'greenDark': 'var(--greenDark)',
             'greenLight': 'var(--greenLight)',
             'greenMint': 'var(--greenMint)',
+            'red': 'var(--red)'
         },
         extend: {},
     },
