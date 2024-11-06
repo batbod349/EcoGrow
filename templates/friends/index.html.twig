@@ -7,11 +7,24 @@
 	{% include 'components/headers/pageHeader.html.twig' with {
                 'title': 'Amis',
             } %}
-	<div>
+	<div class="space-y-10 pt-10 justify-items-center">
 		<h2 class="font-inter text-xl font-bold">Liste de vos amis :</h2>
-		<div>
+		<div class="space-y-5">
 			{% include 'components/containers/contact.html.twig' with {
-                'title': 'Amis',
+                'nom': 'Amis',
+                'src': '..\images\default-profil\daron-chauve.jpg'
+            } %}
+			{% include 'components/containers/contact.html.twig' with {
+                'nom': 'Amis',
+                'src': '..\images\default-profil\daron-chauve.jpg'
+            } %}
+			{% include 'components/containers/contact.html.twig' with {
+                'nom': 'Amis',
+                'src': '..\images\default-profil\daron-chauve.jpg'
+            } %}
+			{% include 'components/containers/contact.html.twig' with {
+                'nom': 'Amis',
+                'src': '..\images\default-profil\daron-chauve.jpg'
             } %}
 		</div>
 	</div>
