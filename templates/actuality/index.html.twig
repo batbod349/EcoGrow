@@ -20,6 +20,7 @@
                     {% if article.getImage %}
                         <img src="data:image/jpeg;base64,{{ article.getImage }}" alt="{{ article.name }}" width="250">
                     {% endif %}
+                    {{ article.text|slice(0, 100) }}{% if article.text|length > 100 %} ...{% endif %}
                 </li>
             {% else %}
                 <li>No articles found.</li>

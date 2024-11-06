@@ -4,41 +4,30 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class IndexTestController extends AbstractController
 {
-    public function __construct(
-        private HttpClientInterface $client,
-    ) {
-    }
 
     #[Route('/index/test', name: 'app_index_test')]
-    public function index(): Response
+    public function index(MailerInterface $mailer): Response
     {
-        $headers = [
-            'Authorization' => 'Bearer ' . $_ENV['AI_TOOLS_API_KEY'],
-            'Content-Type' => 'application/json',
-        ];
+        $email = (new Email())
+            ->from('michel@braquemard.fr')
+            ->to('nathael.stalder@gmail.com')
+            //->cc('cc@example.com')
+            //->bcc('bcc@example.com')
+            //->replyTo('fabien@example.com')
+            //->priority(Email::PRIORITY_HIGH)
+            ->subject('Time for Symfony Mailer!')
+            ->text('Sending emails is fun again!')
+            ->html('<p>See Twig integration for better HTML integration!</p>');
 
-        $body = [
-            'messages' => [
-                [
-                    'content' => 'répond en Français uniquement : comment vas tu ?',
-                    'role' => 'user',
-                ],
-            ],
-            'model' => 'mixtral',
-        ];
-
-        $response = $this->client->request('POST', 'https://api.infomaniak.com/1/ai/501/openai/chat/completions', [
-            'headers' => $headers,
-            'json' => $body,
-        ]);
-
+        $mailer->send($email);
         return $this->render('index_test/index.html.twig', [
-            'response' => json_encode($response->toArray()), // Convert array to JSON string
+            'reponse' => 'IndexTestController',
         ]);
     }
 }
