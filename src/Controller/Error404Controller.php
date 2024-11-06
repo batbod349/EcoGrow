@@ -8,11 +8,11 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class Error404Controller extends AbstractController
 {
-    #[Route('/e/error404', name: 'app_e_error404')]
+    #[Route('/error404', name: 'app_error404')]
     public function index(): Response
     {
-        return $this->render('e_error404/index.html.twig', [
-            'controller_name' => 'EError404Controller',
+        return $this->render('error404/index.html.twig', [
+            'controller_name' => 'Error404Controller',
         ]);
     }
 }
