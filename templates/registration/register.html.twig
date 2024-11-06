@@ -8,16 +8,17 @@
 		<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
 	{% endfor %}
 
-	<div>
-		<img src="../images/logo/logo.png" alt="Logo EcoGrow" class="rounded-2xl h-28 lg:h-48 object-fit"/>
+	<div class=" flex justify-center">
+		<img src="../images/logo/logo.png" alt="Logo EcoGrow" class="rounded-2xl h-28 lg:h-48  object-fit"/>
 	</div>
-	<h2>S'inscrire</h2>
+  
+	<h1 class="text-center mt-5 mb-4 font-monsterrat text-sm">S'inscrire</h1>
 
 	{% form_theme registrationForm 'components/forms/custom_formErrors.html.twig' %}
 
 	{{ form_errors(registrationForm) }}
 	{{ form_start(registrationForm) }}
-	<div class="space-y-5">
+	<div class="  flex flex-col items-center space-y-5 font-monsterrat text-xs">
 		{% include 'components/forms/textForm.html.twig' with {
                     'field': registrationForm.nom,
                     'placeholder' : "Nom",
@@ -44,12 +45,17 @@
                     'field': registrationForm.plainPassword.second,
                     'placeholder' : "Mot de passe (vérification)",
         } %}
-		<a href="{{ path('app_login') }}">Se connecter</a>
-		{% include 'components/buttons/buttonSubmit.html.twig' with {
-                'placeholder': "Créer le compte",} %}
+        <div class="space-y-2 text-sm">
+            <a href="{{ path('app_login') }}" class="m-10">Se connecter</a>
+            {% include 'components/buttons/buttonSubmit.html.twig' with {
+                    'placeholder': "Créer le compte",} %}
+        </div>
+        <div class="text-sm">
+        {{ form_row(registrationForm.agreeTerms) }}
+        </div>
+	    {{ form_end(registrationForm) }}        
 	</div>
-	{{ form_row(registrationForm.agreeTerms) }}
-	{{ form_end(registrationForm) }}
+	
 
 {% endblock %}
 
