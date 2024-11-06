@@ -13,7 +13,7 @@ class MixtralApiService
         $this->client = $client;
     }
 
-    public function sendPrompt(string $prompt): array
+    public function sendDailyPrompt(string $prompt): array
     {
         $headers = [
             'Authorization' => 'Bearer ' . $_ENV['AI_TOOLS_API_KEY'],
@@ -45,5 +45,35 @@ class MixtralApiService
 
         // Retourne les idées sous forme de tableau
         return $matches[1] ?? [];
+    }
+    public function sendPrompt(string $prompt): string
+    {
+        // Configuration des en-têtes et du corps de la requête
+        $headers = [
+            'Authorization' => 'Bearer ' . $_ENV['AI_TOOLS_API_KEY'],
+            'Content-Type' => 'application/json',
+        ];
+
+        $body = [
+            'messages' => [
+                [
+                    'content' => "Repond uniquement en francais " . $prompt,
+                    'role' => 'user',
+                ],
+            ],
+            'model' => 'mixtral',
+        ];
+
+        // Envoi de la requête POST
+        $response = $this->client->request('POST', 'https://api.infomaniak.com/1/ai/501/openai/chat/completions', [
+            'headers' => $headers,
+            'json' => $body,
+        ]);
+
+        // Conversion de la réponse en tableau
+        $data = $response->toArray();
+
+        // Extraction et retour du "content" uniquement
+        return $data['choices'][0]['message']['content'];
     }
 }
