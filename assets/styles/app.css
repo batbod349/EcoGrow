@@ -10,6 +10,7 @@
       --greenDark: #1E3932;
       --greenLight: #13A96A;
       --greenMint: #D4E9E2;
+      --red: #FF0000;
     }
     .dark {
       --black: #e6e6e6;
@@ -17,5 +18,10 @@
       --greenDark: #c6e1da;
       --greenLight: #55ecad;
       --greenMint: #172c25;
+      --red: #FF0000;
     }
   }
+
+  textarea:focus, input:focus{
+    outline: none;
+}
