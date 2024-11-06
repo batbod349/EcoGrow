@@ -2,7 +2,10 @@
 {% set backgroundColor = backgroundColor|default('bg-greenDark')%}
 {% set textColor = textColor|default('text-white')%}
 {% set placeholder = placeholder|default('')%}
+{% set href = href|default('')%}
 
 <div>
-    <button class="{{ textColor }} {{backgroundColor}}  text-sm rounded-2xl w-44 h-12">{{placeholder}}</button>
+	<a href="{{ href }}">
+		<button class="{{ textColor }} {{backgroundColor}} text-sm rounded-2xl py-1 px-3 h-12">{{placeholder}}</button>
+	</a>
 </div>
