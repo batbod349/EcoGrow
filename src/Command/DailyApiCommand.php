@@ -40,7 +40,7 @@ class DailyApiCommand extends Command
         // Appel API via le service
         try {
             $prompt = "Répond en francais uniquement : Donne moi 3 idées de tâches eco-résponsable (en numérotant chaques idées) à réaliser dans la journée";
-            $ideas = $this->mixtralApiService->sendPrompt($prompt);
+            $ideas = $this->mixtralApiService->sendDailyPrompt($prompt);
 
             // Sauvegarde de la réponse dans la base de données
             $apiResponse = new ApiResponse();
