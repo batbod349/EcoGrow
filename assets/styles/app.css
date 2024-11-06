@@ -5,17 +5,25 @@
 
 @layer base {
     :root {
-      --black: #1A1A1A;
-      --white: #FDF7F2;
-      --greenDark: #1E3932;
-      --greenLight: #13A96A;
-      --greenMint: #D4E9E2;
+        --black: #1A1A1A;
+        --white: #FDF7F2;
+        --greenDark: #1E3932;
+        --greenLight: #13A96A;
+        --greenMint: #D4E9E2;
+        --red: #FF0000;
     }
+
     .dark {
-      --black: #e6e6e6;
-      --white: #0d0702;
-      --greenDark: #c6e1da;
-      --greenLight: #55ecad;
-      --greenMint: #172c25;
+        --black: #e6e6e6;
+        --white: #0d0702;
+        --greenDark: #c6e1da;
+        --greenLight: #55ecad;
+        --greenMint: #172c25;
+        --red: #FF0000;
     }
-  }
+}
+
+textarea:focus,
+input:focus {
+    outline: none;
+}

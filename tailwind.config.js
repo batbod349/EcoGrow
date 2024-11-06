@@ -11,7 +11,16 @@ module.exports = {
             'greenDark': 'var(--greenDark)',
             'greenLight': 'var(--greenLight)',
             'greenMint': 'var(--greenMint)',
+            'red': 'var(--red)'
         },
+        fontFamily: {
+            'rawles': "'Rawles', sans-serif",
+            'inter': "'Inter', sans-serif",
+            'monsterrat': "'Montserrat', sans-serif"
+        },
+        boxShadow: {
+            'custom': '0px 4px 8px 0px rgba(29, 57, 50, 0.70)',
+          },
         extend: {},
     },
     plugins: [],

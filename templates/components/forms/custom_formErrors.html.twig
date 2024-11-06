@@ -1,0 +1,15 @@
+{# templates/form/custom_formErrors.html.twig #}
+{% block form_errors %}
+    {% if errors|length > 0 %}
+        <ul class="form-errors mt-2">
+            {% for error in errors %}
+                <li class="flex items-center">
+                    <svg class="h-4 w-4 text-red-600 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11.41V4a1 1 0 00-2 0v2.59a1 1 0 102 0zM10 10a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd" />
+                    </svg>
+                    <span class="text-red">{{ error.message }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
