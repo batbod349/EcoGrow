@@ -30,6 +30,14 @@ class ArticlesRepository extends ServiceEntityRepository
 //            ->getResult()
 //        ;
 //    }
+    public function findLast10Articles()
+    {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.CreateDate', 'DESC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }
 
 //    public function findOneBySomeField($value): ?Articles
 //    {

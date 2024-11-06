@@ -55,9 +55,19 @@ class Articles
         return $this;
     }
 
-    public function getImage()
+    public function getImage(): ?string
     {
-        return $this->image;
+        if ($this->image === null) {
+            return null;
+        }
+
+        rewind($this->image);
+        $stream = stream_get_contents($this->image);
+        if ($stream === false) {
+            return null;
+        }
+
+        return base64_encode($stream);
     }
 
     public function setImage($image): static
