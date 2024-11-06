@@ -1,5 +1,6 @@
-{% set description = description|default('Value desc') %}
-{% set statistic = statistic|default('0,00') %}
+{% set description = description|default('') %}
+{% set statistic = statistic|default('') %}
+{% set unite = unite|default('') %}
 
 <div class="flex flex-col justify-center items-center w-36 bg-greenMint rounded-2xl space-y-4 py-3 px-2 shadow-custom ">
     <div class="flex justify-center items-center w-full space-x-2.5">
@@ -11,7 +12,7 @@
         </p>
     </div>
     <div>
-        {{ statistic }} mg/m²
+        {{ statistic }} {{ unite }}
     </div>
 </div>
 
