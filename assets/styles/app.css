@@ -6,8 +6,8 @@
 @layer base {
     :root {
         --black: #1A1A1A;
-        --whiter: #FDF7F2;
-        --white: #FAF8F6;
+        --whiter: #FDF6F0;
+        --white: #FDF7F2;
         --greenDark: #1E3932;
         --greenLight: #13A96A;
         --greenMint: #D4E9E2;
@@ -17,7 +17,7 @@
     .dark {
         --black: #e6e6e6;
         --whiter: #0d0702;
-        --white: #FAF8F6;
+        --white: #FDF6F0;
         --greenDark: #c6e1da;
         --greenLight: #55ecad;
         --greenMint: #172c25;
