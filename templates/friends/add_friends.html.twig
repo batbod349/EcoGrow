@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter des amis
+{% endblock %}
+
+{% block body %}
+	<div class="space-y-10 pt-10 justify-items-center">
+		<h2 class="font-inter text-xl font-bold">Ajouter un ami :</h2>
+	{% include 'components/forms/searchForm.html.twig' with {
+				'placeholder' : 'Rechercher un ami',
+	} %}
+		<div class="space-y-5">
+			{% include 'components/containers/addFriend.html.twig' with {
+                'nom': 'Alice GUEGAN',
+                'status': 'Amis',
+                'src': '..\images\default-profil\daron-chauve.jpg'
+            } %}
+			{% include 'components/containers/addFriend.html.twig' with {
+                'nom': 'Alice GUEGAN',
+                'status': 'Amis',
+                'src': '..\images\default-profil\daron-chauve.jpg'
+            } %}
+			{% include 'components/containers/addFriend.html.twig' with {
+                'nom': 'Alice GUEGAN',
+                'status': 'Amis',
+                'src': '..\images\default-profil\daron-chauve.jpg'
+            } %}
+			{% include 'components/containers/addFriend.html.twig' with {
+                'nom': 'Alice GUEGAN',
+                'status': 'Amis',
+                'src': '..\images\default-profil\daron-chauve.jpg'
+            } %}
+		</div>
+	</div>
+{% endblock %}

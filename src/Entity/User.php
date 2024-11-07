@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -56,6 +57,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->notifications = new ArrayCollection();
+        $this->badges = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -217,6 +219,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private ?string $plainPassword = null;
 
+    /**
+     * @var Collection<int, Badges>
+     */
+    #[ORM\ManyToMany(targetEntity: Badges::class, mappedBy: 'user_medals')]
+    private Collection $badges;
+
+    #[ORM\Column(type: Types::BLOB)]
+    private $picture = null;
+
     public function getPlainPassword(): ?string
     {
         return $this->plainPassword;
@@ -225,6 +236,56 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPlainPassword(?string $plainPassword): self
     {
         $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Badges>
+     */
+    public function getBadges(): Collection
+    {
+        return $this->badges;
+    }
+
+    public function addBadge(Badges $badge): static
+    {
+        if (!$this->badges->contains($badge)) {
+            $this->badges->add($badge);
+            $badge->addUserMedal($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBadge(Badges $badge): static
+    {
+        if ($this->badges->removeElement($badge)) {
+            $badge->removeUserMedal($this);
+        }
+
+        return $this;
+    }
+
+    public function getPicture()
+    {
+
+        if ($this->picture === null) {
+            return null;
+        }
+
+        rewind($this->picture);
+        $stream = stream_get_contents($this->picture);
+        if ($stream === false) {
+            return null;
+        }
+
+        return base64_encode($stream);
+    }
+
+    public function setPicture($picture): static
+    {
+        $this->picture = $picture;
 
         return $this;
     }
