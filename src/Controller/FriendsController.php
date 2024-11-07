@@ -19,7 +19,7 @@ class FriendsController extends AbstractController
     #[Route('/friends/add', name: 'app_add_friends')]
     public function addFriendIndex(): Response
     {
-        return $this->render('friends/index.html.twig', [
+        return $this->render('friends/add_friends.html.twig', [
             'controller_name' => 'AddFriendsController',
         ]);
     }
