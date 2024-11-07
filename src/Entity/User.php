@@ -59,6 +59,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->notifications = new ArrayCollection();
         $this->badges = new ArrayCollection();
         $this->experiences = new ArrayCollection();
+        $this->quests = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -235,6 +236,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Experiences::class, mappedBy: 'user')]
     private Collection $experiences;
 
+    /**
+     * @var Collection<int, Quest>
+     */
+    #[ORM\ManyToMany(targetEntity: Quest::class, mappedBy: 'quest_user')]
+    private Collection $quests;
+
     public function getPlainPassword(): ?string
     {
         return $this->plainPassword;
@@ -322,6 +329,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             if ($experience->getUser() === $this) {
                 $experience->setUser(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Quest>
+     */
+    public function getQuests(): Collection
+    {
+        return $this->quests;
+    }
+
+    public function addQuest(Quest $quest): static
+    {
+        if (!$this->quests->contains($quest)) {
+            $this->quests->add($quest);
+            $quest->addQuestUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuest(Quest $quest): static
+    {
+        if ($this->quests->removeElement($quest)) {
+            $quest->removeQuestUser($this);
         }
 
         return $this;
