@@ -24,7 +24,9 @@
 			{% endblock %}
 		{% endblock %}
 	</head>
-	<header> {% block header %}{% endblock %}
+	<header>
+	{% include 'components/headers/headerPc.html.twig' %}
+	{% block header %}{% endblock %}
     </header>
     <body class="bg-white pb-24 h-full"> {% block body %}{% endblock %}
     </body>
