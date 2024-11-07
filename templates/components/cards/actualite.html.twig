@@ -11,8 +11,8 @@
 		</div>
 		<div class="space-y-3">
 			<h3 class="font-rawles text-lg">{{ title }}</h3>
-			<p class="font-monsterrat text-xs">{{ subtitle }}</p>
-			<p class="font-monsterrat text-xs">{{ description }}</p>
+			<p class="font-monsterrat text-xs">{# subtitle #}</p>
+			<p class="font-monsterrat text-xs">{{ description|length > 100 ? description|slice(0, 100) ~ '...' : description }}</p>
 		</div>
 	</a>
 </div>

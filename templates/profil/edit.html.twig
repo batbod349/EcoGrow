@@ -17,6 +17,9 @@
 		{{ form_errors(ProfilEdit) }}
 		{{ form_start(ProfilEdit) }}
 		<div class="flex flex-col items-center space-y-5 font-monsterrat">
+            <div class="text-sm">
+                {{ form_row(ProfilEdit.profilePicture) }}
+            </div>e
 			{% include 'components/forms/textForm.html.twig' with {
             'field': ProfilEdit.nom,
             'placeholder': "Nom",

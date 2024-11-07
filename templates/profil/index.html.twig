@@ -43,7 +43,8 @@
 						{% if badge in userBadges %}
 							{% include 'components/cards/badge.html.twig' with {
 		                        'title': badge.name,
-		                        'src': '../images/icons/badge.svg'} %}
+		                        'src': userBadges.image ? ('data:image/jpeg;base64,' ~ userBadges.image) : '../images/default-profil/daron-chauve.jpg'
+							} %}
 						{% endif %}
 					{% endfor %}
 				</div>
