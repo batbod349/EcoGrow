@@ -30,8 +30,8 @@
 
 				<div id="chatBot" class="text-center">
 					<textarea class="input-textarea" id="userInput" placeholder="Tapez votre message ici..." rows="3" style="max-height: calc(1.5em * 10);"></textarea>
-					<button class="button-clear" onclick="clearHistory()">Supprimer l'historique</button>
-					<button class="button-send" onclick="sendMessage()">Envoyer</button>
+					<button class="button-clear bg-red" onclick="clearHistory()">Supprimer l'historique</button>
+					<button class="button-send bg-greenLight" onclick="sendMessage()">Envoyer</button>
 				</div>
 			</div>
 		</div>
@@ -162,11 +162,9 @@ console.error("Erreur:", error);
 			cursor: pointer;
 		}
 		.button-clear {
-			background: #e74c3c;
 			color: white;
 		}
 		.button-send {
-			background: #2ecc71;
 			color: white;
 		}
 	</style>

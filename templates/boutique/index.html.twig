@@ -1,29 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello BoutiqueController!
-{% endblock %}
+{% block title %}Boutique{% endblock %}
 
 {% block body %}
-<div class="flex flex-col items-center gap-5">
-	{% include 'components/headers/pageHeader.html.twig' with {
-            'title': 'Boutique',} %}
 
-	<div class="flex flex-wrap justify-center items-center gap-5">
-		{% include 'components/cards/achat.html.twig' with {
-                'title': 'Nom de l\'élément',
-                'number': '340',
-                'description':'Description',
-                'src': "..\images\default-profil\daron-chauve.jpg"} %}
-            {% include 'components/cards/achat.html.twig' with {
-                'title': 'Nom de l\'élément',
-                'number': '340',
-                'description':'Description',
-                'src': "..\images\default-profil\daron-chauve.jpg"} %}
-		{% include 'components/cards/achat.html.twig' with {
-                'title': 'Nom de l\'élément',
-                'number': '340',
-                'description':'Description',
-                'src': "..\images\default-profil\daron-chauve.jpg"} %}
+    <!-- Affichage des messages flash (succès ou erreur) -->
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">{{ message }}</div>
+    {% endfor %}
+
+    <div class="flex flex-col items-center gap-5">
+        {% include 'components/headers/pageHeader.html.twig' with {
+            'title': "Boutique",
+            'image_path': asset('/images/icons/shop.svg')} 
+            %}
+
+        <div class="flex flex-wrap justify-center items-center gap-5">
+            {% if products is empty %}
+                <p>Aucun produit disponible pour le moment.</p>
+            {% else %}
+                {% for product in products %}
+                    {% include 'components/cards/achat.html.twig' with {
+                        'title': product.name,
+                        'number': product.price,
+                        'description': product.description,
+                        'src': product.image
+                    } %}
+                {% endfor %}
+            {% endif %}
         </div>
     </div>
 {% endblock %}
