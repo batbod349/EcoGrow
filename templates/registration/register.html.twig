@@ -18,7 +18,12 @@
 
 	{{ form_errors(registrationForm) }}
 	{{ form_start(registrationForm) }}
+
 	<div class="  flex flex-col items-center space-y-5 font-monsterrat">
+		<div class="text-sm">
+			{{ form_row(registrationForm.profilePicture) }}
+		</div>e
+
 		{% include 'components/forms/textForm.html.twig' with {
                     'field': registrationForm.nom,
                     'placeholder' : "Nom",
