@@ -69,6 +69,24 @@ class ExperiencesRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    // Dans le repository ExperiencesRepository
+    public function findByDate(int $userId, \DateTime $date): array
+    {
+        // Utiliser DQL pour rechercher les expériences en fonction de la date seule (sans l'heure)
+        $startOfDay = $date->setTime(0, 0, 0); // Début de la journée
+        $endOfDay = clone $startOfDay;
+        $endOfDay->setTime(23, 59, 59); // Fin de la journée
+
+        return $this->createQueryBuilder('e')
+            ->where('e.user = :userId')
+            ->andWhere('e.date BETWEEN :startOfDay AND :endOfDay')
+            ->setParameter('userId', $userId)
+            ->setParameter('startOfDay', $startOfDay)
+            ->setParameter('endOfDay', $endOfDay)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Experiences[] Returns an array of Experiences objects
 //     */
