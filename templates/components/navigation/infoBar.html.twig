@@ -3,7 +3,7 @@
 	<!-- Profil -->
 	<div class="profile">
 		<a href="{{ path('app_profil') }}">
-			<img src="{{ asset('images/default-profil/pepe-lunettes-doree.jpg') }}" alt="Profil" class="rounded-full" width="50" height="40">
+			<img src="{{ user.picture ? ('data:image/jpeg;base64,' ~ user.picture) : asset('images/default-profil/pepe-lunettes-doree.jpg') }}" alt="Profil" class="rounded-full" width="50" height="40">
 		</a>
 	</div>
 
@@ -11,22 +11,24 @@
 		class="space-x-1">
 		<!-- Classement -->
 		<a href="{{ path('app_classement') }}">
-			<div class="badge" style="display: inline-flex; align-items: center; background-color: #1D3932; padding: 6px 8px; border-radius: 8px; box-shadow: 0px 4px 8px 0px rgba(29, 57, 50, 0.70); color: #fff; gap: 15px;">
+			<div class="badge" style="display: inline-flex; align-items: center; background-color: #1D3932; padding: 6px 8px; border-radius: 8px; box-shadow: 0px 4px 8px 0px rgba(29, 57, 50, 0.70); color: #fff; gap: 7px;">
 				{% if position == 1 %}
-			<span class="text-xs">1er</span>
-			{% else %}
-			<span class="text-xs">{{ position }}ème</span>
-			{% endif %}
+					<span class="text-xs">1er</span>
+				{% else %}
+					<span class="text-xs">{{ position }}ème</span>
+				{% endif %}
 				<span class="">
 					<i class="bi bi-trophy-fill"></i>
 					<img src="{{ asset('images/icons/couronne.png') }}" alt="Billets" width="15" height="15">
 
-			</span>
-		</div>
+				</span>
+			</div>
+		</a>
 
 		<!-- Points -->
 		<div class="badge" style="display: inline-flex; align-items: center; background-color: #5C913B; padding: 6px 8px; border-radius: 8px; box-shadow: 0px 4px 8px 0px rgba(29, 57, 50, 0.70); color: #fff; gap: 15px;">
-			<span class="text-xs">{{ userPoints }} 🌱</span>
+			<span class="text-xs">{{ userPoints }}
+				🌱</span>
 		</div>
 
 		<!-- Objectif -->
@@ -40,14 +42,13 @@
 			</div>
 		</a>
 	</div>
-
-
 	<!-- Notifs -->
 	<div style="display: inline-flex; align-items: center; white-space: nowrap; gap: 15px;">
 		<a href="{{ path('app_notification') }}">
-			<div class="notif" style="gap: 15px" ;>
+			<div class="notif" style="gap: 15px;">
 				<img src="{{ asset('images/icons/cloche.png') }}" alt="Profil" class="rounded-circle" width="25" height="" ;>
 			</div>
 		</a>
 
 	</div>
+</div>
