@@ -1,0 +1,22 @@
+{% set text = text|default('')%}
+{% set backgroundColor = backgroundColor|default('bg-white')%}
+{% set textColor = textColor|default('text-black')%}
+{% set nom = nom|default('')%}
+{% set derniereConnexion = derniereConnexion|default('')%}
+{% set etatRequete = etatRequete|default('') %}
+{% set nameChallenge = nameChallenge|default('') %}
+
+<div class="flex flex-row {{backgroundColor}} ">
+    <div>
+        <p class="font-bold">{{derniereConnexion}}</p>
+    <div>
+        <img>
+    </div>
+    <div>
+        <p class="font-bold font-rawles">{{nom}}</p>
+        <p class="font-thin">{{etatRequete}}</p>
+    </div>
+    <div>
+        <p class="font-bold font-rawles">{{nameChallenge}}</p> 
+    </div>
+</div>
