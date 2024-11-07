@@ -31,6 +31,9 @@ class Badges
     #[ORM\Column(type: Types::BLOB, nullable: true)]
     private $image = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $Palier = null;
+
     public function __construct()
     {
         $this->user_medals = new ArrayCollection();
@@ -108,6 +111,18 @@ class Badges
     public function setImage($image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getPalier(): ?int
+    {
+        return $this->Palier;
+    }
+
+    public function setPalier(?int $Palier): static
+    {
+        $this->Palier = $Palier;
 
         return $this;
     }
