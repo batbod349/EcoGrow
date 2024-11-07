@@ -3,7 +3,7 @@
 	<!-- Profil -->
 	<div class="profile">
 		<a href="{{ path('app_profil') }}">
-			<img src="data:image/jpeg;base64,{{ user.picture }}{# asset('images/default-profil/pepe-lunettes-doree.jpg') #}" alt="Profil" class="rounded-full" width="50" height="40">
+			<img src="{{ asset('images/default-profil/pepe-lunettes-doree.jpg') }}" alt="Profil" class="rounded-full" width="50" height="40">
 		</a>
 	</div>
 
@@ -26,12 +26,11 @@
 
 		<!-- Points -->
 		<div class="badge" style="display: inline-flex; align-items: center; background-color: #5C913B; padding: 6px 8px; border-radius: 8px; box-shadow: 0px 4px 8px 0px rgba(29, 57, 50, 0.70); color: #fff; gap: 15px;">
-			{% include 'components/containers/graineCompteur.html.twig' with {
-                            'number': availablePoints,
-                            'color': 'text-white',
-                            'textSize': 'text-xs',
-                            'iconSize': 'w-[15] h-[15]',
-                        } %}
+			<span class="text-xs">{{ availablePoints }}</span>
+			<span class="">
+				<i class="bi bi-tv-fill"></i>
+				<img class="" src="{{ asset('images/icons/billets.png') }}" alt="Billets" width="15" height="15">
+			</span>
 		</div>
 
 		<!-- Objectif -->
@@ -51,7 +50,7 @@
 	<div style="display: inline-flex; align-items: center; white-space: nowrap; gap: 15px;">
 		<a href="{{ path('app_notification') }}">
 			<div class="notif" style="gap: 15px" ;>
-				<img src="{{ asset('images/icons/cloche.png') }}" alt="Profil" class="rounded-circle" width="40" height="40" ;>
+				<img src="{{ asset('images/icons/cloche.png') }}" alt="Profil" class="rounded-circle" width="25" height="" ;>
 			</div>
 		</a>
 
