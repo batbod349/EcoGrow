@@ -15,11 +15,19 @@
 				</div>
 				<div class="space-y-4">
 					{% for dailyQuest in dailyQuests %}
+						{% set isCompleted = false %}
+						{% for completedQuest in completedQuests %}
+							{% if completedQuest.id == dailyQuest.id %}
+								{% set isCompleted = true %}
+							{% endif %}
+						{% endfor %}
 						{% include 'components/cards/challengeCard.html.twig' with {
-                            'number': dailyQuest.rewards,
-                            'idChallenge': dailyQuest.id,
-                            'title': dailyQuest.Name,
-                    } %}
+							'number': dailyQuest.rewards,
+							'idChallenge': dailyQuest.id,
+							'title': dailyQuest.Name,
+							'desc': dailyQuest.description,
+							'isCompleted': isCompleted ? 'True' : 'False',
+						} %}
 					{% else %}
 						Aucun challenge quotidien n'a été trouvé.
 					{% endfor %}

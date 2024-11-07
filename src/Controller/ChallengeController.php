@@ -36,7 +36,7 @@ class ChallengeController extends AbstractController
         if ($user->getQuests()->contains($quest)) {
             // Return a response indicating the quest has already been validated
             $this->addFlash('warning', 'You have already validated this quest.');
-            return $this->redirectToRoute('app_challenge');
+            return $this->redirectToRoute('app_accueil');
         }
         $user->addQuest($quest);
 
@@ -53,6 +53,6 @@ class ChallengeController extends AbstractController
         $entityManager->persist($user);
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_challenge');
+        return $this->redirectToRoute('app_accueil');
     }
 }
