@@ -3,36 +3,82 @@
 namespace App\Controller;
 
 use App\Entity\Experiences;
+use App\Service\MixtralApiService;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class GrowController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
+    private MixtralApiService $mixtralApiService;
 
     // Injection de l'EntityManagerInterface via le constructeur
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(MixtralApiService $mixtralApiService, EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
+        $this->mixtralApiService = $mixtralApiService;
     }
     #[Route('/grow', name: 'app_grow')]
-    public function index(): Response
+    public function index(SessionInterface $session): Response
     {
-        // Définis l'ID utilisateur (par exemple, 1 si tu le veux en dur pour l'instant)
-        //TODO:: A changer par l'id de l'user log
-        $userID = 1;
+        $user = $this->getUser();
+        $userID = $user->getId();
+
+        // Récupère l'historique des messages
+        $chatHistory = $session->get('chat_history', []);
 
         // Récupère le mood en appelant getEcopagnonMood
         $moodValue = $this->getEcopagnonMood($userID);
 
         return $this->render('grow/index.html.twig', [
             'controller_name' => 'GrowController',
-            'moodValue' => $moodValue, // Passe moodValue à la vue
+            'moodValue' => $moodValue,
+            'userID' => $userID,
+            'chatHistory' => $chatHistory, // Passe l'historique à la vue
         ]);
     }
 
+    #[Route('/grow/clear-history', name: 'app_clear_chat_history', methods: ['POST'])]
+    public function clearChatHistory(SessionInterface $session): Response
+    {
+        // Supprime l'historique des messages dans la session
+        $session->remove('chat_history');
+        return $this->json(['status' => 'ok']);
+    }
+
+    #[Route('/grow/chatbot', name: 'app_chatbot', methods: ['POST'])]
+    public function handleChatBotRequest(Request $request, SessionInterface $session): Response
+    {
+        $data = json_decode($request->getContent(), true);
+
+        if (isset($data['prompt'])) {
+            $prompt = $data['prompt'];
+
+            // Récupère l'historique des messages de la session ou initialise un tableau vide
+            $history = $session->get('chat_history', []);
+
+            // Ajoute le message utilisateur à l'historique
+            $history[] = ['user' => $prompt];
+
+            // Envoie le message à l'API
+            $response = $this->mixtralApiService->sendPrompt($prompt);
+
+            // Ajoute la réponse de l'IA à l'historique
+            $history[] = ['ia' => $response];
+
+            // Met à jour la session avec le nouvel historique
+            $session->set('chat_history', $history);
+
+            return $this->json(['response' => $response, 'history' => $history]);
+        }
+
+        return $this->json(['error' => 'Prompt non fourni'], Response::HTTP_BAD_REQUEST);
+    }
     public function getEcopagnonMood(int $userID): int
     {
         // Créer la date d'aujourd'hui
@@ -49,11 +95,9 @@ class GrowController extends AbstractController
         // Vérifier s'il existe une expérience pour l'utilisateur avec la date d'aujourd'hui
         $experienceRepository = $this->entityManager->getRepository(Experiences::class);
 
-        // Recherche des expériences avec la date d'aujourd'hui pour cet utilisateur
-        $experiencesToday = $experienceRepository->findBy([
-            'user' => $userID,
-            'date' => $today,
-        ]);
+        // Recherche des expériences avec la date d'aujourd'hui pour cet utilisateur (en ignorant l'heure)
+        $experiencesToday = $experienceRepository->findByDate($userID, $today);
+
 
         // Vérifier la somme des quantities pour aujourd'hui
         $totalQuantity = 0;
@@ -94,7 +138,7 @@ class GrowController extends AbstractController
             return $choices[array_rand($choices)]; // Sélectionne un élément aléatoire
         }
 
-        // Si une expérience existe avec la date d'aujourd'hui, retourne une valeur différente, si nécessaire
-        return 1;  // Ou une autre logique selon tes besoins
+        // Error
+        return -1;
     }
 }

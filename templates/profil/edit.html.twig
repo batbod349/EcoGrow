@@ -37,7 +37,8 @@
             'label': "Email",
             'placeholder': "Email",
         } %}
-			<div class="space-y-2 text-sm pt-6">
+			<div class="space-y-2 text-sm pt-6 justify-items-center">
+				<a class="text-sm underline" href="{{ path('app_forgot_password_request') }}">Changer le mot de passe</a>
 				{% include 'components/buttons/buttonSubmit.html.twig' with {
                 'placeholder': "Sauvegarder",
                 'backgroundColor': "bg-greenLight",
