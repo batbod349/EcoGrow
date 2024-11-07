@@ -22,7 +22,7 @@ class QuestRepository extends ServiceEntityRepository
             ->where('q.date = :date')
             ->andWhere('q.type = :type')
             ->setParameter('date', $date->format('Y-m-d'))
-            ->setParameter('type', 'daily')
+            ->setParameter('type', 'Daily')
             ->setMaxResults(3)
             ->getQuery()
             ->getResult();
@@ -30,19 +30,18 @@ class QuestRepository extends ServiceEntityRepository
 
     public function findMonthlyQuest(\DateTime $date): array
     {
-        $startOfMonth = $date->modify('first day of this month')->setTime(0, 0);
-        $endOfMonth = $date->modify('last day of this month')->setTime(23, 59, 59);
+        $startOfMonth = (clone $date)->modify('first day of this month')->setTime(0, 0, 0);
+        $endOfMonth = (clone $date)->modify('last day of this month')->setTime(23, 59, 59);
 
         return $this->createQueryBuilder('q')
             ->where('q.date BETWEEN :start AND :end')
             ->andWhere('q.type = :type')
-            ->setParameter('start', $startOfMonth->format('Y-m-d H:i:s'))
-            ->setParameter('end', $endOfMonth->format('Y-m-d H:i:s'))
-            ->setParameter('type', 'monthly')
+            ->setParameter('start', $startOfMonth)
+            ->setParameter('end', $endOfMonth)
+            ->setParameter('type', 'Monthly')
             ->getQuery()
             ->getResult();
     }
-
 
     //    /**
     //     * @return Quest[] Returns an array of Quest objects

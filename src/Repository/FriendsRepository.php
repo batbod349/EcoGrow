@@ -20,7 +20,9 @@ class FriendsRepository extends ServiceEntityRepository
     public function getFriends(int $userId): array
     {
         return $this->createQueryBuilder('f')
-            ->andWhere('f.user1 = :userId OR f.user2 = :userId')
+            ->innerJoin('f.user1', 'u1')
+            ->innerJoin('f.user2', 'u2')
+            ->where('u1.id = :userId OR u2.id = :userId')
             ->andWhere('f.accepted = true')
             ->setParameter('userId', $userId)
             ->getQuery()

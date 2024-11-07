@@ -22,19 +22,19 @@
 				</div>
 			</section>
 			<section class="section-container">
-				<h2 class="font-rawles text-3xl">En bref</h2>
+				<h2 class="font-rawles text-3xl">Ma semaine</h2>
 				<div class="flex flex-wrap space-x-3">
 					{% include 'components/cards/statCardLittle.html.twig' with{
-                    'Amis':"Amis",
-                    'rang':"rang",
+                    'Amis':  averagePointsPerDay,
+                    'rang':"pts par jours",
                     'background':"bg-greenMint",} %}
 					{% include 'components/cards/statCardLittle.html.twig' with{
-                    'Amis':"Amis",
-                    'rang':"rang",
+                    'Amis':pointsLast7Days,
+                    'rang':"pts sur 7 J",
                     'background':"bg-greenMint",} %}
 					{% include 'components/cards/statCardLittle.html.twig' with{
-                    'Amis':"Amis",
-                    'rang':"rang",
+                    'Amis': userPoints,
+                    'rang':"pts Total",
                     'background':"bg-greenMint",} %}
 				</div>
 			</section>
