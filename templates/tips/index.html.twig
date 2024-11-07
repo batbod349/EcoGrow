@@ -4,36 +4,36 @@
 
 {% block body %}
     {% include 'components/headers/pageHeader.html.twig' with {
-                'title': 'Tips',
-            } %}
+        'title': 'Tips',
+    } %}
     <div class="flex flex-col">
-		<div class="container-page">
-			<section class="section-container">
-				<h2 class="font-rawles text-3xl">Themes populaires</h2>
-				<div class="space-y-4">
-					{% for popularTip in popularTips %}
-						{% include 'components/cards/tipsCard.html.twig' with {
-                            'imagePath': popularTip.image,
-                            'title': popularTip.name,
-                    } %}
-					{% else %}
-						Aucun tips n'a été trouvé.
-					{% endfor %}
-				</div>
-			</section>
-			<section class="section-container">
-				<h2 class="font-rawles text-3xl">Tips pour les courses</h2>
-				<div class="space-y-4">
-					{% for courseTip in courseTips %}
-						{% include 'components/cards/tipsCard.html.twig' with {
-                            'imagePath': courseTip.image,
-                            'title': courseTip.name,
-                    } %}
-					{% else %}
-						Aucun tips n'a été trouvé.
-					{% endfor %}
-				</div>
-			</section>
-		</div>
-	</div>
+        <div class="container-page">
+            <section class="section-container">
+                <h2 class="font-rawles text-3xl">Themes populaires</h2>
+                <div class="space-y-4">
+                    {% for popularTip in popularTips %}
+                        <a href="{{ path('app_tips_detail', { 'id': popularTip.id }) }}">{% include 'components/cards/tipsCard.html.twig' with {
+                                'imagePath': popularTip.image,
+                                'title': popularTip.name,
+                            } %}</a>
+                    {% else %}
+                        Aucun tips n'a été trouvé.
+                    {% endfor %}
+                </div>
+            </section>
+            <section class="section-container">
+                <h2 class="font-rawles text-3xl">Tips pour les courses</h2>
+                <div class="space-y-4">
+                    {% for courseTip in courseTips %}
+                        <a href="{{ path('app_tips_detail', { 'id': courseTip.id }) }}">{% include 'components/cards/tipsCard.html.twig' with {
+                                'imagePath': courseTip.image,
+                                'title': courseTip.name,
+                            } %}</a>
+                    {% else %}
+                        Aucun tips n'a été trouvé.
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    </div>
 {% endblock %}
