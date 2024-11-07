@@ -13,6 +13,9 @@ class StartController extends AbstractController
     #[Route('/', name: 'app_start')]
     public function index(): Response
     {
+        if ($this->getUser()) {
+            return $this->redirectToRoute('app_accueil');
+        }
         return $this->render('start/index.html.twig', [
             'controller_name' => 'StartController',
         ]);
