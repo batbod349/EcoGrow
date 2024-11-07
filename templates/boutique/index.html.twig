@@ -1,25 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello BoutiqueController!{% endblock %}
+{% block title %}Hello BoutiqueController!
+{% endblock %}
 
 {% block body %}
-    <div class="flex flex-col items-center gap-5">
-        {% include 'components/headers/pageHeader.html.twig' with {
+<div class="flex flex-col items-center gap-5">
+	{% include 'components/headers/pageHeader.html.twig' with {
             'title': 'Boutique',} %}
 
-        <div class="flex flex-wrap justify-center items-center gap-5">
+	<div class="flex flex-wrap justify-center items-center gap-5">
+		{% include 'components/cards/achat.html.twig' with {
+                'title': 'Nom de l\'élément',
+                'number': '340',
+                'description':'Description',
+                'src': "..\images\default-profil\daron-chauve.jpg"} %}
             {% include 'components/cards/achat.html.twig' with {
                 'title': 'Nom de l\'élément',
                 'number': '340',
-                'description':'Description'} %}
-            {% include 'components/cards/achat.html.twig' with {
+                'description':'Description',
+                'src': "..\images\default-profil\daron-chauve.jpg"} %}
+		{% include 'components/cards/achat.html.twig' with {
                 'title': 'Nom de l\'élément',
                 'number': '340',
-                'description':'Description'} %}
-            {% include 'components/cards/achat.html.twig' with {
-                'title': 'Nom de l\'élément',
-                'number': '340',
-                'description':'Description'} %}
+                'description':'Description',
+                'src': "..\images\default-profil\daron-chauve.jpg"} %}
         </div>
     </div>
 {% endblock %}
