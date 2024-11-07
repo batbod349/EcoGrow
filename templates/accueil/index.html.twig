@@ -11,12 +11,13 @@
 			<section class="section-container">
 			<div class="flex flex-row justify-between">
 				<h2 class="font-rawles text-3xl">Aujourd'hui</h2>
-				<h2 class="font-montserrat underline text-sm">Voir plus</h2>
+				<a href="{{ path('app_challenge') }}" class="font-montserrat underline text-sm">Voir plus</a>
 			</div>	
 				<div class="space-y-4">
 					{% for dailyQuest in dailyQuests %}
 						{% include 'components/cards/challengeCard.html.twig' with {
                             'number': dailyQuest.rewards,
+                            'idChallenge': dailyQuest.id,
                             'title': dailyQuest.Name,
                     } %}
 					{% else %}
@@ -25,7 +26,10 @@
 				</div>
 			</section>
 			<section class="section-container">
+            <div class="flex flex-row justify-between">
 				<h2 class="font-rawles text-3xl">Ma semaine</h2>
+				<a href="{{ path('app_challenge') }}" class="font-montserrat underline text-sm">Voir plus</a>
+			</div>	
 				<div class="flex flex-wrap space-x-3 justify-center">
 					{% include 'components/cards/statCardLittle.html.twig' with{
                     'Amis': averagePointsPerDay,
@@ -47,6 +51,7 @@
 					{% for monthlyQuest in monthlyQuests %}
 						{% include 'components/cards/challengeCard.html.twig' with {
                             'number': monthlyQuest.rewards,
+                            'idChallenge': monthlyQuest.id,
                             'title': monthlyQuest.Name,
                     } %}
 					{% else %}

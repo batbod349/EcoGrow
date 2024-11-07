@@ -6,7 +6,7 @@
 {% block body %}
 {% include 'components/headers/pageHeader.html.twig' with {
                 'title': 'Challenge',
-				'image_path': asset('/images/icons/Quete.svg'),}
+				'image_path': asset('/images/icons/Quete.svg'),}}
 	<div class="flex flex-col">
 		<div class="container-page">
 			<section class="section-container">
@@ -15,6 +15,7 @@
 					{% for dailyQuest in dailyQuests %}
 						{% include 'components/cards/challengeCard.html.twig' with {
                             'number': dailyQuest.rewards,
+                            'idChallenge': dailyQuest.id,
                             'title': dailyQuest.Name,
                     } %}
 					{% else %}
@@ -28,6 +29,7 @@
 					{% for monthlyQuest in monthlyQuests %}
 						{% include 'components/cards/challengeCard.html.twig' with {
                             'number': monthlyQuest.rewards,
+                            'idChallenge': monthlyQuest.id,
                             'title': monthlyQuest.Name,
                     } %}
 					{% else %}
