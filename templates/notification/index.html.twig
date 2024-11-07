@@ -1,20 +1,103 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello NotificationController!{% endblock %}
+{% block title %}Notification{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="justify-items-center">
+    <div class="flex-col w-full justify-items-center bg-white shadow-white">
+        <div class="flex flex-row"> 
+            <p class="font-semibold font-rawles text-2xl p-4">BONJOUR</p>  
+            <div>
+                <img class="rounded-full w-16 h-16"src="../images/default-profil/pepe-lunettes-doree.jpg">
+            </div>
+            <div class="flex flex-row p-4">
+                <div>
+                    <p class="font-semibold font-rawles text-2xl">ALICE GUEGAN</p>
+                </div>
+            </div>
+        </div>    
+    </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <p class="text-center font-bold text-lg p-6">Voici ce que vous avez pu manquer :</p>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/Users/nathael/dev/EcoGrow/src/Controller/NotificationController.php</code></li>
-        <li>Your template at <code>/Users/nathael/dev/EcoGrow/templates/notification/index.html.twig</code></li>
-    </ul>
-</div>
+    <div class="flex-col items-center  bg-white p-4">
+        <div>
+            <p class="font-bold text-lg">Il y a 1h :</p>
+        </div> 
+        <div class="flex flex-row">   
+            <div>
+                <img class="rounded-full mt-4 w-14 h-14"src="../images/default-profil/pepe-lunettes-doree.jpg">
+            </div>
+            <div class="flex flex-row p-4">
+                <div>
+                    <p class="font-semibold font-rawles text-2xl">ALICE GUEGAN</p>
+                    <p class="font-normal">a fini sa quète</p>
+                </div>
+                <div>
+                    <p class="font-semibold font-rawles p-6 text-2xl">NAME-CHALLENGE</p>
+                </div>        
+            </div>
+        </div>    
+    </div>
+
+    {# <div class="flex-col items-center  bg-white shadow-white p-4">
+        <div>
+            <p class="font-bold">Il y a 1h :</p>
+        </div> 
+        <div class="flex flex-row">   
+            <div>
+                <img class="rounded-full mt-4 w-14 h-14"src="../images/default-profil/pepe-lunettes-doree.jpg">
+            </div>
+            <div class="flex flex-row p-4">
+                <div>
+                    <p class="font-semibold font-rawles text-2xl">ALICE GUEGAN</p>
+                    <p class="font-normal">a fini sa quète</p>
+                </div>
+                <div>
+                    <p class="font-semibold font-rawles p-6 text-2xl">NAME-CHALLENGE</p>
+                </div>        
+            </div>
+        </div>    
+    </div>
+
+    <div class="flex-col items-center bg-white shadow-white p-4">
+        <div>
+            <p class="font-bold">Il y a 1h :</p>
+        </div> 
+        <div class="flex flex-row">   
+            <div>
+                <img class="rounded-full mt-4 w-14 h-14"src="../images/default-profil/pepe-lunettes-doree.jpg">
+            </div>
+            <div class="flex flex-row p-4">
+                <div>
+                    <p class="font-semibold font-rawles text-2xl">ALICE GUEGAN</p>
+                    <p class="font-normal">a fini sa quète</p>
+                </div>
+                <div>
+                    <p class="font-semibold font-rawles p-6 text-2xl">NAME-CHALLENGE</p>
+                </div>        
+            </div>
+        </div>    
+    </div>
+
+    <div class="flex-col items-center bg-white shadow-white p-4">
+        <div>
+            <p class="font-bold">Il y a 1h :</p>
+        </div> 
+        <div class="flex flex-row">   
+            <div>
+                <img class="rounded-full mt-4 w-14 h-14"src="../images/default-profil/pepe-lunettes-doree.jpg">
+            </div>
+            <div class="flex flex-row p-4">
+                <div>
+                    <p class="font-semibold font-rawles text-2xl">ALICE GUEGAN</p>
+                    <p class="font-normal">a fini sa quète</p>
+                </div>
+                <div>
+                    <p class="font-semibold font-rawles p-6 text-2xl">NAME-CHALLENGE</p>
+                </div>        
+            </div>
+        </div>    
+    </div> #}
+</div>    
 {% endblock %}
