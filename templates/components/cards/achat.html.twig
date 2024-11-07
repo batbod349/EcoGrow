@@ -1,18 +1,25 @@
 {% set title = title|default('Name-Challenge') %}
 {% set number = number|default('340') %}
-<div class="w-96 h-full rounded-[32px] bg-greenMint border-2 border-greenDark flex flex-col items-center relative py-5 shadow-custom">
+{% set description = description|default('Description') %}
+
+
+<div class="w-96 h-full rounded-[32px] bg-white  border-greenDark flex flex-col items-center relative shadow-custom">
     <!-- Conteneur avec l'image en arrière-plan et le compteur en premier plan -->
-    <div class="relative w-full flex justify-between items-center px-4">
-        <!-- Compteur en bas à gauche -->
-        <div class="counter-left bg-white text-black p-2 rounded-full absolute bottom-4 left-4 z-10">
-            {% include 'components/containers/graineCompteur.html.twig' with {'number': number} %}
+    <div class="relative w-full flex justify-between items-center rounded-t-2xl">
+        <!-- Compteur -->
+        <div class="counter-right bg-white text-black px-2 rounded-full absolute bottom-5 left-6 z-10">
+            <div style="display: flex; justify-content: space-between;">
+                <div>
+                    {% include 'components/containers/graineCompteur.html.twig' %}
+                </div>
+            </div>
         </div>
 
-        <!-- Image centrale en second plan -->
-        <img class="w-[340px] h-[222px] bg-cover bg-center rounded-2xl z-0" src="..\images\miniatures\arbre.jpg" alt="image d'arbres" />
+        <!-- Image centrale en second plan --> 
+        <img class="w-full h-auto bg-cover bg-center rounded-2xl z-0 rounded-t-2xl" src="..\images\miniatures\arbre.jpg" alt="image d'arbres" />
 
         <!-- Bouton pour afficher le contenu -->
-        <div class="toggle-icon absolute bottom-4 right-4 cursor-pointer z-10" onclick="toggleDescription(this)">
+        <div class="toggle-icon absolute bottom-4 right-9 cursor-pointer z-10" onclick="toggleDescription(this)">
             <span class="icon-up" style="display: block;">
                 {% include 'components/containers/iconRounded/iconRoundedUp.html.twig' %}
             </span>
@@ -23,8 +30,7 @@
     </div>
 
     <!-- Conteneur blanc avec titre, point d'interrogation et description, caché par défaut -->
-    <div class="info-container w-full px-4 mt-4 text-black bg-white p-4 rounded-lg" style="display: none;">
-        <!-- Titre -->
+    <div class="info-container w-full max-w-[91%] px-1 mt-2 text-black bg-white py-3 rounded-lg shadow-lg" style="display: none;"> 
         <div class="flex items-center mb-2">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-500 mr-2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z"/>
@@ -32,13 +38,13 @@
             <h3 class="font-bold text-lg">{{ title }}</h3>
         </div>
         <!-- Description -->
-        <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed orci dui, volutpat sed.</p>
+        <p class="text-sm">{{ description }}</p>
     </div>
 
     <!-- Bouton "Participer" -->
-    <div class="flex justify-center mt-4">
-        <button class="bg-greenDark text-white py-2 px-4 rounded-full shadow-md hover:bg-green-700 transition duration-200">
-            Participer
+    <div class="flex justify-center my-4">
+        <button class="bg-greenDark text-white py-2 px-4 rounded-full shadow-md hover:bg-green-700 transition duration-200 padding-bottom">
+        		<a href="http://127.0.0.1:8000/achat">Participer</a>
         </button>
     </div>
 </div>

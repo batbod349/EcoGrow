@@ -1,20 +1,158 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ClassementController!{% endblock %}
+{% block title %}Classement
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	{% include 'components/headers/pageHeader.html.twig' with {
+        'title': 'Classement',
+    } %}
+	<div class="">
+		<div
+			class="rounded mx-auto mt-4">
+			<!-- Tabs -->
+			<ul id="tabs" class="inline-flex pt-2 px-1 w-full justify-center">
+				<li class="bg-white px-4 text-gray-800 font-semibold py-2 rounded-t -mb-px">
+					<a id="tab-top-10" href="#first" onclick="setActiveTab('tab-top-10')">
+						<div class="tab-content inline-flex items-center bg-greenDark text-white" style="padding: 2px 13px; border-radius: 10px; box-shadow: 0px 4px 8px 0px rgba(29, 57, 50, 0.70); gap: 15px;">
+							<span class="text-lg font-rawles">Top 10</span>
+						</div>
+					</a>
+				</li>
+				<li class="px-4 text-gray-800 font-semibold py-2 rounded-t">
+					<a id="tab-top-friends" href="#second" onclick="setActiveTab('tab-top-friends')">
+						<div class="tab-content inline-flex items-center bg-greenMint text-greenDark" style="padding: 2px 13px; border-radius: 10px; box-shadow: 0px 4px 8px 0px rgba(29, 57, 50, 0.70); gap: 15px;">
+							<span class="text-lg font-rawles">Top amis</span>
+						</div>
+					</a>
+				</li>
+			</ul>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+			<!-- Tab Contents -->
+			<div id="tab-contents" class="flex justify-items-center place-content-center pt-16">
+				<!-- Podium -->
+				<div id="first" class="space-y-16">
+					<div class="flex justify-center items-end gap-2">
+						<!-- Podium 2ème place -->
+						<div class="text-center bg-gray-100 rounded-lg shadow-lg w-32 transform translate-y-2">
+							{% include 'components/containers/podium.html.twig' with {
+                                    'classement': '2',
+                                    'image_path': asset('/images/default-profil/daron-chauve.jpg'),
+                                    'nom': 'Bob LEBRON',
+                                    'number': '180',
+                                } %}
+						</div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/Users/nathael/dev/EcoGrow/src/Controller/ClassementController.php</code></li>
-        <li>Your template at <code>/Users/nathael/dev/EcoGrow/templates/classement/index.html.twig</code></li>
-    </ul>
-</div>
-{% endblock %}
+						<!-- Podium 1ère place, plus élevé -->
+						<div class="text-center bg-gray-100 rounded-lg shadow-lg w-32 transform -translate-y-5">
+							{% include 'components/containers/podium.html.twig' with {
+                                'classement': '1',
+                                'image_path': asset('/images/default-profil/daron-chauve.jpg'),
+                                'nom': 'Alice GUEGAN',
+                                'number': '210',
+                            } %}
+						</div>
+
+						<!-- Podium 3ème place -->
+						<div class="text-center bg-gray-100 rounded-lg shadow-lg w-32 transform translate-y-4">
+							{% include 'components/containers/podium.html.twig' with {
+                                'classement': '3',
+                                'image_path': asset('/images/default-profil/daron-chauve.jpg'),
+                                'nom': 'Charlie DUPONT',
+                                'number': '160',
+                            } %}
+						</div>
+					</div>
+					<!-- Liste places suivantes -->
+					<div class="space-y-4 flex flex-col justify-center justify-self-center">
+						{% include 'components/containers/classement.html.twig' with {
+                            'classement': '1',
+                            'image_path': asset('/images/default-profil/daron-chauve.jpg'),
+                            'nom': 'Alice GUEGAN',
+                            'number': '210',
+                        } %}	{% include 'components/containers/classement.html.twig' with {
+                            'classement': '1',
+                            'image_path': asset('/images/default-profil/daron-chauve.jpg'),
+                            'nom': 'Alice GUEGAN',
+                            'number': '210',
+                        } %}
+					</div>
+				</div>
+				<!-- Tabs 2 -->
+				<div id="second" class="space-y-16">
+					<div class="flex justify-center items-end gap-2">
+						<!-- Podium 2ème place -->
+						<div class="text-center bg-gray-100 rounded-lg shadow-lg w-32 transform translate-y-2">
+							{% include 'components/containers/podium.html.twig' with {
+                                    'classement': '2',
+                                    'image_path': asset('/images/default-profil/daron-chauve.jpg'),
+                                    'nom': 'Bob LEBRON',
+                                    'number': '180',
+                                } %}
+						</div>
+
+						<!-- Podium 1ère place, plus élevé -->
+						<div class="text-center bg-gray-100 rounded-lg shadow-lg w-32 transform -translate-y-5">
+							{% include 'components/containers/podium.html.twig' with {
+                                'classement': '1',
+                                'image_path': asset('/images/default-profil/daron-chauve.jpg'),
+                                'nom': 'Alice GUEGAN',
+                                'number': '210',
+                            } %}
+						</div>
+
+						<!-- Podium 3ème place -->
+						<div class="text-center bg-gray-100 rounded-lg shadow-lg w-32 transform translate-y-4">
+							{% include 'components/containers/podium.html.twig' with {
+                                'classement': '3',
+                                'image_path': asset('/images/default-profil/daron-chauve.jpg'),
+                                'nom': 'Charlie DUPONT',
+                                'number': '160',
+                            } %}
+						</div>
+					</div>
+					<!-- Liste places suivantes -->
+					<div class="space-y-4 flex flex-col justify-center justify-self-center">
+						{% include 'components/containers/classement.html.twig' with {
+                            'classement': '1',
+                            'image_path': asset('/images/default-profil/daron-chauve.jpg'),
+                            'nom': 'Alice GUEGAN',
+                            'number': '210',
+                        } %}	{% include 'components/containers/classement.html.twig' with {
+                            'classement': '1',
+                            'image_path': asset('/images/default-profil/daron-chauve.jpg'),
+                            'nom': 'Alice GUEGAN',
+                            'number': '210',
+                        } %}
+					</div>
+				</div>
+			</div>
+
+			<script>
+				function setActiveTab(activeTabId) { // Désactive tous les onglets
+document.querySelectorAll('.tab-content').forEach(tab => {
+tab.classList.remove('bg-greenDark', 'text-white');
+tab.classList.add('bg-greenMint', 'text-greenDark');
+});
+
+// Active le style de l'onglet sélectionné avec fond vert foncé et texte blanc
+const activeTab = document.querySelector (`#${activeTabId} .tab-content`);
+activeTab.classList.remove('bg-greenMint', 'text-greenDark');
+activeTab.classList.add('bg-greenDark', 'text-white');
+
+// Affiche le contenu de l'onglet sélectionné et cache les autres
+document.querySelectorAll("#tab-contents > div").forEach(content => {
+content.classList.add('hidden');
+});
+const targetContentId = document.querySelector (`#${activeTabId}`).getAttribute("href");
+document.querySelector(targetContentId).classList.remove('hidden');
+}
+
+// Initialisation pour activer le premier onglet par défaut
+document.addEventListener("DOMContentLoaded", () => {
+setActiveTab('tab-top-10');
+});
+			</script>
+
+
+		{% endblock %}

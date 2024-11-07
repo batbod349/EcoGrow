@@ -29,6 +29,12 @@ class Experiences
     #[ORM\ManyToOne(inversedBy: 'experiences')]
     private ?user $user = null;
 
+    #[ORM\ManyToOne(inversedBy: 'experiences')]
+    private ?quest $quest = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $completedAt = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +96,30 @@ class Experiences
     public function setUser(?user $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getQuest(): ?quest
+    {
+        return $this->quest;
+    }
+
+    public function setQuest(?quest $quest): static
+    {
+        $this->quest = $quest;
+
+        return $this;
+    }
+
+    public function getCompletedAt(): ?\DateTimeInterface
+    {
+        return $this->completedAt;
+    }
+
+    public function setCompletedAt(?\DateTimeInterface $completedAt): static
+    {
+        $this->completedAt = $completedAt;
 
         return $this;
     }
