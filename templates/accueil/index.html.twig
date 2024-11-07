@@ -14,6 +14,7 @@
 					{% for dailyQuest in dailyQuests %}
 						{% include 'components/cards/challengeCard.html.twig' with {
                             'number': dailyQuest.rewards,
+                            'idChallenge': dailyQuest.id,
                             'title': dailyQuest.Name,
                     } %}
 					{% else %}
@@ -44,6 +45,7 @@
 					{% for monthlyQuest in monthlyQuests %}
 						{% include 'components/cards/challengeCard.html.twig' with {
                             'number': monthlyQuest.rewards,
+                            'idChallenge': monthlyQuest.id,
                             'title': monthlyQuest.Name,
                     } %}
 					{% else %}
