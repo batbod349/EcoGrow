@@ -7,6 +7,7 @@
     :root {
         --black: #1A1A1A;
         --white: #FDF7F2;
+        --whiter: #FAF8F6;
         --greenDark: #1E3932;
         --greenLight: #13A96A;
         --greenMint: #D4E9E2;
@@ -16,6 +17,7 @@
     .dark {
         --black: #e6e6e6;
         --white: #0d0702;
+        --whiter: #FAF8F6;
         --greenDark: #c6e1da;
         --greenLight: #55ecad;
         --greenMint: #172c25;

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello Error403Controller!{% endblock %}
+{% block title %}Erreur 403{% endblock %}
 
 {% block body %}
 <div class="flex flex-col justify-center items-center h-[calc(100vh-112px)] gap-10 bg-white">
@@ -12,6 +12,7 @@
     </h2>
     {% include 'components/buttons/button.html.twig' with {
 		 'placeholder': "RETOURNER À LA PAGE D'ACCUEIL",
-		 'backgroundColor': "bg-greenDark",} %}
+		 'backgroundColor': "bg-greenDark",
+            'href': path('app_accueil')} %}
 </div>
 {% endblock %}
