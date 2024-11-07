@@ -3,10 +3,19 @@
 {% block title %}Détail de l'Astuce{% endblock %}
 
 {% block body %}
+<<<<<<< Updated upstream
     <style>
         .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
         .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
     </style>
+=======
+    <div class="flex flex-col items-center gap-5 lg:mt-24">
+        <div class="flex flex-col items-center w-11/12">
+            {% include 'components/headers/tipsHeader.html.twig' with {
+                'imagePath': tip.image,
+            } %}
+        </div>
+>>>>>>> Stashed changes
 
     <div class="example-wrapper">
         <h1>{{ tip.name }}</h1>
