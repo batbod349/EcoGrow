@@ -19,6 +19,9 @@
 	{{ form_errors(registrationForm) }}
 	{{ form_start(registrationForm) }}
 	<div class="  flex flex-col items-center space-y-5 font-monsterrat text-xs">
+		<div class="text-sm">
+			{{ form_row(registrationForm.profilePicture) }}
+		</div>e
 		{% include 'components/forms/textForm.html.twig' with {
                     'field': registrationForm.nom,
                     'placeholder' : "Nom",
@@ -49,9 +52,6 @@
             <a href="{{ path('app_login') }}" class="m-10">Se connecter</a>
             {% include 'components/buttons/buttonSubmit.html.twig' with {
                     'placeholder': "Créer le compte",} %}
-        </div>
-        <div class="text-sm">
-        {{ form_row(registrationForm.agreeTerms) }}
         </div>
 	    {{ form_end(registrationForm) }}        
 	</div>
