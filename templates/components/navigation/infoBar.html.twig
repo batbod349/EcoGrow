@@ -12,18 +12,21 @@
 		<!-- Classement -->
 		<a href="{{ path('app_classement') }}">
 			<div class="badge" style="display: inline-flex; align-items: center; background-color: #1D3932; padding: 6px 8px; border-radius: 8px; box-shadow: 0px 4px 8px 0px rgba(29, 57, 50, 0.70); color: #fff; gap: 15px;">
-				<span class="text-xs">1er</span>
+				{% if position == 1 %}
+			<span class="text-xs">1er</span>
+			{% else %}
+			<span class="text-xs">{{ position }}ème</span>
+			{% endif %}
 				<span class="">
 					<i class="bi bi-trophy-fill"></i>
 					<img src="{{ asset('images/icons/couronne.png') }}" alt="Billets" width="15" height="15">
 
-				</span>
-			</div>
-		</a>
+			</span>
+		</div>
 
 		<!-- Points -->
 		<div class="badge" style="display: inline-flex; align-items: center; background-color: #5C913B; padding: 6px 8px; border-radius: 8px; box-shadow: 0px 4px 8px 0px rgba(29, 57, 50, 0.70); color: #fff; gap: 15px;">
-			<span class="text-xs">340</span>
+			<span class="text-xs">{{ userPoints }}</span>
 			<span class="">
 				<i class="bi bi-tv-fill"></i>
 				<img class="" src="{{ asset('images/icons/billets.png') }}" alt="Billets" width="15" height="15">
@@ -33,7 +36,7 @@
 		<!-- Objectif -->
 		<a href="{{ path('app_challenge') }}">
 			<div class="badge" style="display: inline-flex; align-items: center; background-color: #D3E9E2; padding: 6px 8px; border-radius: 8px; box-shadow: 0px 4px 8px 0px rgba(29, 57, 50, 0.70); color: #fff; gap: 15px;">
-				<span class="text-xs">2/3</span>
+				<span class="text-xs">{{ completedQuests|length }}/{{ dailyQuests|length }}</span>
 				<span class="">
 					<i class="bi bi-check-circle-fill"></i>
 					<img src="{{ asset('images/icons/target.png') }}" alt="Billets" width="15" height="15">

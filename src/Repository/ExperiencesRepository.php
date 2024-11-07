@@ -16,28 +16,81 @@ class ExperiencesRepository extends ServiceEntityRepository
         parent::__construct($registry, Experiences::class);
     }
 
-    //    /**
-    //     * @return Experiences[] Returns an array of Experiences objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('e')
-    //            ->andWhere('e.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('e.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function getTotalPoints(int $userId): int
+    {
+        return (int) $this->createQueryBuilder('e')
+            ->select('SUM(e.quantity)')
+            ->where('e.user = :userId')
+            ->andWhere('e.type = :type')
+            ->setParameter('userId', $userId)
+            ->setParameter('type', 1)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 
-    //    public function findOneBySomeField($value): ?Experiences
-    //    {
-    //        return $this->createQueryBuilder('e')
-    //            ->andWhere('e.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function findAvailablePoints(int $userId): array
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.user = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getCompletedDailyQuests(int $userId, \DateTime $date): array
+    {
+        return $this->createQueryBuilder('e')
+            ->innerJoin('e.quest', 'q')
+            ->where('e.user = :userId')
+            ->andWhere('q.type = :dailyType')
+            ->andWhere('e.completedAt BETWEEN :startOfDay AND :endOfDay')
+            ->setParameter('userId', $userId)
+            ->setParameter('dailyType', 'Daily')
+            ->setParameter('startOfDay', $date->setTime(0, 0, 0))
+            ->setParameter('endOfDay', $date->setTime(23, 59, 59))
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findPointsLast7Days(int $userId): array
+    {
+        $today = new \DateTime();
+        $lastWeek = (clone $today)->modify('-7 days');
+
+        return $this->createQueryBuilder('e')
+            ->select('SUM(e.quantity) as totalPoints, e.date as day')
+            ->where('e.user = :userId')
+            ->andWhere('e.date BETWEEN :lastWeek AND :today')
+            ->setParameter('userId', $userId)
+            ->setParameter('lastWeek', $lastWeek)
+            ->setParameter('today', $today)
+            ->groupBy('day')
+            ->getQuery()
+            ->getResult();
+    }
+
+//    /**
+//     * @return Experiences[] Returns an array of Experiences objects
+//     */
+//    public function findByExampleField($value): array
+//    {
+//        return $this->createQueryBuilder('e')
+//            ->andWhere('e.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->orderBy('e.id', 'ASC')
+//            ->setMaxResults(10)
+//            ->getQuery()
+//            ->getResult()
+//        ;
+//    }
+
+//    public function findOneBySomeField($value): ?Experiences
+//    {
+//        return $this->createQueryBuilder('e')
+//            ->andWhere('e.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->getQuery()
+//            ->getOneOrNullResult()
+//        ;
+//    }
 }

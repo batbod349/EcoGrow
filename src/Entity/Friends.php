@@ -24,6 +24,12 @@ class Friends
     #[ORM\Column]
     private ?bool $accepted = null;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $friend;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -64,4 +70,17 @@ class Friends
 
         return $this;
     }
+
+    public function getFriend(): ?User
+    {
+        return $this->friend;
+    }
+
+    public function setFriend(?User $friend): self
+    {
+        $this->friend = $friend;
+
+        return $this;
+    }
+
 }
