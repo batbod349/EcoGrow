@@ -10,32 +10,37 @@
 	<div
 		class="space-x-1">
 		<!-- Classement -->
-		<div class="badge" style="display: inline-flex; align-items: center; background-color: #1D3932; padding: 6px 8px; border-radius: 8px; box-shadow: 0px 4px 8px 0px rgba(29, 57, 50, 0.70); color: #fff; gap: 15px;">
-			<span class="text-xs">1er</span>
-			<span class="">
-				<i class="bi bi-trophy-fill"></i>
-				<img src="{{ asset('images/icons/couronne.png') }}" alt="Billets" width="15" height="15">
+		<a href="{{ path('app_classement') }}">
+			<div class="badge" style="display: inline-flex; align-items: center; background-color: #1D3932; padding: 6px 8px; border-radius: 8px; box-shadow: 0px 4px 8px 0px rgba(29, 57, 50, 0.70); color: #fff; gap: 15px;">
+				<span class="text-xs">1er</span>
+				<span class="">
+					<i class="bi bi-trophy-fill"></i>
+					<img src="{{ asset('images/icons/couronne.png') }}" alt="Billets" width="15" height="15">
 
-			</span>
-		</div>
+				</span>
+			</div>
+		</a>
 
 		<!-- Points -->
 		<div class="badge" style="display: inline-flex; align-items: center; background-color: #5C913B; padding: 6px 8px; border-radius: 8px; box-shadow: 0px 4px 8px 0px rgba(29, 57, 50, 0.70); color: #fff; gap: 15px;">
-			<span class="text-xs">340</span>
-			<span class="">
-				<i class="bi bi-tv-fill"></i>
-				<img src="{{ asset('images/icons/billets.png') }}" alt="Billets" width="15" height="15">
-			</span>
+			{% include 'components/containers/graineCompteur.html.twig' with {
+                            'number': '340',
+                            'color': 'text-white',
+                            'textSize': 'text-xs',
+                            'iconSize': 'w-[15] h-[15]',
+                        } %}
 		</div>
 
 		<!-- Objectif -->
-		<div class="badge" style="display: inline-flex; align-items: center; background-color: #D3E9E2; padding: 6px 8px; border-radius: 8px; box-shadow: 0px 4px 8px 0px rgba(29, 57, 50, 0.70); color: #fff; gap: 15px;">
-			<span class="text-xs">2/3</span>
-			<span class="">
-				<i class="bi bi-check-circle-fill"></i>
-				<img src="{{ asset('images/icons/target.png') }}" alt="Billets" width="15" height="15">
-			</span>
-		</div>
+		<a href="{{ path('app_challenge') }}">
+			<div class="badge" style="display: inline-flex; align-items: center; background-color: #D3E9E2; padding: 6px 8px; border-radius: 8px; box-shadow: 0px 4px 8px 0px rgba(29, 57, 50, 0.70); color: #fff; gap: 15px;">
+				<span class="text-xs">2/3</span>
+				<span class="">
+					<i class="bi bi-check-circle-fill"></i>
+					<img src="{{ asset('images/icons/target.png') }}" alt="Billets" width="15" height="15">
+				</span>
+			</div>
+		</a>
 	</div>
 
 
