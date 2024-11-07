@@ -6,7 +6,7 @@
     <div class="flex flex-col items-center gap-5 lg:mt-24">
         <div class="flex flex-col items-center w-11/12">
             {% include 'components/headers/tipsHeader.html.twig' with {
-                'imagePath': '',
+                'imagePath': path(tip.image),
             } %}
         </div>
 
