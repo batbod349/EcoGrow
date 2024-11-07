@@ -1,18 +1,107 @@
 {% extends 'base.html.twig' %}
-{% import 'macros.html.twig' as ecopagnon %}
+{% import 'macro/ecopagnon.html.twig' as ecopagnon %}
 
-{% block title %}Hello GrowController!{% endblock %}
+{% block title %}Chatbot - GrowController{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <style>
+        .example-wrapper {
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+            font: 18px/1.5 sans-serif;
+        }
+        .message-container {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+        .message {
+            margin: 5px 0;
+        }
+        .user-message {
+            text-align: right;
+            font-weight: bold;
+        }
+        .ia-message {
+            text-align: left;
+            font-style: italic;
+        }
+    </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="example-wrapper">
+        <h1>Chatbot</h1>
+        <p>ID USER : {{ userID }}</p>
+        {{ ecopagnon.displayEcopagnonImage(moodValue, 150, 150) }}
 
-    {{ ecopagnon.displayEcopagnonImage(moodValue, 150, 150) }}
+        <div class="message-container" id="messageContainer">
+            {% for message in chatHistory %}
+                <div class="message {{ message.user is defined ? 'user-message' : 'ia-message' }}">
+                    {{ message.user is defined ? message.user : message.ia }}
+                </div>
+            {% endfor %}
+        </div>
 
-</div>
+        <div id="chatBot">
+            <input type="text" id="userInput" placeholder="Tapez votre message ici..." />
+            <button onclick="sendMessage()">Envoyer</button>
+            <button onclick="clearHistory()">Supprimer l'historique</button> <!-- Bouton de suppression -->
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const userInput = document.getElementById("userInput").value;
+            if (!userInput) return;  // Ne rien faire si le champ est vide
+
+            fetch("{{ path('app_chatbot') }}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-Requested-With": "XMLHttpRequest"
+                },
+                body: JSON.stringify({ prompt: userInput })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("userInput").value = '';
+
+                    const messageContainer = document.getElementById("messageContainer");
+
+                    const userMessage = document.createElement("div");
+                    userMessage.classList.add("message", "user-message");
+                    userMessage.textContent = userInput;
+                    messageContainer.appendChild(userMessage);
+
+                    const iaMessage = document.createElement("div");
+                    iaMessage.classList.add("message", "ia-message");
+                    iaMessage.textContent = data.response;
+                    messageContainer.appendChild(iaMessage);
+
+                    messageContainer.scrollTop = messageContainer.scrollHeight;
+                })
+                .catch(error => {
+                    console.error("Erreur:", error);
+                });
+        }
+
+        function clearHistory() {
+            fetch("{{ path('app_clear_chat_history') }}", {
+                method: "POST",
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest"
+                }
+            })
+                .then(response => {
+                    if (response.ok) {
+                        document.getElementById("messageContainer").innerHTML = ''; // Efface l'affichage des messages
+                    }
+                })
+                .catch(error => {
+                    console.error("Erreur:", error);
+                });
+        }
+    </script>
 {% endblock %}
