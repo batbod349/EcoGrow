@@ -9,19 +9,22 @@
             'image_path': asset('/images/icons/shop.svg')} 
             %}
 
-        <div class="flex flex-wrap justify-center items-center gap-5">
+	<div class="flex flex-wrap justify-center items-center gap-5">
+		{% include 'components/cards/achat.html.twig' with {
+                'title': 'Nom de l\'élément',
+                'number': '340',
+                'description':'Description',
+                'src': "..\images\default-profil\daron-chauve.jpg"} %}
             {% include 'components/cards/achat.html.twig' with {
                 'title': 'Nom de l\'élément',
                 'number': '340',
-                'description':'Description'} %}
-            {% include 'components/cards/achat.html.twig' with {
+                'description':'Description',
+                'src': "..\images\default-profil\daron-chauve.jpg"} %}
+		{% include 'components/cards/achat.html.twig' with {
                 'title': 'Nom de l\'élément',
                 'number': '340',
-                'description':'Description'} %}
-            {% include 'components/cards/achat.html.twig' with {
-                'title': 'Nom de l\'élément',
-                'number': '340',
-                'description':'Description'} %}
+                'description':'Description',
+                'src': "..\images\default-profil\daron-chauve.jpg"} %}
         </div>
     </div>
 {% endblock %}

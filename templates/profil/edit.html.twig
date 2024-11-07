@@ -1,43 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier mon profil{% endblock %}
+{% block title %}Modifier mon profil
+{% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
+	{% for flash_error in app.flashes('verify_email_error') %}
+		<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+	{% endfor %}
+	<div class="space-y-6 mt-6">
+		<div class="flex justify-center">
+			<img src="../images/logo/logo.png" alt="Logo EcoGrow" class="rounded-2xl h-28 lg:h-48 object-fit"/>
+		</div>
 
-    <div class="flex justify-center">
-        <img src="../images/logo/logo.png" alt="Logo EcoGrow" class="rounded-2xl h-28 lg:h-48 object-fit"/>
-    </div>
+		{% form_theme ProfilEdit 'components/forms/custom_formErrors.html.twig' %}
 
-    {% form_theme ProfilEdit 'components/forms/custom_formErrors.html.twig' %}
-
-    {{ form_errors(ProfilEdit) }}
-    {{ form_start(ProfilEdit) }}
-    <div class="flex flex-col items-center space-y-5 font-monsterrat text-xs">
-        {% include 'components/forms/textForm.html.twig' with {
+		{{ form_errors(ProfilEdit) }}
+		{{ form_start(ProfilEdit) }}
+		<div class="flex flex-col items-center space-y-5 font-monsterrat">
+			{% include 'components/forms/textForm.html.twig' with {
             'field': ProfilEdit.nom,
             'placeholder': "Nom",
         } %}
-        {% include 'components/forms/textForm.html.twig' with {
+			{% include 'components/forms/textForm.html.twig' with {
             'field': ProfilEdit.prenom,
             'placeholder': "Prénom",
         } %}
-        {% include 'components/forms/textForm.html.twig' with {
+			{% include 'components/forms/textForm.html.twig' with {
             'field': ProfilEdit.username,
             'placeholder': "Nom d'utilisateur",
         } %}
-        {% include 'components/forms/textForm.html.twig' with {
+			{% include 'components/forms/textForm.html.twig' with {
             'field': ProfilEdit.email,
             'label': "Email",
             'placeholder': "Email",
         } %}
-        <div class="space-y-2 text-sm">
-            {% include 'components/buttons/buttonSubmit.html.twig' with {
-                'placeholder': "Modiifer mon compte",
+			<div class="space-y-2 text-sm pt-6">
+				{% include 'components/buttons/buttonSubmit.html.twig' with {
+                'placeholder': "Sauvegarder",
+                'backgroundColor': "bg-greenLight",
             } %}
-        </div>
-        {{ form_end(ProfilEdit) }}
-    </div>
+			</div>
+			{{ form_end(ProfilEdit) }}
+		</div>
+	</div>
 {% endblock %}
