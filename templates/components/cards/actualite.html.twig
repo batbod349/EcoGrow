@@ -4,7 +4,7 @@
 {% set subtitle = subtitle|default('') %}
 {% set description = description|default('') %}
 
-<div class="rounded-2xl border border-greenDark p-4 flex space-x-4 w-96">
+<div class="">
 	<a href="{{ path('app_actuality_detail', { 'id': article.id }) }}" class="rounded-2xl border border-greenDark p-4 flex space-x-4 w-96">
 		<div>
 			<img src="data:image/jpeg;base64,{{ image }}" alt="{{ image_alt }}" class="rounded-2xl w-36 h-44 lg:h-48 object-cover"/>
