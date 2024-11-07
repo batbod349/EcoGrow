@@ -4,9 +4,11 @@
 {% endblock %}
 
 {% block body %}
+<
 	{% include 'components/headers/pageHeader.html.twig' with {
         'title': 'Classement',
-    } %}
+		'image_path' :  asset('/images/icons/Classement.svg')} 
+     %}
 	<div class="">
 		<div
 			class="rounded mx-auto mt-4">
