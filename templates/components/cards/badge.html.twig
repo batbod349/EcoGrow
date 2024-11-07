@@ -1,0 +1,9 @@
+{% set title = title|default('') %}
+{% set src = src|default('') %}
+
+<div class="flex flex-col items-center">
+	<div>
+		<img src="{{ src }}"/>
+	</div>
+	<p>{{ title }}</p>
+</div>

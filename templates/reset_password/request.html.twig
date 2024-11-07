@@ -7,26 +7,40 @@
 	{% for flash_error in app.flashes('reset_password_error') %}
 		<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
 	{% endfor %}
-	<h2>Changer le mot de passe</h2>
 
-	{{ form_start(requestForm) }}
-	{% include 'components/forms/textForm.html.twig' with {
-                    'field': requestForm.Email,
-                    'placeholder' : "Email",
-        } %}
-	<div>
-		<small>
-			Remplissez votre adresse email et nous vous enverrons un lien pour changer votre mot de passe.
-		</small>
+	<div class="flex flex-col justify-center h-screen items-center">
+		<div class="flex flex-col justify-center items-center gap-8">
+			<div class="flex justify-center items-center mb-4">
+				<img src="../images/logo/logo.png" alt="Logo EcoGrow" class="rounded-2xl h-28 lg:h-48 object-fit"/>
+			</div>
+
+			<h2 class="mb-0 font-weight-normal font-rawles text-4xl">Changer le mot de passe</h2>
+
+			{{ form_start(requestForm) }}
+				<div class="flex flex-col justify-center items-center font-monsterrat text-md">
+					{% include 'components/forms/textForm.html.twig' with {
+								'field': requestForm.Email,
+								'placeholder' : "Email",
+					} %}
+					<div class="my-5 w-72 text-center font-monsterrat text-xl">
+						<small>
+							Remplissez votre adresse email et nous vous enverrons un lien pour changer votre mot de passe.
+						</small>
+					</div>
+					
+					<div class="flex flex-col justify-center items-center gap-4 font-monsterrat text-xl">
+						<a href="{{ path('app_login') }}">Se connecter</a>
+						{% include 'components/buttons/button.html.twig' with {
+									'placeholder': "Envoyer le mail",} %}
+					</div>
+				</div>
+			{{ form_end(requestForm) }}
+		
+			{% include 'components/buttons/button.html.twig' with {
+						'placeholder': "RETOURNER À L'ACCUEIL",
+						'href': path('app_accueil')} %}
+		</div>
 	</div>
-
-	<a href="{{ path('app_login') }}">Se connecter</a>
-	{% include 'components/buttons/button.html.twig' with {
-                'placeholder': "Envoyer le mail",} %}
-	{{ form_end(requestForm) }}
-	{% include 'components/buttons/button.html.twig' with {
-                'placeholder': "Retourner à l'accueil",
-                'href': path('app_accueil')} %}
 {% endblock %}
 
 {# {{ form_row(requestForm.Email) }} 
