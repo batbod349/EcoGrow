@@ -6,6 +6,7 @@ use App\Entity\Friends;
 use App\Repository\FriendsRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\BadgesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -13,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class FriendsController extends AbstractController
 {
     #[Route('/friends', name: 'app_friends')]
-    public function FriendIndex(FriendsRepository $friendsRepository): Response
+    public function friendIndex(FriendsRepository $friendsRepository): Response
     {
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
@@ -22,6 +23,8 @@ class FriendsController extends AbstractController
         $userId = $user->getId();
         $friends = $friendsRepository->getFriends($userId);
         //dd($friends);
+
+
         return $this->render('friends/index.html.twig', [
             'userid' => $userId,
             'friends' => $friends,
@@ -40,7 +43,7 @@ class FriendsController extends AbstractController
         ]);
     }
 
-    #[\Symfony\Component\Routing\Annotation\Route('/friends/add/{id}', name: 'app_add_friends_by_id')]
+    #[Route('/friends/add/{id}', name: 'app_add_friends_by_id')]
     public function addFriendById(int $id, UserRepository $userRepository, FriendsRepository $friendsRepository, EntityManagerInterface $entityManager): Response
     {
         $currentUser = $this->getUser();
@@ -76,5 +79,25 @@ class FriendsController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('app_friends');
+    }
+
+    #[Route('/friends/{id}', name: 'friend_details')]
+    public function show(int $id, UserRepository $userRepository, BadgesRepository $badgesRepository): Response
+    {
+        $friend = $userRepository->find($id);
+
+        if (!$friend) {
+            throw $this->createNotFoundException("L'ami avec l'ID $id n'existe pas.");
+        }
+
+        // Récupérer les badges de l'ami
+        $friendBadges = $friend->getBadges();
+        $badges = $badgesRepository->findAll();
+
+        return $this->render('friends/details.html.twig', [
+            'friend' => $friend,
+            'friendBadges' => $friendBadges,
+            'badges' => $badges,
+        ]);
     }
 }

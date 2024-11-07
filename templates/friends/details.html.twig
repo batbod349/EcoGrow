@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de l'ami{% endblock %}
+
+{% block body %}
+    <div class="flex flex-col h-[calc(100vh-112px)] justify-between overflow-y-hidden">
+        <div class="container-page">
+            <section class="section-container space-y-4 flex justify-center">
+                <div class="justify-items-center space-y-3">
+                    <div class="justify-items-center">
+                        <div>
+                            <img src="data:image/jpeg;base64,{{ friend.picture }}" alt="Profil de {{ friend.prenom }} {{ friend.nom }}" class="rounded-full object-cover" width="80" height="80">
+                        </div>
+                        <h2 class="font-rawles text-lg">{{ friend.prenom }} {{ friend.nom }}</h2>
+                        <p class="font-monsterrat text-sm">{{ friend.Email }}</p>
+                    </div>
+                </div>
+            </section>
+            <section class="section-container">
+                <div class="flex flex-wrap justify-center items-center gap-5">
+                    {% include 'components/cards/statCard.html.twig' with{
+                        'description': "Amis",
+                        'statistic': "rang",
+                        'unite': "/jour",} %}
+                </div>
+            </section>
+            <section class="section-container">
+                <div class="flex place-content-between pb-8">
+                    <h2 class="font-rawles text-3xl">Badges de {{ friend.prenom }}</h2>
+                    <div class="flex flex-wrap gap-6 justify-center">
+                        {% for badge in badges %}
+                            {% if badge in friendBadges %}
+                                {% include 'components/cards/badge.html.twig' with {
+                                    'title': badge.name,
+                                    'src': '../images/icons/badge.svg'} %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+        </div>
+        <section class="section-container flex justify-end mr-4">
+            <a class="text-xs font-monsterrat" href="{{ path('app_about') }}">Mentions légales</a>
+        </section>
+    </div>
+{% endblock %}
