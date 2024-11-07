@@ -26,7 +26,7 @@ class ChallengeController extends AbstractController
     }
 
     #[Route('/challenge/validate/{id}', name: 'app_challenge_validate')]
-    public function validate(Quest $quest, EntityManagerInterface $entityManager): Response
+    public function validate(Quest $quest, EntityManagerInterface $entityManager, int $id): Response
     {
 
         $user = $this->getUser();
@@ -45,7 +45,7 @@ class ChallengeController extends AbstractController
         $experience->setDate(new \DateTime());
         $experience->setType(1); // Assuming type 1 for this case
         $experience->setSource('Quest');
-        $experience->setUser($user);
+        $experience->setUser($this->getUser());
         $experience->setQuest($quest);
         $experience->setCompletedAt(new \DateTime());
 
