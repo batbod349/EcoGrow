@@ -10,8 +10,9 @@
         VOUS AVEZ ETE DECONNECTE(E)
     </h2>
     {% include 'components/buttons/button.html.twig' with {
-		 'placeholder': "RETOURNER À LA PAGE D'ACCUEIL",
-		 'backgroundColor': "bg-greenDark",} %}
+		 'placeholder': "Se connecter",
+		 'backgroundColor': "bg-greenDark",
+         'href': path('app_login')} %}
 </div>
 {% endblock %}
 
