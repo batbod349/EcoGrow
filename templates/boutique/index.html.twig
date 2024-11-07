@@ -3,18 +3,27 @@
 {% block title %}Hello BoutiqueController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div class="flex flex-col items-center gap-5">
+        {% include 'components/headers/pageHeader.html.twig' with {
+            'title': 'Boutique',} %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        <div class="flex flex-wrap justify-center items-center gap-5">
+            {% include 'components/cards/achat.html.twig' with {
+                'title': 'Nom de l\'élément',
+                'number': '340',
+                'description':'Nec sane haec sola pernicies orientem diversis cladibus adfligebat. Namque et Isauri, quibus est usitatum saepe pacari saepeque inopinis excursibus cuncta miscere, ex latrociniis occultis et raris, alente inpunitate adulescentem in peius audaciam ad bella gravia proruperunt, diu quidem perduelles spiritus inrequietis motibus erigentes, hac tamen indignitate perciti vehementer, ut iactitabant, quod eorum capiti quidam consortes apud Iconium Pisidiae oppidum in amphitheatrali spectaculo feris praedatricibus obiecti sunt praeter morem.'} %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/Users/nathael/dev/EcoGrow/src/Controller/BoutiqueController.php</code></li>
-        <li>Your template at <code>/Users/nathael/dev/EcoGrow/templates/boutique/index.html.twig</code></li>
-    </ul>
-</div>
+            {% include 'components/cards/achat.html.twig' with {
+                'title': 'Name-Challenge',
+                'number': '340',} %}
+
+            {% include 'components/cards/achat.html.twig' with {
+                'title': 'Name-Challenge',
+                'number': '340',} %}
+
+            {% include 'components/cards/achat.html.twig' with {
+                'title': 'Name-Challenge',
+                'number': '340',} %}
+        </div>
+    </div>
 {% endblock %}
