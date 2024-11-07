@@ -16,6 +16,17 @@ class FriendsRepository extends ServiceEntityRepository
         parent::__construct($registry, Friends::class);
     }
 
+
+    public function getFriends(int $userId): array
+    {
+        return $this->createQueryBuilder('f')
+            ->andWhere('f.user1 = :userId OR f.user2 = :userId')
+            ->andWhere('f.accepted = true')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Friends[] Returns an array of Friends objects
 //     */
