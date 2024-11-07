@@ -11,13 +11,11 @@
         </div>
 
         <div class="w-11/12">
-            {# <h2 class="font-rawles text-3xl">{{ popularTip.name }}</h2> #}
-            <h2 class="font-rawles text-3xl">Nom du tip</h2>
+            <h2 class="font-rawles text-3xl">{{ tip.name }}</h2>
         </div>
 
         <div class="w-11/12">
-            {# <p class="font-monsterrat text-sm text-justify">{{ popularTip.description }}</p> #}
-            <p class="font-monsterrat text-base text-justify">Description du tip</p>
+            <p class="font-monsterrat text-sm text-justify">{{ tip.description }}</p>
         </div>
 
         <div class="w-11/12">
@@ -52,19 +50,4 @@
                 <p class="font-monsterrat text-base text-justify">Description du tip</p>
             </div>
         </div>
-
-{% block title %}Détail de l'Astuce{% endblock %}
-
-{% block body %}
-    <style>
-        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-    </style>
-
-    <div class="example-wrapper">
-        <h1>{{ tip.name }}</h1>
-        <p>Récompense : {{ tip.reward }}</p>
-        <p>Description : {{ tip.description }}</p>
->>
-    </div>
 {% endblock %}
