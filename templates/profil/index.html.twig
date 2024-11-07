@@ -13,13 +13,16 @@
 							<img src="data:image/jpeg;base64,{{ user.picture }}" alt="Profil" class="rounded-full object-cover" width="80" height="80">
 						</div>
 						<h2 class="font-rawles text-lg">{{ user.prenom }} {{ user.nom }}</h2>
-						<p class="font-monsterrat text-sm">{{ friends|length }} amis</p>
+						<p class="font-monsterrat text-sm"><a href="{{ path('app_add_friends') }}">{{ friends|length }} amis </a></p>
 						<div class="mt-3 mb-2">
 							<a  href="{{ path('app_logout') }}">Se déconnecter</a>
 						</div>
 					</div>
 					{% include 'components/buttons/button.html.twig' with {
-		                'placeholder': "Modifier",} %}
+		                'placeholder': "Modifier",
+						'href': path('app_profil_edit'),
+					} %}
+
 				</div>
 			</section>
 			<section class="section-container">
