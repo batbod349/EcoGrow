@@ -1,21 +1,22 @@
 {% set title = title|default('Name-Challenge') %}
 {% set number = number|default('340') %}
-<div class="w-96 h-full rounded-[32px] bg-greenMint  border-greenDark flex flex-col items-center relative py-5 shadow-custom">
+{% set description = description|default('Description') %}
+
+
+<div class="w-96 h-full rounded-[32px] bg-white  border-greenDark flex flex-col items-center relative shadow-custom">
     <!-- Conteneur avec l'image en arrière-plan et le compteur en premier plan -->
-    <div class="relative w-full flex justify-between items-center px-4">
+    <div class="relative w-full flex justify-between items-center rounded-t-2xl">
         <!-- Compteur -->
         <div class="counter-right bg-white text-black px-2 rounded-full absolute bottom-5 left-6 z-10">
-<div style="display: flex; justify-content: space-between;">
-    <div>
-        {% include 'components/containers/graineCompteur.html.twig' %}
-    </div>
-    <div>
-    </div>
-</div>
+            <div style="display: flex; justify-content: space-between;">
+                <div>
+                    {% include 'components/containers/graineCompteur.html.twig' %}
+                </div>
+            </div>
         </div>
 
         <!-- Image centrale en second plan --> 
-        <img class="w-full h-auto bg-cover bg-center rounded-2xl z-0" src="..\images\miniatures\arbre.jpg" alt="image d'arbres" />
+        <img class="w-full h-auto bg-cover bg-center rounded-2xl z-0 rounded-t-2xl" src="..\images\miniatures\arbre.jpg" alt="image d'arbres" />
 
         <!-- Bouton pour afficher le contenu -->
         <div class="toggle-icon absolute bottom-4 right-9 cursor-pointer z-10" onclick="toggleDescription(this)">
@@ -37,14 +38,13 @@
             <h3 class="font-bold text-lg">{{ title }}</h3>
         </div>
         <!-- Description -->
-        <p class="text-sm"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed orci dui, volutpatipsum dolor sit amet, volutpatipsum dolor sit amet, consectetur adipiscing elit. Sed orci dui, volutpatipsum dolor sit amet, consectetur adipiscing elit. Sed orci dui, volutpat dui, volutpat sed.</p>
+        <p class="text-sm">{{ description }}</p>
     </div>
 
     <!-- Bouton "Participer" -->
-    <div class="flex justify-center mt-4">
+    <div class="flex justify-center my-4">
         <button class="bg-greenDark text-white py-2 px-4 rounded-full shadow-md hover:bg-green-700 transition duration-200 padding-bottom">
-        		<a href="http://127.0.0.1:8000/achat">
-            Participer
+        		<a href="http://127.0.0.1:8000/achat">Participer</a>
         </button>
     </div>
 </div>

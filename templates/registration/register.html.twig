@@ -11,17 +11,19 @@
 	<div class=" flex justify-center">
 		<img src="../images/logo/logo.png" alt="Logo EcoGrow" class="rounded-2xl h-28 lg:h-48  object-fit"/>
 	</div>
-  
-	<h1 class="text-center mt-5 mb-4 font-monsterrat text-sm">Inscription</h1>
+
+	<h2 class="h3 mb-3 font-weight-normal font-rawles text-4xl flex justify-center pt-4">Inscription</h2>
 
 	{% form_theme registrationForm 'components/forms/custom_formErrors.html.twig' %}
 
 	{{ form_errors(registrationForm) }}
 	{{ form_start(registrationForm) }}
-	<div class="  flex flex-col items-center space-y-5 font-monsterrat text-xs">
+
+	<div class="  flex flex-col items-center space-y-5 font-monsterrat">
 		<div class="text-sm">
 			{{ form_row(registrationForm.profilePicture) }}
 		</div>e
+
 		{% include 'components/forms/textForm.html.twig' with {
                     'field': registrationForm.nom,
                     'placeholder' : "Nom",
@@ -48,14 +50,22 @@
                     'field': registrationForm.plainPassword.second,
                     'placeholder' : "Mot de passe (vérification)",
         } %}
-        <div class="space-y-2 text-sm">
-            <a href="{{ path('app_login') }}" class="m-10">Se connecter</a>
-            {% include 'components/buttons/buttonSubmit.html.twig' with {
+		<div class="space-y-2 text-sm flex flex-col items-center">
+			<a class="text-sm underline" href="{{ path('app_login') }}" class="m-10">Se connecter</a>
+			<div class="flex space-x-3">
+				<div class="text-sm self-center">
+					{{ form_row(registrationForm.agreeTerms, {
+                        'label': 'J\'accepte les conditions',
+                        'label_attr': {'class': 'font-semibold'},
+                    }) }}
+				</div>
+				{% include 'components/buttons/buttonSubmit.html.twig' with {
                     'placeholder': "Créer le compte",} %}
-        </div>
-	    {{ form_end(registrationForm) }}        
+			</div>
+		</div>
+		{{ form_end(registrationForm) }}
 	</div>
-	
+
 
 {% endblock %}
 

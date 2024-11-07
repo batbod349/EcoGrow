@@ -4,32 +4,24 @@
 {% endblock %}
 
 {% block body %}
-	<div class="space-y-10 pt-10 justify-items-center">
-		<h2 class="font-inter text-xl font-bold">Ajouter un ami :</h2>
-	{% include 'components/forms/searchForm.html.twig' with {
-				'placeholder' : 'Rechercher un ami',
-	} %}
-		<div class="space-y-5">
-			{% include 'components/containers/addFriend.html.twig' with {
-                'nom': 'Alice GUEGAN',
-                'status': 'Amis',
-                'src': '..\images\default-profil\daron-chauve.jpg'
-            } %}
-			{% include 'components/containers/addFriend.html.twig' with {
-                'nom': 'Alice GUEGAN',
-                'status': 'Amis',
-                'src': '..\images\default-profil\daron-chauve.jpg'
-            } %}
-			{% include 'components/containers/addFriend.html.twig' with {
-                'nom': 'Alice GUEGAN',
-                'status': 'Amis',
-                'src': '..\images\default-profil\daron-chauve.jpg'
-            } %}
-			{% include 'components/containers/addFriend.html.twig' with {
-                'nom': 'Alice GUEGAN',
-                'status': 'Amis',
-                'src': '..\images\default-profil\daron-chauve.jpg'
-            } %}
-		</div>
-	</div>
+    <div class="space-y-10 pt-10 justify-items-center">
+        <h2 class="font-inter text-xl font-bold">Ajouter un ami :</h2>
+        {% include 'components/forms/searchForm.html.twig' with {
+            'placeholder' : 'Rechercher un ami',
+        } %}
+        <div class="space-y-5">
+            {% for user in users %}
+                {% if user.id != currentUserId %}
+                    <a href="{{ path('app_add_friends_by_id', { id: user.id }) }}">
+                        {% include 'components/containers/addFriend.html.twig' with {
+                            'nom': user.prenom ~ ' ' ~ user.nom,
+                            'src': user.picture ? ('data:image/jpeg;base64,' ~ user.picture) : '../images/default-profil/daron-chauve.jpg',
+                        } %}
+                    </a>
+                {% endif %}
+            {% endfor %}
+
+
+        </div>
+    </div>
 {% endblock %}
