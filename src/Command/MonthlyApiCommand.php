@@ -2,20 +2,20 @@
 
 namespace App\Command;
 
-use App\Service\MixtralApiService;
 use App\Entity\Quest;
+use App\Service\MixtralApiService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Doctrine\ORM\EntityManagerInterface;
 
 #[AsCommand(
-    name: 'app:DailyApiCommand',
-    description: 'Appel l\'API du LLM pour lui demander les tâches quotidiennes',
+    name: 'app:MonthlyApiCommand',
+    description: 'Appel l\'API du LLM pour lui demander les tâches mensuel',
 )]
-class DailyApiCommand extends Command
+class MonthlyApiCommand extends Command
 {
     private MixtralApiService $mixtralApiService;
     private EntityManagerInterface $entityManager;
@@ -30,7 +30,7 @@ class DailyApiCommand extends Command
 
     protected function configure(): void
     {
-        // Pas besoin d'argument ni d'option pour cette commande
+
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -38,17 +38,17 @@ class DailyApiCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         try {
-            $prompt = "Répond en francais uniquement : Donne moi 3 idées de tâches eco-résponsable (en numérotant chaques idées) à réaliser dans la journée.";
+            $prompt = "Répond en francais uniquement : Donne moi 3 idées de tâches eco-résponsable  (un peu difficile) (en numérotant chaques idées) à réaliser dans le mois.";
             $ideas = $this->mixtralApiService->sendQuestPrompt($prompt);
             $i = 1;
 
             foreach ($ideas as $idea) {
                 $quest = new Quest();
-                $quest->setName('Daily' . $i);
+                $quest->setName('Monthly' . $i);
                 $quest->setDescription($idea);  // Utilise directement l'idée comme description
                 $quest->setRewards(25);
                 $quest->setDate(new \DateTime());
-                $quest->setType('Daily');
+                $quest->setType('Monthly');
                 $i++;
 
                 $this->entityManager->persist($quest);
