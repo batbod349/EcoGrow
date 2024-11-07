@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AccueilController extends AbstractController
 {
-    #[Route('/', name: 'app_accueil')]
+    #[Route('/accueil', name: 'app_accueil')]
     public function index(QuestRepository $questRepository, ExperiencesRepository $experiencesRepository, FriendsRepository $friendsRepository): Response
     {
         if (!$this->getUser()) {

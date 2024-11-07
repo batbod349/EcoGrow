@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class StartController extends AbstractController
 {
-    #[Route('/start', name: 'app_start')]
+    #[Route('/', name: 'app_start')]
     public function index(): Response
     {
         return $this->render('start/index.html.twig', [
