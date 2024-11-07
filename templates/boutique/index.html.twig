@@ -27,7 +27,7 @@
                         'title': product.name,
                         'number': product.price,
                         'description': product.description,
-                        'src': product.image
+                        'src': 'data:image/jpeg;base64,' ~ product.image,
                     } %}
                 {% endfor %}
             {% endif %}
