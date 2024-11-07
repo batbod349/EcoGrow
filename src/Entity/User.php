@@ -58,6 +58,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->notifications = new ArrayCollection();
         $this->badges = new ArrayCollection();
+        $this->experiences = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -228,6 +229,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::BLOB)]
     private $picture = null;
 
+    /**
+     * @var Collection<int, Experiences>
+     */
+    #[ORM\OneToMany(targetEntity: Experiences::class, mappedBy: 'user')]
+    private Collection $experiences;
+
     public function getPlainPassword(): ?string
     {
         return $this->plainPassword;
@@ -286,6 +293,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPicture($picture): static
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Experiences>
+     */
+    public function getExperiences(): Collection
+    {
+        return $this->experiences;
+    }
+
+    public function addExperience(Experiences $experience): static
+    {
+        if (!$this->experiences->contains($experience)) {
+            $this->experiences->add($experience);
+            $experience->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExperience(Experiences $experience): static
+    {
+        if ($this->experiences->removeElement($experience)) {
+            // set the owning side to null (unless already changed)
+            if ($experience->getUser() === $this) {
+                $experience->setUser(null);
+            }
+        }
 
         return $this;
     }
