@@ -1,8 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ActualityController!
-{% endblock %}
+{% block title %}Détail de l'Actualité{% endblock %}
 
 {% block body %}
-	
+    <div class="container">
+        <h1>Détail de l'actualité</h1>
+
+        <!-- Affichage de l'ID de l'article -->
+        <p>ID de l'article : {{ article.id }}</p>
+
+        <!-- Affichage du titre de l'article -->
+        <h2>{{ article.name }}</h2>
+
+        <!-- Affichage de la date de création -->
+        <p>Publié le : {{ article.createDate|date('Y-m-d H:i') }}</p>
+
+        <!-- Affichage de l'image si elle existe -->
+        {% if article.getImage %}
+            <img src="data:image/jpeg;base64,{{ article.getImage }}" alt="{{ article.name }}" width="500">
+        {% endif %}
+
+        <!-- Affichage du texte complet de l'article -->
+        <p>{{ article.text }}</p>
+    </div>
 {% endblock %}
