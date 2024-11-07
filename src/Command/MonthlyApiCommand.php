@@ -46,7 +46,7 @@ class MonthlyApiCommand extends Command
                 $quest = new Quest();
                 $quest->setName('Monthly' . $i);
                 $quest->setDescription($idea);  // Utilise directement l'idée comme description
-                $quest->setRewards(25);
+                $quest->setRewards(100);
                 $quest->setDate(new \DateTime());
                 $quest->setType('Monthly');
                 $i++;
