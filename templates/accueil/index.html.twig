@@ -25,16 +25,16 @@
 				<h2 class="font-rawles text-3xl">Ma semaine</h2>
 				<div class="flex flex-wrap space-x-3">
 					{% include 'components/cards/statCardLittle.html.twig' with{
-                    'Amis':  averagePointsPerDay,
-                    'rang':"pts par jours",
+                    'Amis': averagePointsPerDay,
+                    'rang':"graines/jour",
                     'background':"bg-greenMint",} %}
 					{% include 'components/cards/statCardLittle.html.twig' with{
                     'Amis':pointsLast7Days,
-                    'rang':"pts sur 7 J",
+                    'rang':"pts sur 7j",
                     'background':"bg-greenMint",} %}
 					{% include 'components/cards/statCardLittle.html.twig' with{
-                    'Amis': userPoints,
-                    'rang':"pts Total",
+                    'Amis': availablePoints,
+                    'rang':"pts dispo",
                     'background':"bg-greenMint",} %}
 				</div>
 			</section>
