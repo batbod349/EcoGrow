@@ -1,3 +1,5 @@
+{% set imagePath = imagePath|default('') %}
+
 <div
   class="w-full h-full rounded-[32px] bg-greenDark flex justify-center items-center relative py-10 shadow-custom"
 >
@@ -35,8 +37,8 @@
     <!-- Image poubelle -->
     <div>
       <img
-        src="/images/icons/poubelle.png"
-        alt="Poubelle Header"
+        src="{{ imagePath }}"
+        alt="Image du tips"
         class="w-[150px] h-[215px]"
       />
     </div>
