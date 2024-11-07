@@ -1,8 +1,9 @@
 {% set title = title|default('') %}
+{% set imagePath = imagePath|default('') %}
 
 <div class="border-2 border-greenDark w-40 h-fit px-3 py-3 rounded-2xl space-y-7 justify-items-center">
 	<div class="h-24 w-full self-center">
-		<img class="w-full h-24 object-contain" src="../images/icons/poubelle.png"/>
+		<img class="w-full h-24 object-contain" src="{{ imagePath }}"/>
 	</div>
 	<h3>{{title}}</h3>
 </div>
