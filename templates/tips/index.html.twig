@@ -1,27 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TipsController!{% endblock %}
+{% block title %}Liste des Tips{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-    <div class="example-wrapper">
-        {% for tips in popularTips %}
-            <h1>{{ tips.name }}</h1>
-            <p>{{ tips.reward }}</p>
-        {% else %}
-            <p>Aucun défi n'a été trouvé.</p>
-        {% endfor %}
-    </div>
-    <div class="example-wrapper">
-        {% for tips in courseTips %}
-            <h1>{{ tips.name }}</h1>
-            <p>{{ tips.reward }}</p>
-        {% else %}
-            <p>Aucun défi n'a été trouvé.</p>
-        {% endfor %}
+    {% include 'components/headers/pageHeader.html.twig' with {
+        'title': 'Tips',
+    } %}
+    <div class="flex flex-col">
+        <div class="container-page">
+            <section class="section-container">
+                <h2 class="font-rawles text-3xl">Themes populaires</h2>
+                <div class="space-y-4">
+                    {% for popularTip in popularTips %}
+                        <a href="{{ path('app_tips_detail', { 'id': popularTip.id }) }}">{% include 'components/cards/tipsCard.html.twig' with {
+                                'imagePath': popularTip.image,
+                                'title': popularTip.name,
+                            } %}</a>
+                    {% else %}
+                        Aucun tips n'a été trouvé.
+                    {% endfor %}
+                </div>
+            </section>
+            <section class="section-container">
+                <h2 class="font-rawles text-3xl">Tips pour les courses</h2>
+                <div class="space-y-4">
+                    {% for courseTip in courseTips %}
+                        <a href="{{ path('app_tips_detail', { 'id': courseTip.id }) }}">{% include 'components/cards/tipsCard.html.twig' with {
+                                'imagePath': courseTip.image,
+                                'title': courseTip.name,
+                            } %}</a>
+                    {% else %}
+                        Aucun tips n'a été trouvé.
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
     </div>
 {% endblock %}

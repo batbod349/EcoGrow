@@ -1,8 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ActualityController!
-{% endblock %}
+{% block title %}Détail de l'Actualité{% endblock %}
 
 {% block body %}
-	
+    <div class="container flex flex-col items-center gap-5">
+        <!-- Affichage de l'ID de l'article -->
+        {# <p>ID de l'article : {{ article.id }}</p> #}
+
+        <!-- Affichage du titre de l'article -->
+        <div class="flex justify-center items-center mt-5">
+            <h2 class="font-rawles text-3xl text-center w-11/12 max-w-[500px]">{{ article.name }}</h2>
+        </div>
+
+        <div class="flex justify-center items-center w-full">
+            <!-- Affichage de l'image si elle existe -->
+            {% if article.getImage %}
+                <img src="data:image/jpeg;base64,{{ article.getImage }}" alt="{{ article.name }}" class="w-11/12 max-w-[500px] rounded-2xl">
+            {% endif %}
+        </div>
+
+        <!-- Affichage de la date de création -->
+        {# <p>Publié le : {{ article.createDate|date('j F Y \à H:i') }}</p> #}
+        <p>Publié le : {{ article.createDate|date('j/m/Y \à H:i') }}</p>
+
+        <!-- Affichage du texte complet de l'article -->
+        <div class="w-11/12 max-w-[500px]">
+            <p class="text-justify">{{ article.text }}</p>
+        </div>
+    </div>
 {% endblock %}

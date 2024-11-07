@@ -22,7 +22,14 @@ class ActualityController extends AbstractController
     #[Route('/actuality/{id}', name: 'app_actuality_detail')]
     public function detailIndex(int $id, ArticlesRepository $articleRepository): Response
     {
+        // Recherche de l'article par ID
         $article = $articleRepository->fetchArticleById($id);
+
+        // Vérifie si l'article existe
+        if (!$article) {
+            throw $this->createNotFoundException("L'article n'existe pas.");
+        }
+
         return $this->render('actuality/detail.html.twig', [
             'article' => $article,
         ]);

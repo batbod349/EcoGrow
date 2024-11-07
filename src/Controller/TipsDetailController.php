@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\TipsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -9,10 +10,18 @@ use Symfony\Component\Routing\Attribute\Route;
 class TipsDetailController extends AbstractController
 {
     #[Route('/tips/{id}', name: 'app_tips_detail')]
-    public function index(int $id): Response
+    public function index(int $id, TipsRepository $tipsRepository): Response
     {
+        // Récupérer l'astuce par ID
+        $tip = $tipsRepository->find($id);
+
+        // Vérification si l'astuce existe
+        if (!$tip) {
+            throw $this->createNotFoundException("L'astuce n'existe pas.");
+        }
+
         return $this->render('tips_detail/index.html.twig', [
-            'controller_name' => 'TipsDetailController',
+            'tip' => $tip,
         ]);
     }
 }

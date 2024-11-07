@@ -20,6 +20,7 @@ module.exports = {
         },
         boxShadow: {
             'custom': '0px 4px 8px 0px rgba(29, 57, 50, 0.70)',
+            'customfaible': '0px 2px 4px 0px rgba(29, 57, 50, 0.40)',
           },
         extend: {},
     },
