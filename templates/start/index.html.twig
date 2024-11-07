@@ -1,38 +1,16 @@
-{# {% set image = image|default('') %}
-{% set image_alt = image_alt|default('') %} #}
-{# {% set title = title|default('') %}
-{% set backgroundColor = backgroundColor|default('bg-greenDark') %}
-{% set titleColor = titleColor|default('text-white') %}
-{% set placeholder = placeholder|default('COMMENCER')%}
-
-{% set textColor = textColor|default(' ')%}
-
-{% block body %}
-<div> #}
-    {# <div class="absolute left-8 -top-10 md:-left-8">
-       <img src="{{ image }}" alt="{{ image_alt }}" class="flex justify-center max-md:w-4/5 relative"/>
-    </div> #}
-    {# <div>
-         <h2 class="{{textColor}} {{backgroundColor}} text-6xl font-rawles text-center "> SAUVER LA PLANETE </h2>
-    </div>
-    <div>
-        <button class="{{ textColor }} {{backgroundColor}} text-sm rounded-2xl py-1 px-3 w-72 h-11">COMMENCER</button>
-    </div>
-{% endblock %} #}
-
-
 {% extends 'base.html.twig' %}
 
 {% block title %}{% endblock %}
 
 {% block body %}
-<div>
+
+<div class="absolute left-8 -top-10 md:-left-8">
+    <img src="..\images\logo\logo.svg" alt="">
 </div>
+
 <div class="flex flex-col justify-center items-center h-dvh bg-greenDark ">
     <div class="flex justify-center max-md:w-4/5 relative ">
-        <div class="absolute left-8 -top-10 md:-left-8">
-            <img src="..\images\icons\feuille.svg" alt="">
-        </div>
+       
         <h2 class="text-white text-center text-6xl w-fit font-rawles">
         SAUVER LA PLANETE
         </h2>
