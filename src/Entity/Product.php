@@ -29,9 +29,9 @@ class Product
     private $image = null;
 
     /**
-     * @var Collection<int, user>
+     * @var Collection<int, User>
      */
-    #[ORM\ManyToMany(targetEntity: user::class, inversedBy: 'purchase')]
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'purchase')]
     private Collection $achat;
 
     public function __construct()
@@ -103,14 +103,14 @@ class Product
     }
 
     /**
-     * @return Collection<int, user>
+     * @return Collection<int, User>
      */
     public function getAchat(): Collection
     {
         return $this->achat;
     }
 
-    public function addAchat(user $achat): static
+    public function addAchat(User $achat): static
     {
         if (!$this->achat->contains($achat)) {
             $this->achat->add($achat);
@@ -119,7 +119,7 @@ class Product
         return $this;
     }
 
-    public function removeAchat(user $achat): static
+    public function removeAchat(User $achat): static
     {
         $this->achat->removeElement($achat);
 
