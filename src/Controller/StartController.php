@@ -17,7 +17,6 @@ class StartController extends AbstractController
             return $this->redirectToRoute('app_accueil');
         }
         return $this->render('start/index.html.twig', [
-            'userID' => 2,
             'controller_name' => 'StartController',
         ]);
     }
