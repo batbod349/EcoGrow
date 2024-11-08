@@ -68,6 +68,24 @@ Encore
 
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()
-;
+
+
+    // webpack.config.js
+
+  .setOutputPath('public/build/')
+  .setPublicPath('/build')
+  .addEntry('app', './assets/app.js')       // fichier CSS et JS principal
+  .addEntry('scroll', './assets/scroll.js') // ajoutez cette ligne pour scroll.js
+  .enableSingleRuntimeChunk()
+  .cleanupOutputBeforeBuild()
+  .enableBuildNotifications()
+  .enableSourceMaps(!Encore.isProduction())
+  .enableVersioning(Encore.isProduction());
+  // Ajoutez dans webpack.config.js si nécessaire
+
+  addStyleEntry('app', './assets/styles/app.css');
+
 
 module.exports = Encore.getWebpackConfig();
+
+

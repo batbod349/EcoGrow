@@ -8,7 +8,7 @@
 		.example-wrapper {
 			margin: 1em auto;
 			max-width: 800px;
-			width: 95%;
+			width: 100%;
 			font: 18px / 1.5 sans-serif;
 		}
 		.example-wrapper code {
@@ -27,6 +27,21 @@
 
 		<ul>
 			<div class="flex flex-wrap justify-center items-center gap-5">
+				{% for article in articles %}
+					{% include 'components/cards/actualite.html.twig' with {
+                'image': article.getImage,
+                'image_alt': article.name,
+                'title': article.name,
+                'subtitle': article.text,
+                'description': article.text,
+            	} %}
+				{% else %}
+					Aucun article n'a été trouvé.
+				{% endfor %}
+			</div>
+		</ul>
+		<ul>
+			<div class="flex flex-wrap justify-center items-center w-fix h-fix gap-5">
 				{% for article in articles %}
 					{% include 'components/cards/actualite.html.twig' with {
                 'image': article.getImage,
