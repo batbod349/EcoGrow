@@ -11,11 +11,8 @@ class Error403Controller extends AbstractController
     #[Route('/error403', name: 'app_error403')]
     public function index(): Response
     {
-        $user = $this->getUser();
-        $userId = $user->getId();
         return $this->render('error403/index.html.twig', [
             'controller_name' => 'Error403Controller',
-            'userID' => $userId,
         ]);
     }
 }

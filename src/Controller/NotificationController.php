@@ -11,11 +11,8 @@ class NotificationController extends AbstractController
     #[Route('/notification', name: 'app_notification')]
     public function index(): Response
     {
-        $user = $this->getUser();
-        $userId = $user->getId();
         return $this->render('notification/index.html.twig', [
             'controller_name' => 'NotificationController',
-            'userID' => $userId,
         ]);
     }
 }

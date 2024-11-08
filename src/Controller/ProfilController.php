@@ -21,14 +21,12 @@ class ProfilController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
         $user = $this->getUser();
-        $userId = $user->getId();
         $userBadges = $user->getBadges();
         $badges = $badgesRepository->findAll();
         $friends = $friendsRepository->getFriends($user->getId());
 
         return $this->render('profil/index.html.twig', [
             'user' => $user,
-            'userID' => $userId,
             'userBadges' => $userBadges,
             'badges' => $badges,
             'friends' => $friends,
