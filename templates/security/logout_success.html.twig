@@ -1,10 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <div class="flex flex-col justify-between h-[80vh] items-center">
+        <div></div>
+		<div class="flex flex-col justify-center items-center gap-8">
+			<div class="flex justify-center items-center mb-4">
+				<img src="../images/logo/logo.png" alt="Logo EcoGrow" class="rounded-2xl h-28 lg:h-48 object-fit"/>
+			</div>
 
+			<h2 class="font-weight-normal font-rawles text-4xl text-center">Vous avez bien ete deconnecte</h2>
+		</div>
+		
+        {% include 'components/buttons/button.html.twig' with {
+                    'placeholder': "RETOURNER À L'ACCUEIL",
+                    'href': path('app_accueil')} %}
+	</div>
 {% endblock %}
 
-{% block title %}
-
+{% block title %}Déconnexion
 {% endblock %}
 
