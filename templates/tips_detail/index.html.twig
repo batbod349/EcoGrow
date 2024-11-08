@@ -5,7 +5,9 @@
 {% block body %}
     <div class="flex flex-col items-center gap-5 lg:mt-24">
         <div class="flex flex-col items-center w-11/12">
-            {% include 'components/headers/tipsHeader.html.twig' %}
+            {% include 'components/headers/tipsHeader.html.twig' with {
+                'imagePath': tip.image ? ('data:image/jpeg;base64,' ~ tip.image) : '../images/icons/poubelle.png'
+            } %}
         </div>
 
         <div class="w-11/12">
