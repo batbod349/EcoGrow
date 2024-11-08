@@ -22,12 +22,21 @@ class ProfilController extends AbstractController
         }
         $user = $this->getUser();
         $userBadges = $user->getBadges();
+        $userBadge = [];
+        $i = 0;
+        foreach ($userBadges as $badge) {
+            // This will initialize the collection
+            $userBadge[$i] = $badge;
+            $i++;
+        }
         $badges = $badgesRepository->findAll();
         $friends = $friendsRepository->getFriends($user->getId());
 
+        //dd($userBadge);
+
         return $this->render('profil/index.html.twig', [
             'user' => $user,
-            'userBadges' => $userBadges,
+            'userBadges' => $userBadge,
             'badges' => $badges,
             'friends' => $friends,
         ]);
