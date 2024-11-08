@@ -12,8 +12,6 @@ class TipsDetailController extends AbstractController
     #[Route('/tips/{id}', name: 'app_tips_detail')]
     public function index(int $id, TipsRepository $tipsRepository): Response
     {
-        $user = $this->getUser();
-        $userId = $user->getId();
         // Récupérer l'astuce par ID
         $tip = $tipsRepository->find($id);
 
@@ -24,7 +22,6 @@ class TipsDetailController extends AbstractController
 
         return $this->render('tips_detail/index.html.twig', [
             'tip' => $tip,
-            'userID' => $userId,
         ]);
     }
 }

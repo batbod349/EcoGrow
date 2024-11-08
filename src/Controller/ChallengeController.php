@@ -15,8 +15,6 @@ class ChallengeController extends AbstractController
     #[Route('/challenge', name: 'app_challenge')]
     public function index(QuestRepository $QuestRepository): Response
     {
-        $user = $this->getUser();
-        $userId = $user->getId();
         $today = new \datetime();
         $dailyQuests = $QuestRepository->findDailyQuests($today);
         $monthlyQuests = $QuestRepository->findMonthlyQuest($today);
@@ -24,7 +22,6 @@ class ChallengeController extends AbstractController
         [
             'dailyQuests' => $dailyQuests,
             'monthlyQuests' => $monthlyQuests,
-            'userID' => $userId,
         ]);
     }
 

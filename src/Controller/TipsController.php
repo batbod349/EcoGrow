@@ -11,8 +11,6 @@ class TipsController extends AbstractController
     #[Route('/tips', name: 'app_tips')]
     public function index(TipsRepository $tipsRepository): Response
     {
-        $user = $this->getUser();
-        $userId = $user->getId();
         // Récupération des tips selon leur type
         $consommationTips = $tipsRepository->findBy(['type' => 'Consommation et Achats Responsables']);
         $energieTips = $tipsRepository->findBy(['type' => 'Économies d’Énergie et Transport Écoresponsable']);
@@ -29,12 +27,11 @@ class TipsController extends AbstractController
                 $tip->setImage('data:image/jpeg;base64,' . base64_encode(stream_get_contents($tip->getImage())));
             }
         }
-
-        // Passer les données au template
+        $popularTips = $tipsRepository->findPopularTips();
+        $courseTips = $tipsRepository->findCourseTips();
         return $this->render('tips/index.html.twig', [
-            'consommationTips' => $consommationTips,
-            'energieTips' => $energieTips,
-            'userID' => $userId,
+            'popularTips' => $popularTips,
+            'courseTips' => $courseTips,
         ]);
     }
 }

@@ -12,13 +12,10 @@ class ActualityController extends AbstractController
     #[Route('/actuality', name: 'app_actuality')]
     public function index(ArticlesRepository $articlesRepository): Response
     {
-        $user = $this->getUser();
-        $userId = $user->getId();
         $articles = $articlesRepository->findLast10Articles();
 
         return $this->render('actuality/index.html.twig', [
             'articles' => $articles,
-            'userID' => $userId,
         ]);
     }
 

@@ -35,14 +35,11 @@ class FriendsController extends AbstractController
     #[Route('/friends/add', name: 'app_add_friends')]
     public function addFriendIndex(UserRepository $userRepository): Response
     {
-        $user = $this->getUser();
-        $userId = $user->getId();
         $users = $userRepository->findAll();
         $currentUserId = $this->getUser()->getId();
         return $this->render('friends/add_friends.html.twig', [
             'currentUserId' => $currentUserId,
             'users' => $users,
-            'userID' => $userId,
         ]);
     }
 
