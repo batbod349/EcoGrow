@@ -36,11 +36,8 @@
 
     <!-- Image poubelle -->
     <div>
-      <img
-        src="{{ imagePath }}"
-        alt="Image du tips"
-        class="w-[150px] h-[215px]"
-      />
+     			<img src="{{ imagePath ? ('data:image/jpeg;base64,' ~ imagePath) : asset('images/default-profil/pepe-lunettes-doree.jpg') }}" alt="Profil" class="rounded-full w-10 h-10">
+
     </div>
 
     <!-- SVG feuille duo gauche -->

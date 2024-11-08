@@ -16,27 +16,28 @@ class TipsRepository extends ServiceEntityRepository
         parent::__construct($registry, Tips::class);
     }
 
-    public function findPopularTips(): array
+    public function consommationTips(): array
     {
         return $this->createQueryBuilder('t')
             ->orderBy('t.createDate', 'DESC')
             ->where('t.type = :type')
-            ->setParameter('type', 'popular')
+            ->setParameter('type', 'consommation')
             ->setMaxResults(3)
             ->getQuery()
             ->getResult();
     }
-
-    public function findCourseTips(): array
+    
+    public function energieTips(): array
     {
         return $this->createQueryBuilder('t')
             ->orderBy('t.createDate', 'DESC')
             ->where('t.type = :type')
-            ->setParameter('type', 'course')
+            ->setParameter('type', 'economie')
             ->setMaxResults(3)
             ->getQuery()
             ->getResult();
     }
+    
 
     //    /**
     //     * @return Tips[] Returns an array of Tips objects
