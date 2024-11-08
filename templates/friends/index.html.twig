@@ -1,17 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mes amis{% endblock %}
+{% block title %}Mes amis
+{% endblock %}
 
 {% block body %}
-	{% include 'components/headers/pageHeader.html.twig' with {'title': 'Amis'} %}
+	{% include 'components/headers/pageHeader.html.twig' with {
+		'title': 'Amis',
+		'image_path': asset('/images/icons/Friends.svg')} %}
 
 	<div class="space-y-10 pt-10 justify-items-center">
 		<h2 class="font-inter text-xl font-bold">Liste de vos amis :</h2>
-		<div class="space-y-5">
+		<a href="{{ path('app_add_friends') }}" class="font-montserrat underline text-sm">Ajouter quelqu'un</a>
+		<div class="space-y-4 space-x-4">
 			{% for friend in friends %}
 				{% set ami = friend.user1 == app.user ? friend.user2 : friend.user1 %}
 				<a href="{{ path('friend_details', { id: ami.id }) }}">
-				{% include 'components/containers/contact.html.twig' with {
+					{% include 'components/containers/contact.html.twig' with {
 					'nom': ami.nom ~ ' ' ~ ami.prenom,
 					'src': ami.picture ? ('data:image/jpeg;base64,' ~ ami.picture) : '../images/default-profil/daron-chauve.jpg'
 				} %}

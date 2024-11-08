@@ -3,12 +3,13 @@
 {% set nom = nom|default('') %}
 {% set image_path = image_path|default('') %}
 
-<div class="flex items-center">
+<div
+	class="flex items-center">
 	<!-- Première partie à Gauche -->
 	<p class="font-rawles text-black text-lg pr-5">{{ classement }}</p>
 
 	<!-- Deuxième partie à Droite -->
-	<div class="flex items-center justify-center w-80 h-20 rounded-2xl bg-greenDark">
+	<div class="flex items-center px-4 w-80 h-20 rounded-2xl bg-greenDark justify-between">
 		<img src="{{ image_path }}" alt="Image Profil" class="w-16 h-16 rounded-full mr-5 "/>
 		<p class="font-rawles text-white text-lg mr-5">{{ nom }}</p>
 		{% include 'components/containers/graineCompteur.html.twig' with {

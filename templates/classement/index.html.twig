@@ -4,9 +4,10 @@
 {% endblock %}
 
 {% block body %}
+
 	{% include 'components/headers/pageHeader.html.twig' with {
-        'title': 'Classement',
-    } %}
+    'title': 'Classement',
+    'image_path' :  asset('/images/icons/Classement.svg')} %}
 	<div class="">
 		<div
 			class="rounded mx-auto mt-4">
@@ -27,109 +28,112 @@
 					</a>
 				</li>
 			</ul>
-
 			<!-- Tab Contents -->
-			<div id="tab-contents" class="flex justify-items-center place-content-center pt-16">
+			<div
+				id="tab-contents" class="flex justify-items-center place-content-center pt-16">
 				<!-- Podium -->
 				<div id="first" class="space-y-16">
-					<div class="flex justify-center items-end gap-2">
+					<div
+						class="flex justify-center items-end gap-2">
 						<!-- Podium 2ème place -->
 						<div class="text-center bg-gray-100 rounded-lg shadow-lg w-32 transform translate-y-2">
 							{% include 'components/containers/podium.html.twig' with {
-                                    'classement': '2',
-                                    'image_path': asset('/images/default-profil/daron-chauve.jpg'),
-                                    'nom': 'Bob LEBRON',
-                                    'number': '180',
-                                } %}
+                            'classement': '2',
+                            'image_path': users[1].picture ? ('data:image/jpeg;base64,' ~ users[1].picture) : '../images/default-profil/daron-chauve.jpg',
+                            'nom': users[1].username,
+                            'number': users[1].points,
+                        } %}
 						</div>
 
 						<!-- Podium 1ère place, plus élevé -->
-						<div class="text-center bg-gray-100 rounded-lg shadow-lg w-32 transform -translate-y-5">
+						<div class="text-center bg-gray-100 rounded-lg shadow-lg w-32 transform -translate-y-5 bg-greenMint">
+							<p class="place-self-center pl-2 w-6 h-6">👑</p>
 							{% include 'components/containers/podium.html.twig' with {
-                                'classement': '1',
-                                'image_path': asset('/images/default-profil/daron-chauve.jpg'),
-                                'nom': 'Alice GUEGAN',
-                                'number': '210',
-                            } %}
+                            'classement': '1',
+                            'image_path': users[0].picture ? ('data:image/jpeg;base64,' ~ users[0].picture) : '../images/default-profil/daron-chauve.jpg',
+                            'nom': users[0].username,
+                            'number': users[0].points,
+                        } %}
 						</div>
 
 						<!-- Podium 3ème place -->
 						<div class="text-center bg-gray-100 rounded-lg shadow-lg w-32 transform translate-y-4">
 							{% include 'components/containers/podium.html.twig' with {
-                                'classement': '3',
-                                'image_path': asset('/images/default-profil/daron-chauve.jpg'),
-                                'nom': 'Charlie DUPONT',
-                                'number': '160',
-                            } %}
+                            'classement': '3',
+                            'image_path': users[2].picture ? ('data:image/jpeg;base64,' ~ users[2].picture) : '../images/default-profil/daron-chauve.jpg',
+                            'nom': users[2].username,
+                            'number': users[2].points,
+                        } %}
 						</div>
 					</div>
-					<!-- Liste places suivantes -->
 					<div class="space-y-4 flex flex-col justify-center justify-self-center">
-						{% include 'components/containers/classement.html.twig' with {
-                            'classement': '1',
-                            'image_path': asset('/images/default-profil/daron-chauve.jpg'),
-                            'nom': 'Alice GUEGAN',
-                            'number': '210',
-                        } %}	{% include 'components/containers/classement.html.twig' with {
-                            'classement': '1',
-                            'image_path': asset('/images/default-profil/daron-chauve.jpg'),
-                            'nom': 'Alice GUEGAN',
-                            'number': '210',
-                        } %}
+						{% for user in users %}
+							{% if loop.index > 3 %}
+								{% include 'components/containers/classement.html.twig' with {
+                                'classement': loop.index,
+                                'image_path': user.picture ? ('data:image/jpeg;base64,' ~ user.picture) : '../images/default-profil/daron-chauve.jpg',
+                                'nom': user.username,
+                                'number': user.points,
+                            } %}
+							{% endif %}
+						{% endfor %}
 					</div>
 				</div>
 				<!-- Tabs 2 -->
 				<div id="second" class="space-y-16">
-					<div class="flex justify-center items-end gap-2">
+					<div
+						class="flex justify-center items-end gap-2">
 						<!-- Podium 2ème place -->
 						<div class="text-center bg-gray-100 rounded-lg shadow-lg w-32 transform translate-y-2">
 							{% include 'components/containers/podium.html.twig' with {
-                                    'classement': '2',
-                                    'image_path': asset('/images/default-profil/daron-chauve.jpg'),
-                                    'nom': 'Bob LEBRON',
-                                    'number': '180',
-                                } %}
+                            'classement': '2',
+                            'image_path': friends[1].picture ? ('data:image/jpeg;base64,' ~ friends[1].picture) : '../images/default-profil/daron-chauve.jpg',
+                            'nom': friends[1].username,
+                            'number': friends[1].points,
+                        } %}
 						</div>
 
 						<!-- Podium 1ère place, plus élevé -->
-						<div class="text-center bg-gray-100 rounded-lg shadow-lg w-32 transform -translate-y-5">
+						<div class="text-center bg-gray-100 rounded-lg shadow-lg w-32 transform -translate-y-5 bg-greenMint">
+							<p class="place-self-center pl-2 w-6 h-6">👑</p>
 							{% include 'components/containers/podium.html.twig' with {
-                                'classement': '1',
-                                'image_path': asset('/images/default-profil/daron-chauve.jpg'),
-                                'nom': 'Alice GUEGAN',
-                                'number': '210',
-                            } %}
+                            'classement': '1',
+                            'image_path': friends[0].picture ? ('data:image/jpeg;base64,' ~ friends[0].picture) : '../images/default-profil/daron-chauve.jpg',
+                            'nom': friends[0].username,
+                            'number': friends[0].points,
+                        } %}
 						</div>
 
 						<!-- Podium 3ème place -->
 						<div class="text-center bg-gray-100 rounded-lg shadow-lg w-32 transform translate-y-4">
 							{% include 'components/containers/podium.html.twig' with {
-                                'classement': '3',
-                                'image_path': asset('/images/default-profil/daron-chauve.jpg'),
-                                'nom': 'Charlie DUPONT',
-                                'number': '160',
-                            } %}
+                            'classement': '3',
+                            'image_path': friends[2].picture ? ('data:image/jpeg;base64,' ~ friends[2].picture) : '../images/default-profil/daron-chauve.jpg',
+                            'nom': friends[2].username,
+                            'number': friends[2].points,
+                        } %}
 						</div>
 					</div>
 					<!-- Liste places suivantes -->
 					<div class="space-y-4 flex flex-col justify-center justify-self-center">
-						{% include 'components/containers/classement.html.twig' with {
-                            'classement': '1',
-                            'image_path': asset('/images/default-profil/daron-chauve.jpg'),
-                            'nom': 'Alice GUEGAN',
-                            'number': '210',
-                        } %}	{% include 'components/containers/classement.html.twig' with {
-                            'classement': '1',
-                            'image_path': asset('/images/default-profil/daron-chauve.jpg'),
-                            'nom': 'Alice GUEGAN',
-                            'number': '210',
-                        } %}
+						{% for friend in friends %}
+							{% if loop.index > 3 %}
+								{% include 'components/containers/classement.html.twig' with {
+                        'classement': loop.index,
+                        'image_path': friend.picture ? ('data:image/jpeg;base64,' ~ friend.picture) : '../images/default-profil/daron-chauve.jpg',
+                        'nom': friend.username,
+                        'number': friend.points,
+                    } %}
+							{% endif %}
+						{% endfor %}
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
 
-			<script>
-				function setActiveTab(activeTabId) { // Désactive tous les onglets
+	<script>
+		function setActiveTab(activeTabId) { // Désactive tous les onglets
 document.querySelectorAll('.tab-content').forEach(tab => {
 tab.classList.remove('bg-greenDark', 'text-white');
 tab.classList.add('bg-greenMint', 'text-greenDark');
@@ -152,7 +156,7 @@ document.querySelector(targetContentId).classList.remove('hidden');
 document.addEventListener("DOMContentLoaded", () => {
 setActiveTab('tab-top-10');
 });
-			</script>
+	</script>
 
 
-		{% endblock %}
+{% endblock %}

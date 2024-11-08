@@ -40,6 +40,7 @@ class ExperiencesRepository extends ServiceEntityRepository
     public function getCompletedDailyQuests(int $userId, \DateTime $date): array
     {
         return $this->createQueryBuilder('e')
+            ->select('q.id') // Sélectionne explicitement l'ID de la quête
             ->innerJoin('e.quest', 'q')
             ->where('e.user = :userId')
             ->andWhere('q.type = :dailyType')
@@ -47,9 +48,31 @@ class ExperiencesRepository extends ServiceEntityRepository
             ->setParameter('userId', $userId)
             ->setParameter('dailyType', 'Daily')
             ->setParameter('startOfDay', $date->setTime(0, 0, 0))
-            ->setParameter('endOfDay', $date->setTime(23, 59, 59))
+            ->setParameter('endOfDay', (clone $date)->setTime(23, 59, 59))
             ->getQuery()
-            ->getResult();
+            ->getArrayResult();
+    }
+
+    public function getCompletedMonthlyQuests(int $userId, \DateTime $date): array
+    {
+        // Définir le début du mois (1er jour à minuit)
+        $startOfMonth = $date->setDate($date->format('Y'), $date->format('m'), 1)->setTime(0, 0, 0);
+
+        // Définir la fin du mois (dernier jour à 23h59)
+        $endOfMonth = (clone $startOfMonth)->modify('last day of this month')->setTime(23, 59, 59);
+
+        return $this->createQueryBuilder('e')
+            ->select('q.id') // Sélectionne explicitement l'ID de la quête
+            ->innerJoin('e.quest', 'q')
+            ->where('e.user = :userId')
+            ->andWhere('q.type = :monthlyType')
+            ->andWhere('e.completedAt BETWEEN :startOfMonth AND :endOfMonth')
+            ->setParameter('userId', $userId)
+            ->setParameter('monthlyType', 'Monthly')
+            ->setParameter('startOfMonth', $startOfMonth)
+            ->setParameter('endOfMonth', $endOfMonth)
+            ->getQuery()
+            ->getArrayResult();
     }
 
     public function findPointsLast7Days(int $userId): array
@@ -65,6 +88,24 @@ class ExperiencesRepository extends ServiceEntityRepository
             ->setParameter('lastWeek', $lastWeek)
             ->setParameter('today', $today)
             ->groupBy('day')
+            ->getQuery()
+            ->getResult();
+    }
+
+    // Dans le repository ExperiencesRepository
+    public function findByDate(int $userId, \DateTime $date): array
+    {
+        // Utiliser DQL pour rechercher les expériences en fonction de la date seule (sans l'heure)
+        $startOfDay = $date->setTime(0, 0, 0); // Début de la journée
+        $endOfDay = clone $startOfDay;
+        $endOfDay->setTime(23, 59, 59); // Fin de la journée
+
+        return $this->createQueryBuilder('e')
+            ->where('e.user = :userId')
+            ->andWhere('e.date BETWEEN :startOfDay AND :endOfDay')
+            ->setParameter('userId', $userId)
+            ->setParameter('startOfDay', $startOfDay)
+            ->setParameter('endOfDay', $endOfDay)
             ->getQuery()
             ->getResult();
     }

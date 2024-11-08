@@ -60,6 +60,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->badges = new ArrayCollection();
         $this->experiences = new ArrayCollection();
         $this->quests = new ArrayCollection();
+        $this->purchase = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -242,6 +243,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Quest::class, mappedBy: 'quest_user')]
     private Collection $quests;
 
+    /**
+     * @var Collection<int, Product>
+     */
+    #[ORM\ManyToMany(targetEntity: Product::class, mappedBy: 'achat')]
+    private Collection $purchase;
+
     public function getPlainPassword(): ?string
     {
         return $this->plainPassword;
@@ -356,6 +363,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->quests->removeElement($quest)) {
             $quest->removeQuestUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Product>
+     */
+    public function getPurchase(): Collection
+    {
+        return $this->purchase;
+    }
+
+    public function addPurchase(Product $purchase): static
+    {
+        if (!$this->purchase->contains($purchase)) {
+            $this->purchase->add($purchase);
+            $purchase->addAchat($this);
+        }
+
+        return $this;
+    }
+
+    public function removePurchase(Product $purchase): static
+    {
+        if ($this->purchase->removeElement($purchase)) {
+            $purchase->removeAchat($this);
         }
 
         return $this;
