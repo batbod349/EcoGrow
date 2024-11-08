@@ -19,12 +19,12 @@
                     {% dump(consommationTips) %}
                     
 {% for tip in consommationTips %}
-    <a href="{{ path('app_tips_detail', { 'id': tip.id }) }}">
+                        <a href="{{ path('app_tips_detail', { 'id': tip.id }) }}">
         {% include 'components/cards/tipsCard.html.twig' with {
-            'imagePath': asset(tip.image), 
-            'title': tip.name,
-        } %}
-    </a>
+                                'imagePath': tip.image,
+                                'title': tip.name,
+                            } %}
+                        </a>
 {% else %}
     Aucun tip n'a été trouvé.
 {% endfor %}

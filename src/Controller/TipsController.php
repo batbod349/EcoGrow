@@ -6,6 +6,7 @@ use App\Repository\TipsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use WideImage\WideImage;
 
 class TipsController extends AbstractController
 {
@@ -40,8 +41,20 @@ class TipsController extends AbstractController
     {
         // Si l'image est un flux (BLOB), on la transforme en base64 pour l'affichage
         $imageData = $tip->getImage();
+        
         if (is_resource($imageData)) {
-            $tip->setImage('data:image/jpeg;base64,' . base64_encode(stream_get_contents($imageData)));
+            // Lire l'image depuis le flux (BLOB)
+            $imageContent = stream_get_contents($imageData);
+    
+            // Redimensionner l'image avec WideImage
+            $image = WideImage::loadFromString($imageContent);
+            $resizedImage = $image->resize(50, 30); // Redimensionner à 50x30 pixels
+    
+            // Convertir l'image redimensionnée en base64
+            $base64Image = base64_encode($resizedImage->asString('png'));
+    
+            // Sauvegarder l'image redimensionnée en base64
+            $tip->setImage('data:image/png;base64,' . $base64Image);
         }
     }
-}
+    }
