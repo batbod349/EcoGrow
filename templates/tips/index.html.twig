@@ -19,7 +19,7 @@
 						{% for popularTip in popularTips %}
 							<a href="{{ path('app_tips_detail', { 'id': popularTip.id }) }}">
 								{% include 'components/cards/tipsCard.html.twig' with {
-                                'imagePath': popularTip.image,
+                                'imagePath': "data:image/jpeg;base64," ~ popularTip.image,
                                 'title': popularTip.name,
                             } %}
 							</a>
