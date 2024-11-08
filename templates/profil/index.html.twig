@@ -12,8 +12,13 @@
 						<div>
 							<img src="data:image/jpeg;base64,{{ user.picture }}" alt="Profil" class="rounded-full object-cover w-28 h-28">
 						</div>
-						<h2 class="font-rawles text-lg">{{ user.prenom }} {{ user.nom }}</h2>
-						<p class="font-monsterrat text-sm underline"><a href="{{ path('app_friends') }}">{{ friends|length }} amis </a></p>
+						<h2 class="font-rawles text-lg">{{ user.prenom }}
+							{{ user.nom }}</h2>
+						<p class="font-monsterrat text-sm underline">
+							<a href="{{ path('app_friends') }}">{{ friends|length }}
+								amis
+							</a>
+						</p>
 						<div class="mt-3 mb-2">
 							<a href="{{ path('app_logout') }}">Se déconnecter</a>
 						</div>
