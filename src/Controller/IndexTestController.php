@@ -14,6 +14,8 @@ class IndexTestController extends AbstractController
     #[Route('/index/test', name: 'app_index_test')]
     public function index(MailerInterface $mailer): Response
     {
+        $user = $this->getUser();
+        $userId = $user->getId();
         $email = (new Email())
             ->from('michel@braquemard.fr')
             ->to('nathael.stalder@gmail.com')
@@ -28,6 +30,7 @@ class IndexTestController extends AbstractController
         $mailer->send($email);
         return $this->render('index_test/index.html.twig', [
             'reponse' => 'IndexTestController',
+            'userID' => $userId,
         ]);
     }
 }

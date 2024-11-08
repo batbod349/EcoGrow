@@ -6,6 +6,8 @@ use App\Repository\BadgesRepository;
 use App\Repository\FriendsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -19,12 +21,14 @@ class ProfilController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
         $user = $this->getUser();
+        $userId = $user->getId();
         $userBadges = $user->getBadges();
         $badges = $badgesRepository->findAll();
         $friends = $friendsRepository->getFriends($user->getId());
 
         return $this->render('profil/index.html.twig', [
             'user' => $user,
+            'userID' => $userId,
             'userBadges' => $userBadges,
             'badges' => $badges,
             'friends' => $friends,
@@ -43,12 +47,24 @@ class ProfilController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $profilePictureFile */
+            $profilePictureFile = $form->get('profilePicture')->getData();
+            if ($profilePictureFile) {
+                try {
+                    $imageData = file_get_contents($profilePictureFile->getPathname());
+                    $user->setPicture($imageData);
+                } catch (FileException $e) {
+                    // Handle exception if something happens during file upload
+                }
+            }
             $entityManager->persist($user);
             $entityManager->flush();
+
             return $this->redirectToRoute('app_profil');
         }
 
         return $this->render('profil/edit.html.twig', [
+            'userID' => $this->getUser()->getId(),
             'ProfilEdit' => $form->createView(),
         ]);
     }

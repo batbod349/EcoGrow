@@ -22,6 +22,7 @@ class SecurityController extends AbstractController
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('security/login.html.twig', [
+            'userID' => 0,
             'last_username' => $lastUsername,
             'error' => $error,
         ]);
@@ -37,6 +38,8 @@ class SecurityController extends AbstractController
     #[Route(path: '/logout-success', name: 'app_logout_success')]
     public function logoutSuccess(): Response
     {
-        return $this->render('security/logout_success.html.twig');
+        return $this->render('security/logout_success.html.twig', [
+            'userID' => 0,
+        ]);
     }
 }
