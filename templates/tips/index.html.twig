@@ -6,31 +6,45 @@
     {% include 'components/headers/pageHeader.html.twig' with {
         'title': 'Tips',
     } %}
+
     <div class="flex flex-col">
         <div class="container-page">
+            <!-- Catégorie Consommation et Achats Responsables -->
             <section class="section-container">
-                <h2 class="font-rawles text-3xl">Themes populaires</h2>
+                <h2 class="font-rawles text-3xl">Consommation et Achats Responsables</h2>
                 <div class="space-y-4">
-                    {% for popularTip in popularTips %}
-                        <a href="{{ path('app_tips_detail', { 'id': popularTip.id }) }}">{% include 'components/cards/tipsCard.html.twig' with {
-                                'imagePath': popularTip.image,
-                                'title': popularTip.name,
-                            } %}</a>
+                    {# Debugging - Vérifier si les données existent dans consommationTips #}
+                    {% dump(consommationTips) %}
+                    
+                    {% for tip in consommationTips %}
+                        <a href="{{ path('app_tips_detail', { 'id': tip.id }) }}">
+                            {% include 'components/cards/tipsCard.html.twig' with {
+                                'imagePath': tip.image, 
+                                'title': tip.name,
+                            } %}
+                        </a>
                     {% else %}
-                        Aucun tips n'a été trouvé.
+                        Aucun tip n'a été trouvé.
                     {% endfor %}
                 </div>
             </section>
+
+            <!-- Catégorie Économies d’Énergie et Transport Écoresponsable -->
             <section class="section-container">
-                <h2 class="font-rawles text-3xl">Tips pour les courses</h2>
+                <h2 class="font-rawles text-3xl">Economies d ’ Energie et Transport Ecoresponsable</h2>
                 <div class="space-y-4">
-                    {% for courseTip in courseTips %}
-                        <a href="{{ path('app_tips_detail', { 'id': courseTip.id }) }}">{% include 'components/cards/tipsCard.html.twig' with {
-                                'imagePath': courseTip.image,
-                                'title': courseTip.name,
-                            } %}</a>
+                    {# Debugging - Vérifier si les données existent dans energieTips #}
+                    {% dump(energieTips) %}
+                    
+                    {% for tip in energieTips %}
+                        <a href="{{ path('app_tips_detail', { 'id': tip.id }) }}">
+                            {% include 'components/cards/tipsCard.html.twig' with {
+                                'imagePath': tip.image,
+                                'title': tip.name,
+                            } %}
+                        </a>
                     {% else %}
-                        Aucun tips n'a été trouvé.
+                        Aucun tip n'a été trouvé.
                     {% endfor %}
                 </div>
             </section>
