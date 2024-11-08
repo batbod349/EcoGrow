@@ -53,7 +53,27 @@ class ExperiencesRepository extends ServiceEntityRepository
             ->getArrayResult();
     }
 
+    public function getCompletedMonthlyQuests(int $userId, \DateTime $date): array
+    {
+        // Définir le début du mois (1er jour à minuit)
+        $startOfMonth = $date->setDate($date->format('Y'), $date->format('m'), 1)->setTime(0, 0, 0);
 
+        // Définir la fin du mois (dernier jour à 23h59)
+        $endOfMonth = (clone $startOfMonth)->modify('last day of this month')->setTime(23, 59, 59);
+
+        return $this->createQueryBuilder('e')
+            ->select('q.id') // Sélectionne explicitement l'ID de la quête
+            ->innerJoin('e.quest', 'q')
+            ->where('e.user = :userId')
+            ->andWhere('q.type = :monthlyType')
+            ->andWhere('e.completedAt BETWEEN :startOfMonth AND :endOfMonth')
+            ->setParameter('userId', $userId)
+            ->setParameter('monthlyType', 'Monthly')
+            ->setParameter('startOfMonth', $startOfMonth)
+            ->setParameter('endOfMonth', $endOfMonth)
+            ->getQuery()
+            ->getArrayResult();
+    }
 
     public function findPointsLast7Days(int $userId): array
     {

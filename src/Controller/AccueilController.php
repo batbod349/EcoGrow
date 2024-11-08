@@ -35,6 +35,7 @@ class AccueilController extends AbstractController
         }
 
         $completedQuests = $experiencesRepository->getCompletedDailyQuests($userId, $today);
+        $completedMonthlyQuests = $experiencesRepository->getCompletedMonthlyQuests($userId, $today);
 
         $friends = $friendsRepository->getFriends($userId);
         $friendsPoints = [];
@@ -60,6 +61,7 @@ class AccueilController extends AbstractController
         return $this->render('accueil/index.html.twig', [
             'dailyQuests' => $dailyQuests,
             'completedQuests' => $completedQuests,
+            'completedMonthlyQuests' => $completedMonthlyQuests,
             'monthlyQuests' => $questRepository->findMonthlyQuest($today),
             'user' => $user,
             'userID' => $userId,
