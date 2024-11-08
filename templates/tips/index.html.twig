@@ -35,7 +35,7 @@
 				<h2 class="font-rawles text-3xl">Economies d’Énergie et Transport Écoresponsable</h2>
 				<div class="space-y-4">
 					{# Debugging - Vérifier si les données existent dans energieTips #}
-					{% dump(energieTips) %}
+					{# dump(energieTips) #}
 
 					{% for tip in energieTips %}
 						<a href="{{ path('app_tips_detail', { 'id': tip.id }) }}">
