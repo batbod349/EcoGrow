@@ -60,6 +60,7 @@
 						{% include 'components/cards/challengeCard.html.twig' with {
                             'number': monthlyQuest.rewards,
                             'idChallenge': monthlyQuest.id,
+							'desc': monthlyQuest.description,
                             'title': monthlyQuest.Name,
                     } %}
 					{% else %}

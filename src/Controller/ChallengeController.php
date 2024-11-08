@@ -44,7 +44,7 @@ class ChallengeController extends AbstractController
         $experience->setQuantity($quest->getRewards());
         $experience->setDate(new \DateTime());
         $experience->setType(1); // Assuming type 1 for this case
-        $experience->setSource('Quest');
+        $experience->setSource($quest->getType());
         $experience->setUser($this->getUser());
         $experience->setQuest($quest);
         $experience->setCompletedAt(new \DateTime());
