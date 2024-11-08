@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\ProductRepository;
@@ -23,7 +25,7 @@ class BoutiqueController extends AbstractController
 
     // Route pour participer
     #[Route('/participer/{id}', name: 'app_participer')]
-    public function participer(Product $product): RedirectResponse
+    public function participer(Product $product, int $id): RedirectResponse
     {
         $user = $this->getUser(); // Supposons qu'il y a un utilisateur connecté
         if ($user) {
