@@ -36,7 +36,7 @@
     <!-- Bouton "Participer" juste sous le titre -->
     <div class="w-full flex justify-center mb-4">
         <div class="counter-right bg-greenDark text-whiter px-4 h-7 rounded-full">
-            <a href="{{ path('app_participer', {'id': product.id}) }}">Participer</a>
+            <button id="participerBtn" onclick="changeButtonText(event)">Participer</button>
         </div>
     </div>
 
@@ -45,6 +45,7 @@
         <p class="text-sm">{{ description }}</p>
     </div>
 </div>
+
 <script>
     function toggleDescription(element) {
         const container = element.closest(".w-96");
@@ -68,4 +69,20 @@
     document.querySelectorAll(".info-container").forEach(el => {
         el.style.display = "none";
     });
+
+    // Fonction pour changer le texte du bouton "Participer" et empêcher la redirection
+    function changeButtonText(event) {
+        event.preventDefault(); // Empêcher toute redirection par défaut
+
+        const button = event.target;
+
+        // Ajouter un délai de 500ms avant de changer le texte
+        setTimeout(function() {
+            button.textContent = 'Vous participez à cet événement'; // Changer le texte après le délai
+        }, 500); // Délai de 500ms
+
+        // Si vous avez une redirection à effectuer après un certain délai
+        setTimeout(function() {
+        }, 1000); // Délai de 1 seconde avant la redirection
+    }
 </script>
