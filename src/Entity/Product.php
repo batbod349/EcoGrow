@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -25,6 +27,17 @@ class Product
 
     #[ORM\Column(type: Types::BLOB, nullable: true)]
     private $image = null;
+
+    /**
+     * @var Collection<int, User>
+     */
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'purchase')]
+    private Collection $achat;
+
+    public function __construct()
+    {
+        $this->achat = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -85,6 +98,30 @@ class Product
     public function setImage($image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getAchat(): Collection
+    {
+        return $this->achat;
+    }
+
+    public function addAchat(User $achat): static
+    {
+        if (!$this->achat->contains($achat)) {
+            $this->achat->add($achat);
+        }
+
+        return $this;
+    }
+
+    public function removeAchat(User $achat): static
+    {
+        $this->achat->removeElement($achat);
 
         return $this;
     }

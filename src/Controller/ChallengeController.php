@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Experiences;
 use App\Entity\Quest;
+use App\Repository\BadgesRepository;
+use App\Repository\ExperiencesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,8 +17,6 @@ class ChallengeController extends AbstractController
     #[Route('/challenge', name: 'app_challenge')]
     public function index(QuestRepository $QuestRepository): Response
     {
-        $user = $this->getUser();
-        $userId = $user->getId();
         $today = new \datetime();
         $dailyQuests = $QuestRepository->findDailyQuests($today);
         $monthlyQuests = $QuestRepository->findMonthlyQuest($today);
@@ -24,12 +24,11 @@ class ChallengeController extends AbstractController
         [
             'dailyQuests' => $dailyQuests,
             'monthlyQuests' => $monthlyQuests,
-            'userID' => $userId,
         ]);
     }
 
     #[Route('/challenge/validate/{id}', name: 'app_challenge_validate')]
-    public function validate(Quest $quest, EntityManagerInterface $entityManager, int $id): Response
+    public function validate(Quest $quest, EntityManagerInterface $entityManager, int $id, BadgesRepository $badgesRepository, ExperiencesRepository $experiencesRepository): Response
     {
 
         $user = $this->getUser();
@@ -55,6 +54,17 @@ class ChallengeController extends AbstractController
         $entityManager->persist($experience);
         $entityManager->persist($user);
         $entityManager->flush();
+
+        $badges = $badgesRepository->findAll();
+        $userPoints = $experiencesRepository->getTotalPoints($user->getId());
+        foreach ($badges as $badge) {
+            if ($badge->getPalier() <= $userPoints) {
+                $user->addBadge($badge);
+                $entityManager->persist($user);
+                $entityManager->flush();
+            }
+        }
+
 
         return $this->redirectToRoute('app_accueil');
     }
