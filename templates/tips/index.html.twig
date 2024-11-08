@@ -8,6 +8,51 @@
         'title': 'Tips',
         'image_path': asset('/images/icons/Tips.svg')
     } %}
+
+    <div class="flex flex-col">
+        <div class="container-page">
+            <!-- Catégorie Consommation et Achats Responsables -->
+            <section class="section-container">
+                <h2 class="font-rawles text-3xl">Consommation et Achats Responsables</h2>
+                <div class="space-y-4">
+                    {# Debugging - Vérifier si les données existent dans consommationTips #}
+                    {% dump(consommationTips) %}
+                    
+                    {% for tip in consommationTips %}
+                        <a href="{{ path('app_tips_detail', { 'id': tip.id }) }}">
+                            {% include 'components/cards/tipsCard.html.twig' with {
+                                'imagePath': tip.image, 
+                                'title': tip.name,
+                            } %}
+                        </a>
+                    {% else %}
+                        Aucun tip n'a été trouvé.
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- Catégorie Économies d’Énergie et Transport Écoresponsable -->
+            <section class="section-container">
+                <h2 class="font-rawles text-3xl">Economies d ’ Energie et Transport Ecoresponsable</h2>
+                <div class="space-y-4">
+                    {# Debugging - Vérifier si les données existent dans energieTips #}
+                    {% dump(energieTips) %}
+                    
+                    {% for tip in energieTips %}
+                        <a href="{{ path('app_tips_detail', { 'id': tip.id }) }}">
+                            {% include 'components/cards/tipsCard.html.twig' with {
+                                'imagePath': tip.image,
+                                'title': tip.name,
+                            } %}
+                        </a>
+                    {% else %}
+                        Aucun tip n'a été trouvé.
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    </div>
+=======
 	<div class="flex flex-col">
 		<div
 			class="container-page">

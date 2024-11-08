@@ -12,12 +12,15 @@ class BoutiqueController extends AbstractController
     #[Route('/boutique', name: 'app_boutique')]
     public function index(ProductRepository $productRepository): Response
     {
+        $user = $this->getUser();
+        $userId = $user->getId();
         // Récupérer tous les produits depuis la base de données
         $products = $productRepository->findAll();
 
         // Passer les produits à la vue
         return $this->render('boutique/index.html.twig', [
             'products' => $products,
+            'userID' => $userId,
         ]);
     }
 

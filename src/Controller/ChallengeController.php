@@ -15,6 +15,8 @@ class ChallengeController extends AbstractController
     #[Route('/challenge', name: 'app_challenge')]
     public function index(QuestRepository $QuestRepository): Response
     {
+        $user = $this->getUser();
+        $userId = $user->getId();
         $today = new \datetime();
         $dailyQuests = $QuestRepository->findDailyQuests($today);
         $monthlyQuests = $QuestRepository->findMonthlyQuest($today);
@@ -22,6 +24,7 @@ class ChallengeController extends AbstractController
         [
             'dailyQuests' => $dailyQuests,
             'monthlyQuests' => $monthlyQuests,
+            'userID' => $userId,
         ]);
     }
 
@@ -36,7 +39,7 @@ class ChallengeController extends AbstractController
         if ($user->getQuests()->contains($quest)) {
             // Return a response indicating the quest has already been validated
             $this->addFlash('warning', 'You have already validated this quest.');
-            return $this->redirectToRoute('app_challenge');
+            return $this->redirectToRoute('app_accueil');
         }
         $user->addQuest($quest);
 
@@ -44,7 +47,7 @@ class ChallengeController extends AbstractController
         $experience->setQuantity($quest->getRewards());
         $experience->setDate(new \DateTime());
         $experience->setType(1); // Assuming type 1 for this case
-        $experience->setSource('Quest');
+        $experience->setSource($quest->getType());
         $experience->setUser($this->getUser());
         $experience->setQuest($quest);
         $experience->setCompletedAt(new \DateTime());
@@ -53,6 +56,6 @@ class ChallengeController extends AbstractController
         $entityManager->persist($user);
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_challenge');
+        return $this->redirectToRoute('app_accueil');
     }
 }
