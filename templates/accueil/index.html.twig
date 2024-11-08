@@ -57,11 +57,18 @@
 				</div>
 				<div class="space-y-4">
 					{% for monthlyQuest in monthlyQuests %}
+						{% set isCompleted = false %}
+						{% for completedMonthlyQuests in completedMonthlyQuests %}
+							{% if monthlyQuest.id == completedMonthlyQuests.id %}
+								{% set isCompleted = true %}
+							{% endif %}
+						{% endfor %}
 						{% include 'components/cards/challengeCard.html.twig' with {
                             'number': monthlyQuest.rewards,
                             'idChallenge': monthlyQuest.id,
 							'desc': monthlyQuest.description,
                             'title': monthlyQuest.Name,
+							'isCompleted': isCompleted,
                     } %}
 					{% else %}
 						Aucun challenge mensuel n'a été trouvé.
