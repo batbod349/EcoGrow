@@ -2,10 +2,10 @@
 {% set status = status|default('') %}
 {% set src = src|default('') %}
 
-<div class="flex items-center">
+<div class="flex justify-between items-center">
 	<img src="{{ src }}" alt="Image Profil" class="w-[80px] h-[80px] rounded-full mr-5"/>
 
-	<p class="font-rawles text-lg mr-5">{{ nom }}</p>
+	<p class="font-rawles self-center text-lg mr-5">{{ nom }}</p>
 	<div class="flex items-center space-x-1">
 		<p class="font-monsterrat text-xs">{{ status }}</p>
 		<a class="flex items-center justify-center p-2 bg-green-500 text-white rounded-full hover:bg-green-600">

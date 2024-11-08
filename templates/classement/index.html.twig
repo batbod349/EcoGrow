@@ -47,8 +47,8 @@
 						</div>
 
 						<!-- Podium 1ère place, plus élevé -->
-						<div class="text-center bg-gray-100 rounded-lg shadow-lg w-32 transform -translate-y-5">
-                        	<p class="place-self-center pl-2 w-6 h-6">👑</p>
+						<div class="text-center bg-gray-100 rounded-lg shadow-lg w-32 transform -translate-y-5 bg-greenMint">
+							<p class="place-self-center pl-2 w-6 h-6">👑</p>
 							{% include 'components/containers/podium.html.twig' with {
                             'classement': '1',
                             'image_path': users[0].picture ? ('data:image/jpeg;base64,' ~ users[0].picture) : '../images/default-profil/daron-chauve.jpg',
@@ -95,8 +95,8 @@
 						</div>
 
 						<!-- Podium 1ère place, plus élevé -->
-						<div class="text-center bg-gray-100 rounded-lg shadow-lg w-32 transform -translate-y-5">
-                        	<p class="place-self-center pl-2 w-6 h-6">👑</p>
+						<div class="text-center bg-gray-100 rounded-lg shadow-lg w-32 transform -translate-y-5 bg-greenMint">
+							<p class="place-self-center pl-2 w-6 h-6">👑</p>
 							{% include 'components/containers/podium.html.twig' with {
                             'classement': '1',
                             'image_path': friends[0].picture ? ('data:image/jpeg;base64,' ~ friends[0].picture) : '../images/default-profil/daron-chauve.jpg',
