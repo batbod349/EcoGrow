@@ -11,8 +11,11 @@ class ClassementController extends AbstractController
     #[Route('/classement', name: 'app_classement')]
     public function index(): Response
     {
+        $user = $this->getUser();
+        $userId = $user->getId();
         return $this->render('classement/index.html.twig', [
             'controller_name' => 'ClassementController',
+            'userID' => $userId,
         ]);
     }
 }

@@ -62,6 +62,7 @@ class AccueilController extends AbstractController
             'completedQuests' => $completedQuests,
             'monthlyQuests' => $questRepository->findMonthlyQuest($today),
             'user' => $user,
+            'userID' => $userId,
             'userPoints' => $userPoints,
             'friendsPoints' => $friendsPoints,
             'position' => $position,
