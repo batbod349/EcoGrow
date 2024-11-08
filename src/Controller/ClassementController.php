@@ -55,6 +55,7 @@ class ClassementController extends AbstractController
         //dd($friendsPoints);
 
         return $this->render('classement/index.html.twig', [
+            'userID' => $this->getUser()->getId(),
             'friends' => $friendsPoints,
             'users' => $allUsers,
             'controller_name' => 'ClassementController',
