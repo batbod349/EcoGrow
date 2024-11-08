@@ -110,6 +110,44 @@ class ExperiencesRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function getTotalDailyQuestsCompleted(int $userId): int
+    {
+        return $this->createQueryBuilder('e')
+            ->select('COUNT(e.id)')
+            ->where('e.user = :user')
+            ->andWhere('e.source = :source')
+            ->setParameter('user', $userId)
+            ->setParameter('source', 'Daily')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function getTotalMonthlyQuestsCompleted(int $userId): int
+    {
+        return $this->createQueryBuilder('e')
+            ->select('COUNT(e.id)')
+            ->where('e.user = :user')
+            ->andWhere('e.source = :source')
+            ->setParameter('user', $userId)
+            ->setParameter('source', 'Monthly')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function getAverageDailyQuestsPerWeek(int $userId): float
+    {
+        $totalDailyQuests = $this->getTotalDailyQuestsCompleted($userId);
+        $weeksInMonth = (new \DateTime())->format('W') - (new \DateTime('first day of this month'))->format('W') + 1;
+        return $totalDailyQuests / $weeksInMonth;
+    }
+
+    public function getAverageMonthlyQuestsPerMonth(int $userId): float
+    {
+        $totalMonthlyQuests = $this->getTotalMonthlyQuestsCompleted($userId);
+        $monthsInYear = 12;
+        return $totalMonthlyQuests / $monthsInYear;
+    }
+
 //    /**
 //     * @return Experiences[] Returns an array of Experiences objects
 //     */
