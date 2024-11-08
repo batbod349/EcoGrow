@@ -3,7 +3,9 @@
 {% block title %}Mes amis{% endblock %}
 
 {% block body %}
-	{% include 'components/headers/pageHeader.html.twig' with {'title': 'Amis'} %}
+	{% include 'components/headers/pageHeader.html.twig' with {
+		'title': 'Amis',
+		'image_path': asset('/images/icons/Friends.svg')} %}
 
 	<div class="space-y-10 pt-10 justify-items-center">
 		<h2 class="font-inter text-xl font-bold">Liste de vos amis :</h2>

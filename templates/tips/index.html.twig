@@ -1,10 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des Tips{% endblock %}
+{% block title %}Liste des Tips
+{% endblock %}
 
 {% block body %}
-    {% include 'components/headers/pageHeader.html.twig' with {
+	{% include 'components/headers/pageHeader.html.twig' with {
         'title': 'Tips',
+        'image_path': asset('/images/icons/Tips.svg')
     } %}
 
     <div class="flex flex-col">
@@ -50,4 +52,78 @@
             </section>
         </div>
     </div>
+	<div class="flex flex-col">
+		<div
+			class="container-page">
+			<!-- Thèmes populaires -->
+			<section class="section-container horizontal-scroll">
+				<h2 class="font-rawles text-3xl">Themes populaires</h2>
+				<div class="overflow-x-auto py-4 scroll-smooth">
+					<div class="flex space-x-4">
+						{% for popularTip in popularTips %}
+							<a href="{{ path('app_tips_detail', { 'id': popularTip.id }) }}">
+								{% include 'components/cards/tipsCard.html.twig' with {
+                                'imagePath': "data:image/jpeg;base64," ~ popularTip.image,
+                                'title': popularTip.name,
+                            } %}
+							</a>
+						{% else %}
+							<p>Aucun tips n'a été trouvé.</p>
+						{% endfor %}
+					</div>
+				</div>
+			</section>
+
+			<!-- Tips pour les courses -->
+			<section class="section-container horizontal-scroll">
+				<h2 class="font-rawles text-3xl">Tips pour les courses</h2>
+				<div class="overflow-x-auto py-4 scroll-smooth">
+					<div class="flex space-x-4">
+						{% for courseTip in courseTips %}
+							<a href="{{ path('app_tips_detail', { 'id': courseTip.id }) }}">
+								{% include 'components/cards/tipsCard.html.twig' with {
+                                'imagePath': courseTip.image,
+                                'title': courseTip.name,
+                            } %}
+							</a>
+						{% else %}
+							<p>Aucun tips n'a été trouvé.</p>
+						{% endfor %}
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+
+	<style>
+		/* Style commun pour les sections à défilement horizontal */
+		.horizontal-scroll .overflow-x-auto {
+			overflow-x: auto; /* Permet le défilement horizontal */
+			white-space: nowrap; /* Empêche les éléments de se replier sur plusieurs lignes */
+			-webkit-overflow-scrolling: touch; /* Améliore le défilement tactile sur iOS */
+		}
+
+		/* Aligne les éléments horizontalement */
+		.horizontal-scroll .flex {
+			display: flex;
+		}
+
+		/* Espace entre les éléments */
+		.horizontal-scroll .space-x-4 {
+			margin-right: 16px;
+		}
+
+		/* Cache la barre de défilement pour tous les navigateurs */
+		.horizontal-scroll::-webkit-scrollbar {
+			display: none;
+		}
+
+		/* Pour Internet Explorer et Firefox */
+		.horizontal-scroll {
+			-ms-overflow-style: none; /* Pour Internet Explorer */
+			scrollbar-width: none; /* Pour Firefox */
+		}
+	</style>
+
 {% endblock %}
