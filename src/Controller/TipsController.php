@@ -14,11 +14,14 @@ class TipsController extends AbstractController
     {
         $user = $this->getUser();
         $userId = $user->getId();
-        $popularTips = $tipsRepository->findPopularTips();
-        $courseTips = $tipsRepository->findCourseTips();
+        // Récupération des tips selon leur type
+        $consommationTips = $tipsRepository->findBy(['type' => 'Consommation et Achats Responsables']);
+        $energieTips = $tipsRepository->findBy(['type' => 'Économies d’Énergie et Transport Écoresponsable']);
+        
+        // Passer les données au template
         return $this->render('tips/index.html.twig', [
-            'popularTips' => $popularTips,
-            'courseTips' => $courseTips,
+            'consommationTips' => $consommationTips,
+            'energieTips' => $energieTips,
             'userID' => $userId,
         ]);
     }
