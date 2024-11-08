@@ -32,6 +32,8 @@ class TipsController extends AbstractController
         return $this->render('tips/index.html.twig', [
             'popularTips' => $popularTips,
             'courseTips' => $courseTips,
+            'consommationTips' => $consommationTips,
+            'energieTips' => $energieTips,
         ]);
     }
 }
