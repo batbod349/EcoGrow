@@ -5,120 +5,102 @@
 {% set isCompleted = isCompleted|default('False') %}
 
 {% if isCompleted == 'True' %}
-<div class="border-2 rounded-2xl bg-white border-greenLight w-96 p-2 relative element-container">
-	<div
-		class="absolute top-4 right-2 toggle-icon" onclick="toggleDescription(this)">
-		<!-- Icône visible lorsque la description est cachée -->
-		<span class="icon-up" style="display: none;">
-			{% include 'components/containers/iconRounded/iconRoundedUp.html.twig' %}
-		</span>
-		<span class="icon-down" style="display: block;">
-			{% include 'components/containers/iconRounded/iconRoundedDown.html.twig' %}
-		</span>
-	</div>
-	<div class="flex my-4 space-x-4">
-		<div>
-			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-				<path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z"/>
-			</svg>
+	<div class="border-2 rounded-2xl bg-greenLight border-greenLight w-96 p-2 relative element-container">
+		<div
+			class="absolute top-4 right-2 toggle-icon" onclick="toggleDescription(this)">
+			<!-- Icône visible lorsque la description est cachée -->
+			<span class="icon-up" style="display: none;">
+				{% include 'components/containers/iconRounded/iconRoundedUp.html.twig' %}
+			</span>
+			<span class="icon-down" style="display: block;">
+				{% include 'components/containers/iconRounded/iconRoundedDown.html.twig' %}
+			</span>
 		</div>
-		<div class="space-y-2 flex-1">
-			<div class="flex items-center justify-between">
-				<h3>{{ title }}</h3>
-				<!-- Conteneur du compteur à côté du titre (initialement visible à droite) -->
-				<span class="counter-next-to-title mr-10" style="display: inline-block;">
-					{% include 'components/containers/graineCompteur.html.twig' with {
+		<div class="flex my-4 space-x-4">
+			<div>
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z"/>
+				</svg>
+			</div>
+			<div class="space-y-2 flex-1">
+				<div class="flex items-center justify-between">
+					<h3 class="font-inter font-bold text-lg">{{ title }}</h3>
+					<!-- Conteneur du compteur à côté du titre (initialement visible à droite) -->
+					<span class="counter-next-to-title mr-10" style="display: inline-block;">
+						{% include 'components/containers/graineCompteur.html.twig' with {
                         'number': number,
                     } %}
-				</span>
+					</span>
+				</div>
+				<!-- Description avec une classe pour basculer sa visibilité -->
+				<p class="description" style="display: none;">{{ desc }}</p>
 			</div>
-			<!-- Description avec une classe pour basculer sa visibilité -->
-			<p class="description" style="display: none;">{{ desc }}</p>
+		</div>
+		<!-- Conteneur du compteur en bas (initialement caché) -->
+		<div
+			class="bottom-counter flex justify-between items-center text-whiter px-4 h-7 rounded-full" style="display: none;">
+			<!-- Lien centré -->
+			<div class="bottom-counter flex justify-between items-center text-whiter px-4 h-7 rounded-full">
+				<div class="flex justify-end">
+					{% include 'components/containers/graineCompteur.html.twig' with {
+						'number': number,
+					} %}
+				</div>
+				<p class="ml-8 font-monsterrat font-bold text-black">Bravo cette quête est terminée !</p>
+			</div>
 		</div>
 	</div>
-	<!-- Conteneur du compteur en bas (initialement caché) -->
-	<div class="bottom-counter flex justify-between items-center text-whiter px-4 h-7 rounded-full" style="display: none;">
-		<!-- Lien centré -->
-		{% if isCompleted == 'True' %}
-			<div class="bottom-counter flex justify-between items-center text-whiter px-4 h-7 rounded-full">
-				<div class="flex justify-end">
-					{% include 'components/containers/graineCompteur.html.twig' with {
-						'number': number,
-					} %}
-				</div>
-			</div>
-		{% else %}
-			<!-- Si la quête n'est pas complétée, afficher le bouton pour valider -->
-			<div class="bottom-counter flex justify-between items-center text-whiter px-4 h-7 rounded-full">
-				<div class="flex-grow text-center">
-					<a href="{{ path('app_challenge_validate', { id: idChallenge }) }}" class="text-whiter bg-greenLight p-2 px-4 rounded-2xl">Valider la quête</a>
-				</div>
-				<div class="flex justify-end">
-					{% include 'components/containers/graineCompteur.html.twig' with {
-						'number': number,
-					} %}
-				</div>
-			</div>
-		{% endif %}
-	</div>
-</div>
 {% else %}
-<div class="border-2 rounded-2xl bg-white border-greenDark w-96 p-2 relative element-container">
-	<div
+	<div class="border-2 rounded-2xl bg-white border-greenDark w-96 p-2 relative element-container">
+		<div
 			class="absolute top-4 right-2 toggle-icon" onclick="toggleDescription(this)">
-		<!-- Icône visible lorsque la description est cachée -->
-		<span class="icon-up" style="display: none;">
-			{% include 'components/containers/iconRounded/iconRoundedUp.html.twig' %}
-		</span>
-		<span class="icon-down" style="display: block;">
-			{% include 'components/containers/iconRounded/iconRoundedDown.html.twig' %}
-		</span>
-	</div>
-	<div class="flex my-4 space-x-4">
-		<div>
-			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-				<path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z"/>
-			</svg>
+			<!-- Icône visible lorsque la description est cachée -->
+			<span class="icon-up" style="display: none;">
+				{% include 'components/containers/iconRounded/iconRoundedUp.html.twig' %}
+			</span>
+			<span class="icon-down" style="display: block;">
+				{% include 'components/containers/iconRounded/iconRoundedDown.html.twig' %}
+			</span>
 		</div>
-		<div class="space-y-2 flex-1">
-			<div class="flex items-center justify-between">
-				<h3>{{ title }}</h3>
-				<!-- Conteneur du compteur à côté du titre (initialement visible à droite) -->
-				<span class="counter-next-to-title mr-10" style="display: inline-block;">
-					{% include 'components/containers/graineCompteur.html.twig' with {
+		<div class="flex my-4 space-x-4">
+			<div>
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z"/>
+				</svg>
+			</div>
+			<div class="space-y-2 flex-1">
+				<div class="flex items-center justify-between">
+					<h3 class="font-inter font-bold text-lg">{{ title }}</h3>
+					<!-- Conteneur du compteur à côté du titre (initialement visible à droite) -->
+					<span class="counter-next-to-title mr-10" style="display: inline-block;">
+						{% include 'components/containers/graineCompteur.html.twig' with {
 						'number': number,
 					} %}
-				</span>
-			</div>
-			<!-- Description avec une classe pour basculer sa visibilité -->
-			<p class="description" style="display: none;">{{ desc }}</p>
-		</div>
-	</div>
-	<!-- Conteneur du compteur en bas (initialement caché) -->
-	<div class="bottom-counter flex justify-between items-center text-whiter px-4 h-7 rounded-full" style="display: none;">
-		<!-- Lien centré -->
-		{% if isCompleted == 'True' %}
-			<div class="bottom-counter flex justify-between items-center text-whiter px-4 h-7 rounded-full">
-				<!-- Si la quête est complétée, afficher le message -->
-				<p>La quête est déjà validée !</p>
-			</div>
-		{% else %}
-			<!-- Si la quête n'est pas complétée, afficher le bouton pour valider -->
-			<div class="bottom-counter flex justify-between items-center text-whiter px-4 h-7 rounded-full">
-				<div class="flex-grow text-center">
-					<a href="{{ path('app_challenge_validate', { id: idChallenge }) }}" class="text-whiter bg-greenLight p-2 px-4 rounded-2xl">Valider la quête</a>
+					</span>
 				</div>
+				<!-- Description avec une classe pour basculer sa visibilité -->
+				<p class="description" style="display: none;">{{ desc }}</p>
+			</div>
+		</div>
+		<!-- Conteneur du compteur en bas (initialement caché) -->
+		<div
+			class="bottom-counter flex justify-between items-center text-whiter px-4 h-7 rounded-full" style="display: none;">
+
+			<!-- Si la quête n'est pas complétée, afficher le bouton pour valider -->
+			<div class="bottom-counter flex justify-between items-center text-whiter px-4 h-7 rounded-full space-x-14">
 				<div class="flex justify-end">
 					{% include 'components/containers/graineCompteur.html.twig' with {
 						'number': number,
 					} %}
 				</div>
+				<div class="flex-grow text-center">
+					<a href="{{ path('app_challenge_validate', { id: idChallenge }) }}" class="text-whiter bg-greenLight p-2 px-4 rounded-2xl">Valider la quête</a>
+				</div>
 			</div>
-		{% endif %}
+
+		</div>
 
 	</div>
-
-</div>
 {% endif %}
 <script>
 	function toggleDescription(element) {
