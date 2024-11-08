@@ -53,12 +53,6 @@
 		<div class="space-y-2 text-sm flex flex-col items-center">
 			<a class="text-sm underline" href="{{ path('app_login') }}" class="m-10">Se connecter</a>
 			<div class="flex space-x-3">
-				<div class="text-sm self-center">
-					{{ form_row(registrationForm.agreeTerms, {
-                        'label': 'J\'accepte les conditions',
-                        'label_attr': {'class': 'font-semibold'},
-                    }) }}
-				</div>
 				{% include 'components/buttons/buttonSubmit.html.twig' with {
                     'placeholder': "Créer le compte",} %}
 			</div>

@@ -11,6 +11,8 @@ class TipsController extends AbstractController
     #[Route('/tips', name: 'app_tips')]
     public function index(TipsRepository $tipsRepository): Response
     {
+        $user = $this->getUser();
+        $userId = $user->getId();
         // Récupération des tips selon leur type
         $consommationTips = $tipsRepository->findBy(['type' => 'Consommation et Achats Responsables']);
         $energieTips = $tipsRepository->findBy(['type' => 'Économies d’Énergie et Transport Écoresponsable']);
@@ -32,6 +34,7 @@ class TipsController extends AbstractController
         return $this->render('tips/index.html.twig', [
             'consommationTips' => $consommationTips,
             'energieTips' => $energieTips,
+            'userID' => $userId,
         ]);
     }
 }

@@ -32,9 +32,9 @@ class Quest
     private ?string $description = null;
 
     /**
-     * @var Collection<int, user>
+     * @var Collection<int, User>
      */
-    #[ORM\ManyToMany(targetEntity: user::class, inversedBy: 'quests')]
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'quests')]
     private Collection $quest_user;
 
     /**
@@ -115,14 +115,14 @@ class Quest
     }
 
     /**
-     * @return Collection<int, user>
+     * @return Collection<int, User>
      */
     public function getQuestUser(): Collection
     {
         return $this->quest_user;
     }
 
-    public function addQuestUser(user $questUser): static
+    public function addQuestUser(User $questUser): static
     {
         if (!$this->quest_user->contains($questUser)) {
             $this->quest_user->add($questUser);
@@ -131,7 +131,7 @@ class Quest
         return $this;
     }
 
-    public function removeQuestUser(user $questUser): static
+    public function removeQuestUser(User $questUser): static
     {
         $this->quest_user->removeElement($questUser);
 
