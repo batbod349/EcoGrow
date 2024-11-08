@@ -33,9 +33,23 @@
 			<section class="section-container">
 				<div class="flex flex-wrap justify-center items-center gap-5">
 					{% include 'components/cards/statCard.html.twig' with{
-						'description':"Amis",
-						'statistic':"rang",
-						'unite':"/jour",} %}
+						'description':"quête journalière",
+						'statistic': totalDailyQuestsCompleted,
+						'unite':"réalisé",} %}
+					{% include 'components/cards/statCard.html.twig' with{
+						'description':"quête journalière",
+						'statistic': averageDailyQuestsPerWeek,
+						'unite':"/semaine",} %}
+				</div>
+				<div class="flex flex-wrap justify-center items-center gap-5">
+					{% include 'components/cards/statCard.html.twig' with{
+						'description':"quête mensuel",
+						'statistic': totalMonthlyQuestsCompleted,
+						'unite':"réalisé",} %}
+					{% include 'components/cards/statCard.html.twig' with{
+						'description':"quête mensuel",
+						'statistic': averageMonthlyQuestsPerMonth,
+						'unite':"/mois",} %}
 				</div>
 			</section>
 			<section class="section-container">

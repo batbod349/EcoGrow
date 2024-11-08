@@ -1,7 +1,7 @@
-{% set imagePath = tips.image|default('') %}
+{% set imagePath = imagePath|default('') %}
 
 <div
-  class="w-full h-full rounded-[32px] bg-greenDark flex justify-center items-center relative py-10 shadow-custom"
+  class="w-full h-full rounded-b-[32px] bg-greenDark flex justify-center items-center relative py-10 shadow-custom"
 >
   <!-- Bouton -->
   <!--<button class="absolute top-4 left-4 bg-greenMint w-12 h-12 z-12 rounded-2xl flex items-center justify-center hover:bg-green-400 focus:outline-none">
@@ -16,7 +16,7 @@
     </svg>
   </button> -->
 
-  <div class="w-[390px] h-[405px] flex justify-center items-center relative">
+  <div class="w-[390px] h-[233px] flex justify-center items-center relative">
     <!-- SVG feuille solo droite -->
     <div class="absolute top-[0px] right-[20px]">
       <svg
@@ -36,11 +36,7 @@
 
     <!-- Image poubelle -->
     <div>
-      <img
-        src="{{ imagePath }}"
-        alt="Image du tips"
-        class="w-[150px] h-[215px]"
-      />
+		<img src="{{ imagePath }}" alt="image du tip" class="h-44 object-cover">
     </div>
 
     <!-- SVG feuille duo gauche -->

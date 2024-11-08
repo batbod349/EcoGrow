@@ -2,19 +2,24 @@
 {% set number = number|default('340') %}
 {% set description = description|default('Description') %}
 {% set src = src|default('') %}
+{% set product_id = product_id|default('') %}
+{% set isPurchased = false %}
+
+{# Vérifiez si l'utilisateur a acheté ce produit #}
+{% if user is not null and user.purchase is not empty %}
+    {% for product in user.purchase %}
+        {% if product.id == product_id %}
+            {% set isPurchased = true %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
 
 <div class="w-96 h-full rounded-2xl bg-white border-greenDark flex flex-col items-center relative shadow-custom">
-    <!-- Conteneur avec l'image en arrière-plan -->
     <div class="relative w-full flex justify-between items-center rounded-t-2xl">
-        <!-- Image centrale en second plan -->
-        <img class="w-full h-auto bg-cover bg-center z-0 rounded-t-2xl" src="{{ src }}" alt="image d'arbres"/>
-
-        <!-- Compteur positionné en bas à gauche de l'image -->
+        <img class="w-full h-56 object-cover bg-cover bg-center z-0 rounded-t-2xl" src="{{ src }}" alt="image d'arbres"/>
         <div class="absolute bottom-4 left-4 bg-white px-2 h-6 rounded-full shadow-lg">
             {% include 'components/containers/graineCompteur.html.twig' %}
         </div>
-
-        <!-- Bouton pour afficher/masquer la description -->
         <div class="toggle-icon absolute bottom-4 right-9 cursor-pointer z-10" onclick="toggleDescription(this)">
             <span class="icon-up" style="display: none;">
                 {% include 'components/containers/iconRounded/iconRoundedUp.html.twig' %}
@@ -25,7 +30,6 @@
         </div>
     </div>
 
-    <!-- Titre, toujours affiché -->
     <div class="flex items-center mb-2 mt-2 px-4">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-500 mr-2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z"/>
@@ -33,14 +37,19 @@
         <h3 class="font-bold text-lg">{{ title }}</h3>
     </div>
 
-    <!-- Bouton "Participer" juste sous le titre -->
     <div class="w-full flex justify-center mb-4">
-        <div class="counter-right bg-greenDark text-whiter px-4 h-7 rounded-full">
-            <button id="participerBtn" onclick="changeButtonText(event)">Participer</button>
-        </div>
+            {% if isPurchased %}
+                <span>Vous avez déjà participé à cet événement</span>
+            {% else %}
+                 <div class="counter-right bg-greenDark text-whiter px-4 h-7 rounded-full">
+                    <a href="{{ path('app_participer', { id: product_id }) }}">
+                        <button id="participerBtn">Participer</button>
+                    </a>
+                 </div>
+            {% endif %}
+
     </div>
 
-    <!-- Conteneur blanc avec description, caché par défaut -->
     <div class="info-container w-full max-w-[91%] px-1 text-black bg-white py-3 rounded-lg shadow-lg" style="display: none;">
         <p class="text-sm">{{ description }}</p>
     </div>
@@ -53,36 +62,18 @@
         const iconUp = container.querySelector(".icon-up");
         const iconDown = container.querySelector(".icon-down");
 
-        // Basculer entre affichage et masquage du conteneur blanc
         if (infoContainer.style.display === "none" || infoContainer.style.display === "") {
-            infoContainer.style.display = "block"; // Afficher la description
-            iconUp.style.display = "block"; // Afficher l'icône "up"
-            iconDown.style.display = "none"; // Cacher l'icône "down"
+            infoContainer.style.display = "block";
+            iconUp.style.display = "block";
+            iconDown.style.display = "none";
         } else {
-            infoContainer.style.display = "none"; // Cacher la description
-            iconUp.style.display = "none"; // Cacher l'icône "up"
-            iconDown.style.display = "block"; // Afficher l'icône "down"
+            infoContainer.style.display = "none";
+            iconUp.style.display = "none";
+            iconDown.style.display = "block";
         }
     }
 
-    // Masquer par défaut le contenu du carré blanc
     document.querySelectorAll(".info-container").forEach(el => {
         el.style.display = "none";
     });
-
-    // Fonction pour changer le texte du bouton "Participer" et empêcher la redirection
-    function changeButtonText(event) {
-        event.preventDefault(); // Empêcher toute redirection par défaut
-
-        const button = event.target;
-
-        // Ajouter un délai de 500ms avant de changer le texte
-        setTimeout(function() {
-            button.textContent = 'Vous participez à cet événement'; // Changer le texte après le délai
-        }, 500); // Délai de 500ms
-
-        // Si vous avez une redirection à effectuer après un certain délai
-        setTimeout(function() {
-        }, 1000); // Délai de 1 seconde avant la redirection
-    }
 </script>

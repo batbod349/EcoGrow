@@ -25,10 +25,12 @@
             {% else %}
                 {% for product in products %}
                     {% include 'components/cards/achat.html.twig' with {
+                        'product_id': product.id,
                         'title': product.name,
                         'number': product.price,
                         'description': product.description,
                         'src': 'data:image/jpeg;base64,' ~ product.image,
+                        'user': app.user,
                     } %}
                 {% endfor %}
             {% endif %}
