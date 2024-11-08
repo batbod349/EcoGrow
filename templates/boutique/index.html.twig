@@ -30,6 +30,7 @@
                         'number': product.price,
                         'description': product.description,
                         'src': 'data:image/jpeg;base64,' ~ product.image,
+                        'user': app.user,
                     } %}
                 {% endfor %}
             {% endif %}

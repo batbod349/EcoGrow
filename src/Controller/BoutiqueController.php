@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Experiences;
 use App\Entity\Product;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -22,6 +23,21 @@ class BoutiqueController extends AbstractController
         // Passer les produits à la vue
         return $this->render('boutique/index.html.twig', [
             'products' => $products,
+        ]);
+    }
+
+    public function shop(ProductRepository $productRepository, UserRepository $userRepository)
+    {
+        // Récupérer l'utilisateur actuel
+        $user = $this->getUser();
+
+        // Récupérer tous les produits
+        $products = $productRepository->findAll();
+
+        // Passer les produits à la vue
+        return $this->render('shop/index.html.twig', [
+            'products' => $products,
+            'user' => $user,
         ]);
     }
 
