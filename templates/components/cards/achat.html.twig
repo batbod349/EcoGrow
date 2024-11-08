@@ -2,6 +2,7 @@
 {% set number = number|default('340') %}
 {% set description = description|default('Description') %}
 {% set src = src|default('') %}
+{% set product_id = product_id|default('') %}
 
 <div class="w-96 h-full rounded-2xl bg-white border-greenDark flex flex-col items-center relative shadow-custom">
     <!-- Conteneur avec l'image en arrière-plan -->
@@ -36,7 +37,8 @@
     <!-- Bouton "Participer" juste sous le titre -->
     <div class="w-full flex justify-center mb-4">
         <div class="counter-right bg-greenDark text-whiter px-4 h-7 rounded-full">
-            <button id="participerBtn" onclick="changeButtonText(event)">Participer</button>
+            <a href="{{ path('app_participer', { id: product_id }) }}">
+            <button id="participerBtn">Participer</button>
         </div>
     </div>
 
