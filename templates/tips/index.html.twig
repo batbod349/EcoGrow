@@ -16,7 +16,7 @@
 				<h2 class="font-rawles text-3xl">Consommation </h2>
 				<div class="flex flex-wrap gap-4">
 					{# Debugging - Vérifier si les données existent dans consommationTips #}
-					{% dump(consommationTips) %}
+					{# dump(consommationTips) #}
 
 					{% for tip in consommationTips %}
 						<a href="{{ path('app_tips_detail', { 'id': tip.id }) }}">
@@ -37,7 +37,7 @@
 				<h2 class="font-rawles text-3xl">Economie</h2>
 				<div class="flex flex-wrap gap-4">
 					{# Debugging - Vérifier si les données existent dans energieTips #}
-					{% dump(energieTips) %}
+					{# dump(energieTips) #}
 
 					{% for tip in energieTips %}
 						<a href="{{ path('app_tips_detail', { 'id': tip.id }) }}">
