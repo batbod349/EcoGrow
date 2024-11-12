@@ -138,14 +138,14 @@ class ExperiencesRepository extends ServiceEntityRepository
     {
         $totalDailyQuests = $this->getTotalDailyQuestsCompleted($userId);
         $weeksInMonth = (new \DateTime())->format('W') - (new \DateTime('first day of this month'))->format('W') + 1;
-        return $totalDailyQuests / $weeksInMonth;
+        return round($totalDailyQuests / $weeksInMonth, 2);
     }
 
     public function getAverageMonthlyQuestsPerMonth(int $userId): float
     {
         $totalMonthlyQuests = $this->getTotalMonthlyQuestsCompleted($userId);
         $monthsInYear = 12;
-        return $totalMonthlyQuests / $monthsInYear;
+        return round($totalMonthlyQuests / $monthsInYear, 2);
     }
 
 //    /**

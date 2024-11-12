@@ -35,7 +35,7 @@
 					{% include 'components/cards/statCard.html.twig' with{
 						'description':"quête journalière",
 						'statistic': totalDailyQuestsCompleted,
-						'unite':"réalisé",} %}
+						'unite':"réalisés",} %}
 					{% include 'components/cards/statCard.html.twig' with{
 						'description':"quête journalière",
 						'statistic': averageDailyQuestsPerWeek,
@@ -43,11 +43,11 @@
 				</div>
 				<div class="flex flex-wrap justify-center items-center gap-5">
 					{% include 'components/cards/statCard.html.twig' with{
-						'description':"quête mensuel",
+						'description':"quête mensuelle",
 						'statistic': totalMonthlyQuestsCompleted,
-						'unite':"réalisé",} %}
+						'unite':"réalisés",} %}
 					{% include 'components/cards/statCard.html.twig' with{
-						'description':"quête mensuel",
+						'description':"quête mensuelle",
 						'statistic': averageMonthlyQuestsPerMonth,
 						'unite':"/mois",} %}
 				</div>
