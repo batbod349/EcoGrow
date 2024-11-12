@@ -26,6 +26,10 @@ class GrowController extends AbstractController
     #[Route('/grow', name: 'app_grow')]
     public function index(SessionInterface $session): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+
         $user = $this->getUser();
         $userID = $user->getId();
 
