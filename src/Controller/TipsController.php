@@ -12,6 +12,10 @@ class TipsController extends AbstractController
     #[Route('/tips', name: 'app_tips')]
     public function index(TipsRepository $tipsRepository): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+
         $user = $this->getUser();
         $userId = $user ? $user->getId() : null;
 

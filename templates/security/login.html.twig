@@ -5,11 +5,11 @@
 
 {% block body %}
 	<form method="post">
-		{% if error %}
+		{% if error is defined and error %}
 			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 		{% endif %}
 
-		{% if app.user %}
+		{% if app.user is defined and app.user %}
 			<div class="mb-3">
 				You are logged in as
 				{{ app.user.userIdentifier }},
@@ -32,7 +32,7 @@
 						'label' : "Nom d'utilisateur",
 						'placeholder' : "Nom d'utilisateur",
 						'type' : "username",
-						'value' : last_username,
+						'value' :  last_username,
 						'name' : "_username",
 						'id' : "username",
 						'autocomplete' : "username",
@@ -50,6 +50,7 @@
 
 			<div class="flex flex-col items-center space-y-4 font-monsterrat text-xl">
 				<a class="text-sm underline" href="{{ path('app_register') }}">Créer un compte</a>
+				<a class="text-sm underline" href="{{ path('app_forgot_password_request') }}">Mot de passe oublié ?</a>
 				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
 				{% include 'components/buttons/buttonSubmit.html.twig' with {
