@@ -14,8 +14,8 @@
 
         <div class="flex justify-center items-center w-full">
             <!-- Affichage de l'image si elle existe -->
-            {% if article.getImage %}
-<img src="{{ tip.image }}" alt="Image du tips" class="w-[150px] h-[215px]" />
+            {% if article.image %}
+<img src="data:image/jpeg;base64,{{ article.image }}" alt="Image du tips" class="w-[150px] h-[215px]" />
             {% endif %}
         </div>
 

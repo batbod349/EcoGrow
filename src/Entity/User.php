@@ -216,6 +216,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function setIsVerified(bool $isVerified): static
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
     /**
      * @Assert\NotBlank()
      * @Assert\Length(min=6)
@@ -395,4 +402,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+
+    public function __toString(): string
+    {
+        return $this->username;
+    }
 }
